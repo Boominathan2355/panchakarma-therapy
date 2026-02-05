@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Abstract Lotus Base -->
+  <path d="M20,65 Q50,95 80,65 Q95,50 80,35 Q50,5 20,35 Q5,50 20,65 Z" fill="url(#primaryGradient)" opacity="0.2" />
+  
+  <!-- Central Healing Drop -->
+  <path d="M50,15 C50,15 25,55 25,70 A25,25 0 0,0 75,70 C75,55 50,15 50,15 Z" fill="url(#primaryGradient)" />
+  
+  <!-- Inner Stylized Leaf/Pulse -->
+  <path d="M50,35 C50,35 40,60 40,70 A10,10 0 0,0 60,70 C60,60 50,35 50,35 Z" fill="#ffffff" opacity="0.8" />
+</svg>
