@@ -1,0 +1,41 @@
+.safety-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.safety-section {
+    background-color: var(--error-bg);
+    border: 1px solid var(--error-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+}
+
+.note-section {
+    background-color: var(--info-bg);
+    border-color: var(--info-color);
+}
+
+.section-head {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.section-head h3 {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.contra-list {
+    list-style-type: disc;
+    padding-left: var(--spacing-lg);
+    color: var(--error-text);
+}
+
+.safety-notes {
+    color: var(--info-text);
+    line-height: 1.6;
+}

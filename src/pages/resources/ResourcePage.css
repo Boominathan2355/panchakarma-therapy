@@ -1,0 +1,36 @@
+.resource-page {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - var(--spacing-md));
+    padding: var(--spacing-lg);
+    gap: var(--spacing-lg);
+}
+
+.resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.resource-header h2 {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+}
+
+.resource-tabs {
+    display: flex;
+    background-color: var(--surface-color);
+    padding: 4px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.resource-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.limit-width {
+    max-width: 1000px;
+    margin: 0 auto;
+}

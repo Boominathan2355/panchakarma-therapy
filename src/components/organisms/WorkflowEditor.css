@@ -1,0 +1,90 @@
+.workflow-editor {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+}
+
+.editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.editor-header h3 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+}
+
+.steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.step-item {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: var(--background-color);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.step-number {
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-row {
+    font-size: 0.875rem;
+    margin-bottom: 4px;
+}
+
+.step-label {
+    font-weight: 600;
+    margin-right: 8px;
+    color: var(--text-secondary);
+}
+
+.step-value {
+    color: var(--text-primary);
+}
+
+.text-muted {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.icon-btn-danger {
+    background: transparent;
+    border: none;
+    color: var(--error-color);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.icon-btn-danger:hover {
+    opacity: 1;
+}
+
+.empty-state {
+    text-align: center;
+    color: var(--text-muted);
+    padding: var(--spacing-lg);
+    font-style: italic;
+}

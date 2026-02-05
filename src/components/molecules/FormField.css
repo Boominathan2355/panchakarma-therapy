@@ -1,0 +1,10 @@
+.form-field-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.error-text {
+    font-size: 0.75rem;
+    color: var(--error-color);
+    margin-top: var(--spacing-xs);
+    font-weight: 500;
+}

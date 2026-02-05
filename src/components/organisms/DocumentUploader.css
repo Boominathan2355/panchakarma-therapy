@@ -1,0 +1,139 @@
+.doc-uploader {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.doc-list {
+    margin-top: var(--spacing-lg);
+}
+
+.doc-list h3 {
+    margin-bottom: var(--spacing-md);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.doc-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-sm);
+}
+
+.file-icon {
+    color: var(--primary-color);
+}
+
+.doc-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.doc-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.doc-meta {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.download-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 4px;
+    border-radius: var(--radius-sm);
+}
+
+.download-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--primary-color);
+}
+
+.no-docs {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+/* New Status Badges */
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.json-preview-action {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Modal Simple */
+.json-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.json-modal {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    width: 500px;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.json-modal h3 {
+    margin: 0;
+}
+
+.json-modal pre {
+    background: #f4f4f4;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    overflow: auto;
+    max-height: 300px;
+    font-size: 0.85rem;
+}

@@ -1,0 +1,227 @@
+.settings-page {
+    padding: var(--spacing-lg);
+    height: calc(100vh - var(--spacing-md));
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+}
+
+.settings-container {
+    display: flex;
+    gap: var(--spacing-xl);
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    flex: 1;
+    overflow: hidden;
+}
+
+.settings-sidebar {
+    width: 250px;
+    border-right: 1px solid var(--border-color);
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    background-color: var(--background-color);
+}
+
+.settings-nav-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-align: left;
+    transition: all 0.2s;
+}
+
+.settings-nav-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.settings-nav-item.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.settings-content {
+    flex: 1;
+    padding: var(--spacing-xl);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-section {
+    flex: 1;
+    max-width: 600px;
+}
+
+.settings-section h3 {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--border-color);
+    font-size: var(--font-size-lg);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.theme-options {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.theme-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: transparent;
+    cursor: pointer;
+}
+
+.theme-btn.active {
+    border-color: var(--primary-color);
+    background-color: var(--info-bg);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.toggle-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.toggle-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--background-color);
+    border-radius: var(--radius-md);
+}
+
+.toggle-info h4 {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.toggle-info p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.settings-actions {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.text-error {
+    color: var(--error-color);
+}
+
+.border-error {
+    border-color: var(--error-color);
+}
+
+/* User Management Styles */
+.settings-section.full-width {
+    max-width: 100%;
+}
+
+.add-user-card {
+    background-color: var(--background-color);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--spacing-lg);
+}
+
+.add-user-card h4 {
+    margin-bottom: var(--spacing-md);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.add-user-grid {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1.5fr auto;
+    gap: var(--spacing-md);
+    align-items: end;
+}
+
+.custom-select {
+    width: 100%;
+    height: 2.5rem;
+    padding: 0 var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background-color: var(--surface-color);
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.users-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.users-list th {
+    text-align: left;
+    padding: var(--spacing-sm);
+    border-bottom: 2px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.users-list td {
+    padding: var(--spacing-md) var(--spacing-sm);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.role-badge {
+    background-color: var(--secondary-color);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s;
+}
+
+.icon-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}

@@ -1,0 +1,29 @@
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-md);
+    margin: var(--spacing-xs) 0;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.nav-item:hover {
+    background-color: var(--secondary-color);
+    color: var(--text-primary);
+}
+
+.nav-item.active {
+    background-color: var(--info-bg);
+    color: var(--primary-color);
+}
+
+.nav-icon {
+    margin-right: var(--spacing-md);
+}
+
+.nav-label {
+    font-size: 0.95rem;
+}

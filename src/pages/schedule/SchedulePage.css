@@ -1,0 +1,109 @@
+.schedule-page {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - var(--spacing-md));
+    padding: var(--spacing-lg);
+    gap: var(--spacing-md);
+}
+
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.schedule-header h2 {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+}
+
+.view-toggles {
+    display: flex;
+    background-color: var(--surface-color);
+    padding: 4px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+}
+
+.toggle-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.toggle-btn.optimize {
+    position: relative;
+}
+
+.toggle-btn.optimize::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--primary-color, #8b5cf6), var(--accent-color, #06b6d4));
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.toggle-btn.optimize.active::before {
+    opacity: 1;
+}
+
+.toggle-btn.optimize.active {
+    color: white;
+    background: transparent;
+    z-index: 1;
+}
+
+.toggle-btn.optimize>* {
+    position: relative;
+    z-index: 2;
+}
+
+.schedule-content {
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Optimize Layout */
+.optimize-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    height: 100%;
+}
+
+.optimize-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.optimize-sidebar {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+@media (max-width: 1200px) {
+    .optimize-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+    }
+
+    .optimize-sidebar {
+        max-height: 400px;
+    }
+}

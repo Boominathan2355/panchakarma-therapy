@@ -1,0 +1,17 @@
+.gantt-container {
+    background-color: var(--surface-color);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    height: 100%;
+}
+
+/* Distinguish Resources */
+.rbc-time-header-content {
+    border-left: 1px solid var(--border-color);
+}
+
+.rbc-header {
+    background-color: var(--secondary-color);
+    padding: var(--spacing-md);
+}

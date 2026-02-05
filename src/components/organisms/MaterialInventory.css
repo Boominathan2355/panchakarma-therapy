@@ -1,0 +1,36 @@
+.inventory-panel {
+    background-color: var(--surface-color);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+}
+
+.inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-md);
+}
+
+.inventory-table th {
+    text-align: left;
+    padding: var(--spacing-sm);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.inventory-table td {
+    padding: var(--spacing-md) var(--spacing-sm);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+.font-mono {
+    font-family: monospace;
+    font-weight: 600;
+}
+
+.text-secondary {
+    color: var(--text-muted);
+}

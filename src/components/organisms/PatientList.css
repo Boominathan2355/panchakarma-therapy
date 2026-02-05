@@ -1,0 +1,59 @@
+.patient-list-container {
+    width: 250px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.list-header {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+}
+
+.patient-scroll-list {
+    overflow-y: auto;
+    flex: 1;
+}
+
+.patient-list-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+}
+
+.patient-list-item:hover {
+    background-color: var(--secondary-color);
+}
+
+.patient-list-item.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.patient-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.patient-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.patient-sub {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.patient-list-item.active .patient-sub {
+    color: rgba(255, 255, 255, 0.8);
+}
