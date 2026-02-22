@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Calendar, dateFnsLocalizer, Views } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 import format from 'date-fns/format';
@@ -24,6 +24,16 @@ const localizer = dateFnsLocalizer({
 const DnDCalendar = withDragAndDrop(Calendar);
 
 const TherapyCalendar = ({ events, onEventDrop, onSelectEvent, resources }) => {
+    const [currentDate, setCurrentDate] = useState(new Date());
+    const [currentView, setCurrentView] = useState(Views.WEEK);
+
+    const handleNavigate = useCallback((newDate) => {
+        setCurrentDate(newDate);
+    }, []);
+
+    const handleViewChange = useCallback((newView) => {
+        setCurrentView(newView);
+    }, []);
 
     // Style events based on status
     const eventPropGetter = (event) => {
@@ -47,7 +57,10 @@ const TherapyCalendar = ({ events, onEventDrop, onSelectEvent, resources }) => {
                 resizable
                 style={{ height: 'calc(100vh - 160px)' }}
                 views={['month', 'week', 'day', 'agenda']}
-                defaultView={Views.WEEK}
+                view={currentView}
+                date={currentDate}
+                onNavigate={handleNavigate}
+                onView={handleViewChange}
                 eventPropGetter={eventPropGetter}
                 min={new Date(0, 0, 0, 8, 0, 0)} // Start at 8 AM
                 max={new Date(0, 0, 0, 20, 0, 0)} // End at 8 PM

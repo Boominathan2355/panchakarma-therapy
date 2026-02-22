@@ -66,3 +66,34 @@
     color: white;
     border-color: var(--primary-color);
 }
+
+/* Reorder nav buttons: Back | Today | Next */
+.rbc-toolbar .rbc-btn-group:first-child {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Increased gap to show radius clearly */
+}
+
+/* Today = 1st button → move to center (order 2) */
+.rbc-toolbar .rbc-btn-group:first-child button:nth-child(1) {
+    order: 2;
+    border-radius: var(--radius-md) !important;
+    /* Keep normal */
+}
+
+/* Back = 2nd button → move to left (order 1) */
+.rbc-toolbar .rbc-btn-group:first-child button:nth-child(2) {
+    order: 1;
+    border-radius: var(--radius-xl) !important;
+    /* Larger radius for back */
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+/* Next = 3rd button → move to right (order 3) */
+.rbc-toolbar .rbc-btn-group:first-child button:nth-child(3) {
+    order: 3;
+    border-radius: var(--radius-xl) !important;
+    /* Match Back radius */
+}

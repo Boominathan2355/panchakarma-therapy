@@ -72,6 +72,13 @@
   padding: 0;
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
 body {
   font-family: var(--font-family);
   background-color: var(--background-color);
@@ -91,4 +98,55 @@ body {
 /* Utility Helper for Full Height */
 .h-full {
   height: 100%;
+}
+
+/* --- Bootstrap Overrides --- */
+/* Preserve custom font across all elements */
+body,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+li,
+td,
+th,
+label,
+div {
+  font-family: var(--font-family) !important;
+}
+
+/* Preserve custom body styles over Bootstrap */
+body {
+  background-color: var(--background-color) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Prevent Bootstrap from adding bottom margin to headings/paragraphs */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-bottom: 0;
+}
+
+/* Prevent Bootstrap row negative margins from breaking layout */
+.main-layout,
+.main-container,
+.main-content {
+  --bs-gutter-x: 0;
+  --bs-gutter-y: 0;
 }

@@ -68,8 +68,8 @@
 /* Cards Grid */
 .therapy-cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: var(--spacing-lg);
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--spacing-md);
 }
 
 /* Card */
@@ -84,7 +84,7 @@
 }
 
 .therapy-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
     border-color: transparent;
 }
@@ -96,7 +96,7 @@
 
 /* Card Banner */
 .therapy-card-banner {
-    height: 110px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,8 +112,8 @@
 }
 
 .therapy-card-icon {
-    width: 56px;
-    height: 56px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(8px);
@@ -146,21 +146,21 @@
 
 /* Card Body */
 .therapy-card-body {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-sm) var(--spacing-md);
 }
 
 .therapy-card-name {
-    font-size: 1.1rem;
+    font-size: 0.92rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .therapy-card-desc {
-    font-size: var(--font-size-sm);
+    font-size: 0.75rem;
     color: var(--text-secondary);
-    line-height: 1.5;
-    margin-bottom: var(--spacing-md);
+    line-height: 1.4;
+    margin-bottom: var(--spacing-sm);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
@@ -171,19 +171,19 @@
 /* Stats Row */
 .therapy-card-stats {
     display: flex;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
     flex-wrap: wrap;
 }
 
 .therapy-stat {
     display: flex;
     align-items: center;
-    gap: 4px;
-    font-size: 0.78rem;
+    gap: 3px;
+    font-size: 0.68rem;
     color: var(--text-secondary);
     background: var(--secondary-color);
-    padding: 4px 10px;
+    padding: 2px 7px;
     border-radius: 20px;
 }
 
@@ -195,15 +195,15 @@
 .therapy-card-btn {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     width: 100%;
-    padding: 10px;
+    padding: 6px;
     border: none;
     border-radius: var(--radius-md);
     background: var(--secondary-color);
     color: var(--primary-color);
     font-weight: 600;
-    font-size: var(--font-size-sm);
+    font-size: 0.75rem;
     cursor: pointer;
     transition: all 0.2s;
     justify-content: center;

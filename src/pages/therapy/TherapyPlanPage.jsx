@@ -85,11 +85,11 @@ const TherapyPlanPage = () => {
                         <div className="plan-cards-grid">
                             {[...Array(4)].map((_, i) => (
                                 <div key={i} className="plan-card skeleton-card">
-                                    <Skeleton width="100%" height="100px" style={{ borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0' }} />
-                                    <div style={{ padding: 'var(--spacing-lg)' }}>
-                                        <Skeleton width="70%" height="1.3rem" style={{ marginBottom: '10px' }} />
-                                        <Skeleton width="90%" height="0.85rem" style={{ marginBottom: '6px' }} />
-                                        <Skeleton width="60%" height="0.85rem" />
+                                    <Skeleton width="100%" height="60px" style={{ borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0' }} />
+                                    <div style={{ padding: 'var(--spacing-sm) var(--spacing-md)' }}>
+                                        <Skeleton width="70%" height="1rem" style={{ marginBottom: '8px' }} />
+                                        <Skeleton width="90%" height="0.75rem" style={{ marginBottom: '4px' }} />
+                                        <Skeleton width="60%" height="0.75rem" />
                                     </div>
                                 </div>
                             ))}
@@ -110,7 +110,7 @@ const TherapyPlanPage = () => {
                                     >
                                         <div className="plan-card-banner" style={{ background: color.bg }}>
                                             <div className="plan-card-icon">
-                                                <Layers size={24} />
+                                                <Layers size={16} />
                                             </div>
                                             <span className={`plan-status-badge ${getStatusBadgeClass(plan.status)}`}>
                                                 {plan.status}
@@ -122,13 +122,13 @@ const TherapyPlanPage = () => {
 
                                             <div className="plan-card-meta">
                                                 <span className="plan-meta-item">
-                                                    <Calendar size={14} /> {plan.duration}
+                                                    <Calendar size={11} /> {plan.duration}
                                                 </span>
                                                 <span className="plan-meta-item">
-                                                    <Zap size={14} /> {plan.totalSessions} Sessions
+                                                    <Zap size={11} /> {plan.totalSessions} Sessions
                                                 </span>
                                                 <span className="plan-meta-item">
-                                                    <Users size={14} /> {plan.assignedPatients} Patients
+                                                    <Users size={11} /> {plan.assignedPatients} Patients
                                                 </span>
                                             </div>
 
@@ -148,12 +148,12 @@ const TherapyPlanPage = () => {
 
                                             <div className="plan-tags">
                                                 {plan.tags?.map(tag => (
-                                                    <span key={tag} className="plan-tag"><Tag size={10} /> {tag}</span>
+                                                    <span key={tag} className="plan-tag"><Tag size={8} /> {tag}</span>
                                                 ))}
                                             </div>
 
                                             <button className="plan-card-btn">
-                                                View Plan <ChevronRight size={16} />
+                                                View Plan <ChevronRight size={13} />
                                             </button>
                                         </div>
                                     </div>

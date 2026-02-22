@@ -68,11 +68,11 @@ const TherapyDashboard = ({ therapies, onSelect, isLoading, searchTerm, onSearch
                 <div className="therapy-cards-grid">
                     {[...Array(6)].map((_, i) => (
                         <div key={i} className="therapy-card skeleton-card">
-                            <Skeleton width="100%" height="120px" style={{ borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0' }} />
-                            <div style={{ padding: 'var(--spacing-lg)' }}>
-                                <Skeleton width="60%" height="1.4rem" style={{ marginBottom: '12px' }} />
-                                <Skeleton width="90%" height="0.9rem" style={{ marginBottom: '6px' }} />
-                                <Skeleton width="70%" height="0.9rem" />
+                            <Skeleton width="100%" height="70px" style={{ borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0' }} />
+                            <div style={{ padding: 'var(--spacing-sm) var(--spacing-md)' }}>
+                                <Skeleton width="60%" height="1rem" style={{ marginBottom: '8px' }} />
+                                <Skeleton width="90%" height="0.75rem" style={{ marginBottom: '4px' }} />
+                                <Skeleton width="70%" height="0.75rem" />
                             </div>
                         </div>
                     ))}
@@ -118,7 +118,7 @@ const TherapyDashboard = ({ therapies, onSelect, isLoading, searchTerm, onSearch
                             >
                                 <div className="therapy-card-banner" style={{ background: color.bg }}>
                                     <div className="therapy-card-icon">
-                                        <Zap size={28} />
+                                        <Zap size={18} />
                                     </div>
                                     {searchTerm && therapy.score > 0 && (
                                         <span className="therapy-match-badge">{therapy.score}% Match</span>
@@ -130,21 +130,21 @@ const TherapyDashboard = ({ therapies, onSelect, isLoading, searchTerm, onSearch
 
                                     <div className="therapy-card-stats">
                                         <div className="therapy-stat">
-                                            <Clock size={14} />
+                                            <Clock size={11} />
                                             <span>{therapy.workflow?.length || 0} Steps</span>
                                         </div>
                                         <div className="therapy-stat">
-                                            <AlertTriangle size={14} />
+                                            <AlertTriangle size={11} />
                                             <span>{therapy.contraindications?.length || 0} Warnings</span>
                                         </div>
                                         <div className="therapy-stat">
-                                            <FileText size={14} />
+                                            <FileText size={11} />
                                             <span>{therapy.documents?.length || 0} Docs</span>
                                         </div>
                                     </div>
 
                                     <button className="therapy-card-btn">
-                                        View Protocol <ChevronRight size={16} />
+                                        View Protocol <ChevronRight size={13} />
                                     </button>
                                 </div>
                             </div>

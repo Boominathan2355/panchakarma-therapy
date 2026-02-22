@@ -36,8 +36,8 @@
 /* Cards Grid */
 .plan-cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: var(--spacing-lg);
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--spacing-md);
 }
 
 .plan-card {
@@ -51,7 +51,7 @@
 }
 
 .plan-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
     border-color: transparent;
 }
@@ -63,7 +63,7 @@
 
 /* Banner */
 .plan-card-banner {
-    height: 90px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,8 +79,8 @@
 }
 
 .plan-card-icon {
-    width: 48px;
-    height: 48px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(8px);
@@ -98,15 +98,15 @@
 
 .plan-status-badge {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 6px;
+    right: 6px;
     z-index: 1;
-    font-size: 0.7rem;
+    font-size: 0.62rem;
     font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 12px;
+    padding: 2px 7px;
+    border-radius: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.4px;
 }
 
 .plan-status-active {
@@ -129,21 +129,21 @@
 
 /* Card Body */
 .plan-card-body {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-sm) var(--spacing-md);
 }
 
 .plan-card-name {
-    font-size: 1.05rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .plan-card-desc {
-    font-size: var(--font-size-sm);
+    font-size: 0.75rem;
     color: var(--text-secondary);
-    line-height: 1.5;
-    margin-bottom: var(--spacing-md);
+    line-height: 1.4;
+    margin-bottom: var(--spacing-sm);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
@@ -155,19 +155,19 @@
 .plan-card-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-md);
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
 }
 
 .plan-meta-item {
     display: flex;
     align-items: center;
-    gap: 4px;
-    font-size: 0.76rem;
+    gap: 3px;
+    font-size: 0.68rem;
     color: var(--text-secondary);
     background: var(--secondary-color);
-    padding: 3px 9px;
-    border-radius: 16px;
+    padding: 2px 7px;
+    border-radius: 14px;
 }
 
 .plan-meta-item svg {
@@ -176,29 +176,29 @@
 
 /* Progress */
 .plan-progress-wrapper {
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
 }
 
 .plan-progress-label {
     display: flex;
     justify-content: space-between;
-    font-size: 0.75rem;
+    font-size: 0.68rem;
     color: var(--text-secondary);
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     font-weight: 500;
 }
 
 .plan-progress-bar {
     width: 100%;
-    height: 6px;
+    height: 4px;
     background: var(--secondary-color);
-    border-radius: 3px;
+    border-radius: 2px;
     overflow: hidden;
 }
 
 .plan-progress-fill {
     height: 100%;
-    border-radius: 3px;
+    border-radius: 2px;
     transition: width 0.5s ease;
 }
 
@@ -206,19 +206,19 @@
 .plan-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: var(--spacing-md);
+    gap: 4px;
+    margin-bottom: var(--spacing-sm);
 }
 
 .plan-tag {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    font-size: 0.72rem;
+    gap: 3px;
+    font-size: 0.65rem;
     color: var(--primary-color);
     background: rgba(79, 70, 229, 0.08);
-    padding: 3px 10px;
-    border-radius: 12px;
+    padding: 2px 7px;
+    border-radius: 10px;
     font-weight: 500;
 }
 
@@ -226,15 +226,15 @@
 .plan-card-btn {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     width: 100%;
-    padding: 10px;
+    padding: 6px;
     border: none;
     border-radius: var(--radius-md);
     background: var(--secondary-color);
     color: var(--primary-color);
     font-weight: 600;
-    font-size: var(--font-size-sm);
+    font-size: 0.75rem;
     cursor: pointer;
     transition: all 0.2s;
     justify-content: center;

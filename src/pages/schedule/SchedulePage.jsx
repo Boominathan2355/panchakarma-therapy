@@ -128,7 +128,7 @@ const SchedulePage = () => {
                         className={`toggle-btn optimize ${viewMode === 'optimize' ? 'active' : ''}`}
                         onClick={() => setViewMode('optimize')}
                     >
-                        <Zap size={18} /> Optimize
+                        <Zap size={18} /> <span>Optimize</span>
                     </button>
                 </div>
             </div>
