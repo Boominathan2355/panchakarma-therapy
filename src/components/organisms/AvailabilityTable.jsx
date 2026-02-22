@@ -1,9 +1,45 @@
 import React, { useState } from 'react';
+import Skeleton from '../atoms/Skeleton';
 import Badge from '../atoms/Badge';
 import './AvailabilityTable.css';
 
-const AvailabilityTable = ({ therapists, rooms }) => {
+const AvailabilityTable = ({ therapists, rooms, loading }) => {
+
     const [activeTab, setActiveTab] = useState('therapists');
+
+    if (loading) {
+        return (
+            <div className="availability-panel">
+                <div className="panel-header">
+                    <Skeleton width="40%" height="24px" />
+                    <div className="tabs">
+                        <Skeleton width="80px" height="32px" borderRadius="16px" />
+                        <Skeleton width="80px" height="32px" borderRadius="16px" className="ml-2" />
+                    </div>
+                </div>
+                <div className="table-responsive">
+                    <table className="custom-table">
+                        <thead>
+                            <tr>
+                                <th><Skeleton width="60%" /></th>
+                                <th><Skeleton width="60%" /></th>
+                                <th><Skeleton width="60%" /></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {[1, 2, 3, 4, 5].map(i => (
+                                <tr key={i}>
+                                    <td><Skeleton width="80%" /></td>
+                                    <td><Skeleton width="70%" /></td>
+                                    <td><Skeleton width="60px" height="24px" borderRadius="12px" /></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        );
+    }
 
     const getStatusVariant = (status) => {
         switch (status.toLowerCase()) {

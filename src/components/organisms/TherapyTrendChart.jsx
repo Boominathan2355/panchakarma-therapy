@@ -1,8 +1,17 @@
-import React from 'react';
+import Skeleton from '../atoms/Skeleton';
 import ReactECharts from 'echarts-for-react';
 import './TherapyTrendChart.css';
 
-const TherapyTrendChart = ({ dates, values }) => {
+const TherapyTrendChart = ({ dates, values, loading }) => {
+    if (loading) {
+        return (
+            <div className="chart-container">
+                <Skeleton width="40%" height="24px" className="mb-4" />
+                <Skeleton width="100%" height="300px" />
+            </div>
+        );
+    }
+
     const options = {
         grid: { top: 20, right: 30, bottom: 20, left: 40, containLabel: true },
         xAxis: {

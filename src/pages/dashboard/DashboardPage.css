@@ -32,28 +32,11 @@
     color: var(--text-secondary);
 }
 
-/* Dashboard Grid Layout */
-.dashboard-main-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
-}
-
-@media (min-width: 1024px) {
-    .dashboard-main-grid {
-        grid-template-columns: 2fr 1fr;
-    }
-}
-
-.dashboard-col-left {
+/* Dashboard Layout - Stacked since Alerts moved to Navbar */
+.dashboard-content-stack {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-lg);
-}
-
-.dashboard-col-right {
-    display: flex;
-    flex-direction: column;
 }
 
 .card-container {

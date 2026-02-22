@@ -1,9 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from '../../services/authService';
+import storage from '../../utils/storage';
 
-// Get token from local storage
-const token = localStorage.getItem('token');
-const user = JSON.parse(localStorage.getItem('user'));
+const getInitialAuth = () => {
+    const token = storage.get('token');
+    const userStr = storage.get('user');
+    let user = null;
+    try {
+        user = userStr ? JSON.parse(userStr) : null;
+    } catch (e) {
+        console.error("Failed to parse user from storage", e);
+    }
+    return { token, user };
+};
+
+const { token, user } = getInitialAuth();
 
 const initialState = {
     user: user ? user : null,
@@ -56,8 +67,8 @@ const authSlice = createSlice({
                 state.isAuthenticated = true;
                 state.user = action.payload.user;
                 state.token = action.payload.token;
-                localStorage.setItem('token', action.payload.token);
-                localStorage.setItem('user', JSON.stringify(action.payload.user));
+                storage.set('token', action.payload.token);
+                storage.set('user', JSON.stringify(action.payload.user));
             })
             .addCase(login.rejected, (state, action) => {
                 state.isLoading = false;
@@ -70,8 +81,8 @@ const authSlice = createSlice({
                 state.user = null;
                 state.token = null;
                 state.isAuthenticated = false;
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
+                storage.remove('token');
+                storage.remove('user');
             });
     },
 });

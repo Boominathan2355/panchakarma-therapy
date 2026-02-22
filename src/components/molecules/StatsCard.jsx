@@ -1,8 +1,23 @@
-import React from 'react';
+import Skeleton from '../atoms/Skeleton';
 import './StatsCard.css';
 
 
-const StatsCard = ({ title, value, description, icon: Icon, trend }) => {
+const StatsCard = ({ title, value, description, icon: Icon, trend, loading }) => {
+    if (loading) {
+        return (
+            <div className="stat-card">
+                <div className="stat-header">
+                    <Skeleton width="60%" height="20px" />
+                    <Skeleton variant="circle" width="24px" height="24px" />
+                </div>
+                <div className="stat-content">
+                    <Skeleton width="40%" height="32px" className="mb-2" />
+                    <Skeleton width="80%" height="16px" />
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="stat-card">
             <div className="stat-header">

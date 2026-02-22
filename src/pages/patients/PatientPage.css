@@ -19,6 +19,71 @@
     padding-right: var(--spacing-sm);
 }
 
+.patient-content.full-width {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-navigation {
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.management-dashboard-view {
+    width: 100%;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.sidebar-actions {
+    padding: var(--spacing-md) var(--spacing-md) 0 var(--spacing-md);
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s;
+}
+
+.back-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.page-header {
+    margin-bottom: var(--spacing-lg);
+}
+
+.page-title {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .patient-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -37,11 +102,27 @@
     gap: var(--spacing-lg);
 }
 
-/* Assign Therapy Feature */
-.assign-therapy-bar {
+.nested-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.dashboard-actions {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: var(--spacing-md);
+    margin: var(--spacing-sm) 0;
+}
+
+.empty-state,
+.loading-state {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    gap: var(--spacing-md);
 }
 
 .assign-modal-wrapper {

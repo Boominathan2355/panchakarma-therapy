@@ -56,11 +56,25 @@ const getAlerts = async () => {
     });
 };
 
+const getNotifications = async () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve([
+                { id: 1, type: 'info', title: 'Appointment Warning', message: 'You have 3 appointments starting in 15 mins', time: '5 mins ago', read: false },
+                { id: 2, type: 'warning', title: 'Low Stock', message: 'Dhanwantharam Thailam stock is below 10%', time: '20 mins ago', read: false },
+                { id: 3, type: 'success', title: 'Report Ready', message: 'Patient Arjun\'s discharge summary is ready', time: '1 hour ago', read: true },
+                { id: 4, type: 'error', title: 'System Error', message: 'Automated backup failed last night', time: '3 hours ago', read: false },
+            ]);
+        }, 500);
+    });
+};
+
 const dashboardService = {
     getKPIs,
     getTherapyTrends,
     getAvailability,
-    getAlerts
+    getAlerts,
+    getNotifications
 };
 
 export default dashboardService;

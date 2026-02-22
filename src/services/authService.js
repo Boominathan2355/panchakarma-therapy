@@ -1,6 +1,8 @@
 import api from './api';
+import storage from '../utils/storage';
 
 // Mock implementation for development
+// ... (mockLogin code remains the same)
 const mockLogin = async (credentials) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -32,10 +34,16 @@ const authService = {
         return mockLogin(credentials);
     },
     logout: () => {
-        localStorage.removeItem('token');
+        storage.remove('token');
     },
     getCurrentUser: () => {
-        return JSON.parse(localStorage.getItem('user'));
+        const userStr = storage.get('user');
+        try {
+            return userStr ? JSON.parse(userStr) : null;
+        } catch (e) {
+            console.error("Failed to parse user from storage", e);
+            return null;
+        }
     },
 };
 

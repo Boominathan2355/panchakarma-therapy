@@ -2,11 +2,26 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AlertTriangle, CheckCircle } from 'lucide-react';
 import Button from '../atoms/Button';
+import Skeleton from '../atoms/Skeleton';
 import './EligibilityTracker.css';
 
-const EligibilityTracker = ({ patientConditions }) => {
+const EligibilityTracker = ({ patientConditions = [], loading = false }) => {
     const { therapies } = useSelector(state => state.therapy);
     const [selectedTherapyId, setSelectedTherapyId] = useState('');
+
+    if (loading) {
+        return (
+            <div className="eligibility-card loading">
+                <h3 className="section-title">Eligibility Checker</h3>
+                <div className="eligibility-controls">
+                    <Skeleton width="100%" height="40px" />
+                </div>
+                <div className="eligibility-result-skeleton" style={{ marginTop: '1rem' }}>
+                    <Skeleton width="100%" height="80px" />
+                </div>
+            </div>
+        );
+    }
 
     // Find selected therapy details
     const selectedTherapy = therapies.find(t => t.id === selectedTherapyId);

@@ -53,3 +53,60 @@
 .add-window-btn:hover {
     background-color: var(--info-bg);
 }
+
+.add-window-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: var(--background-color);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--primary-color);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.form-group input {
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+}
+
+.cancel-btn,
+.submit-btn {
+    flex: 1;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.cancel-btn {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.submit-btn {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    color: white;
+}

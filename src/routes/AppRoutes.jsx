@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from '../pages/auth/LoginPage';
 import DashboardPage from '../pages/dashboard/DashboardPage';
 import TherapyPage from '../pages/therapy/TherapyPage';
+import TherapyPlanPage from '../pages/therapy/TherapyPlanPage';
 import PatientPage from '../pages/patients/PatientPage';
 import SchedulePage from '../pages/schedule/SchedulePage';
 import ResourcePage from '../pages/resources/ResourcePage';
@@ -33,12 +34,15 @@ const AppRoutes = () => {
                 {/* Patients: Admin, Physician */}
                 <Route element={<PrivateRoute allowedRoles={[ROLES.ADMIN, ROLES.PHYSICIAN]} />}>
                     <Route path="/patients" element={<PatientPage />} />
+                    <Route path="/patients/:id" element={<PatientPage />} />
                 </Route>
 
-                {/* Therapies: Physician */}
+                {/* Therapies: Physician, Admin */}
                 <Route element={<PrivateRoute allowedRoles={[ROLES.PHYSICIAN, ROLES.ADMIN]} />}>
                     <Route path="/therapies" element={<TherapyPage />} />
-                    <Route path="/therapy-plans" element={<TherapyPage />} /> {/* Mapping to same page for now */}
+                    <Route path="/therapies/:id" element={<TherapyPage />} />
+                    <Route path="/therapy-plans" element={<TherapyPlanPage />} />
+                    <Route path="/therapy-plans/:id" element={<TherapyPlanPage />} />
                 </Route>
 
                 {/* Scheduler: Scheduler, Admin */}
