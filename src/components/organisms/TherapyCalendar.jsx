@@ -25,7 +25,7 @@ const DnDCalendar = withDragAndDrop(Calendar);
 
 const TherapyCalendar = ({ events, onEventDrop, onSelectEvent, resources }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
-    const [currentView, setCurrentView] = useState(Views.WEEK);
+    const [currentView, setCurrentView] = useState(Views.DAY);
 
     const handleNavigate = useCallback((newDate) => {
         setCurrentDate(newDate);

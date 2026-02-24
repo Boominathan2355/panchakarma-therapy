@@ -47,12 +47,14 @@ const AppRoutes = () => {
 
                 {/* Scheduler: Scheduler, Admin */}
                 <Route element={<PrivateRoute allowedRoles={[ROLES.SCHEDULER, ROLES.ADMIN]} />}>
-                    <Route path="/scheduler" element={<SchedulePage />} />
+                    <Route path="/scheduler" element={<Navigate to="/scheduler/calendar" replace />} />
+                    <Route path="/scheduler/:view" element={<SchedulePage />} />
                 </Route>
 
                 {/* Resources: Admin */}
                 <Route element={<PrivateRoute allowedRoles={[ROLES.ADMIN]} />}>
-                    <Route path="/resources" element={<ResourcePage />} />
+                    <Route path="/resources" element={<Navigate to="/resources/staff" replace />} />
+                    <Route path="/resources/:tab" element={<ResourcePage />} />
                 </Route>
 
                 {/* Audit: Admin */}

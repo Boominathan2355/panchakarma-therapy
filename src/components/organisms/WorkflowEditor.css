@@ -430,14 +430,3 @@
 .empty-state p {
     margin: 0;
 }
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 640px) {
-    .form-row {
-        flex-direction: column;
-    }
-
-    .step-actions {
-        opacity: 1;
-    }
-}

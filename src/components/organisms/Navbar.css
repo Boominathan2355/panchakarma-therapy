@@ -131,21 +131,3 @@
     background-color: #fee2e2;
     color: var(--error-color);
 }
-
-@media (max-width: 768px) {
-    .navbar-center {
-        display: none;
-    }
-
-    .mobile-menu-btn {
-        display: block;
-    }
-
-    .user-info {
-        display: none;
-    }
-
-    .navbar-title {
-        font-size: var(--font-size-lg);
-    }
-}

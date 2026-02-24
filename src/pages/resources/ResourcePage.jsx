@@ -1,23 +1,39 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useNavigate } from 'react-router-dom';
 import { fetchResourceData } from '../../store/slices/resourceSlice';
 import { fetchSessions } from '../../store/slices/scheduleSlice';
 import StaffDirectory from '../../components/organisms/StaffDirectory';
 import MaterialInventory from '../../components/organisms/MaterialInventory';
 import UtilizationChart from '../../components/organisms/UtilizationChart';
+import Skeleton from '../../components/atoms/Skeleton';
 import { startOfWeek, addDays, format, isSameDay } from 'date-fns';
 import './ResourcePage.css';
 
 const ResourcePage = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { tab } = useParams();
+    const activeTab = tab || 'staff'; // Fallback to staff if no tab is provided
+
     const { staff, inventory, isLoading } = useSelector(state => state.resource);
     const { sessions } = useSelector(state => state.schedule);
-    const [activeTab, setActiveTab] = useState('staff');
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
     useEffect(() => {
         dispatch(fetchResourceData());
         dispatch(fetchSessions());
     }, [dispatch]);
+
+    useEffect(() => {
+        setIsTransitioning(true);
+        const timer = setTimeout(() => setIsTransitioning(false), 300);
+        return () => clearTimeout(timer);
+    }, [activeTab]);
+
+    const handleTabChange = (newTab) => {
+        navigate(`/resources/${newTab}`);
+    };
 
     // Calculate utilization based on actual sessions
     const utilizationData = useMemo(() => {
@@ -63,45 +79,89 @@ const ResourcePage = () => {
         };
     }, [sessions, staff]);
 
-    if (isLoading) return <div className="p-8 text-center text-muted">Loading Resources...</div>;
-
     return (
         <div className="resource-page">
             <div className="resource-header">
-                <h2>Resources & Inventory</h2>
+                <h2>{isLoading ? <Skeleton width="220px" height="2.5rem" /> : 'Resources & Inventory'}</h2>
                 <div className="resource-tabs">
-                    <button
-                        className={`tab-btn ${activeTab === 'staff' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('staff')}
-                    >Staff & Skills</button>
-                    <button
-                        className={`tab-btn ${activeTab === 'inventory' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('inventory')}
-                    >Inventory</button>
-                    <button
-                        className={`tab-btn ${activeTab === 'analytics' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('analytics')}
-                    >Analytics</button>
+                    {isLoading ? (
+                        <div style={{ display: 'flex', gap: '8px', padding: '4px' }}>
+                            <Skeleton width="115px" height="36px" borderRadius="18px" />
+                            <Skeleton width="115px" height="36px" borderRadius="18px" />
+                            <Skeleton width="115px" height="36px" borderRadius="18px" />
+                        </div>
+                    ) : (
+                        <>
+                            <button
+                                className={`tab-btn ${activeTab === 'staff' ? 'active' : ''}`}
+                                onClick={() => handleTabChange('staff')}
+                            >Staff & Skills</button>
+                            <button
+                                className={`tab-btn ${activeTab === 'inventory' ? 'active' : ''}`}
+                                onClick={() => handleTabChange('inventory')}
+                            >Inventory</button>
+                            <button
+                                className={`tab-btn ${activeTab === 'analytics' ? 'active' : ''}`}
+                                onClick={() => handleTabChange('analytics')}
+                            >Analytics</button>
+                        </>
+                    )}
                 </div>
             </div>
 
             <div className="resource-content">
-                {activeTab === 'staff' && <StaffDirectory staff={staff} />}
+                {(isLoading || isTransitioning) ? (
+                    activeTab === 'staff' ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '1.5rem' }}>
+                            <Skeleton width="100%" height="100px" borderRadius="12px" />
+                            <Skeleton width="100%" height="100px" borderRadius="12px" />
+                            <Skeleton width="100%" height="100px" borderRadius="12px" />
+                        </div>
+                    ) : activeTab === 'inventory' ? (
+                        <div className="limit-width">
+                            <div className="inventory-panel" style={{ padding: '1.5rem' }}>
+                                <div style={{ marginBottom: '1.5rem' }}>
+                                    <Skeleton width="200px" height="1.8rem" />
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                    <Skeleton width="100%" height="40px" borderRadius="6px" />
+                                    <Skeleton width="100%" height="40px" borderRadius="6px" />
+                                    <Skeleton width="100%" height="40px" borderRadius="6px" />
+                                    <Skeleton width="100%" height="40px" borderRadius="6px" />
+                                    <Skeleton width="100%" height="40px" borderRadius="6px" />
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="limit-width">
+                            <div className="utilization-card" style={{ padding: '1.5rem' }}>
+                                <div style={{ marginBottom: '1.5rem' }}>
+                                    <Skeleton width="200px" height="1.8rem" />
+                                </div>
+                                <Skeleton width="100%" height="300px" borderRadius="12px" />
+                            </div>
+                        </div>
+                    )
+                ) : (
+                    <>
+                        {activeTab === 'staff' && <StaffDirectory staff={staff} />}
 
-                {activeTab === 'inventory' && (
-                    <div className="limit-width">
-                        <MaterialInventory items={inventory} />
-                    </div>
-                )}
-
-                {activeTab === 'analytics' && (
-                    <div className="limit-width">
-                        {utilizationData ? (
-                            <UtilizationChart data={utilizationData} />
-                        ) : (
-                            <div className="text-center p-8 text-muted">No session data available for analytics.</div>
+                        {activeTab === 'inventory' && (
+                            <div className="limit-width">
+                                <MaterialInventory items={inventory} />
+                            </div>
                         )}
-                    </div>
+
+                        {activeTab === 'analytics' && (
+                            <div className="limit-width">
+                                {utilizationData ? (
+                                    <UtilizationChart data={utilizationData} />
+                                ) : (
+                                    <div className="text-center p-8 text-muted">No session data available for analytics.</div>
+                                )}
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
     fetchSessions,
     fetchResources,
@@ -22,8 +23,11 @@ import resourceService from '../../services/resourceService';
 
 const SchedulePage = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { view } = useParams();
+    const viewMode = view || 'calendar'; // 'calendar', 'gantt', or 'optimize'
+
     const { sessions, resources, conflictSession, explanations, isOptimizing } = useSelector(state => state.schedule);
-    const [viewMode, setViewMode] = useState('calendar'); // 'calendar', 'gantt', or 'optimize'
 
     // State for optimizer data
     const [therapies, setTherapies] = useState([]);
@@ -114,19 +118,19 @@ const SchedulePage = () => {
                 <div className="view-toggles">
                     <button
                         className={`toggle-btn ${viewMode === 'calendar' ? 'active' : ''}`}
-                        onClick={() => setViewMode('calendar')}
+                        onClick={() => navigate('/scheduler/calendar')}
                     >
                         <Calendar size={18} /> Calendar
                     </button>
                     <button
                         className={`toggle-btn ${viewMode === 'gantt' ? 'active' : ''}`}
-                        onClick={() => setViewMode('gantt')}
+                        onClick={() => navigate('/scheduler/gantt')}
                     >
                         <AlignLeft size={18} /> Resource View
                     </button>
                     <button
                         className={`toggle-btn optimize ${viewMode === 'optimize' ? 'active' : ''}`}
-                        onClick={() => setViewMode('optimize')}
+                        onClick={() => navigate('/scheduler/optimize')}
                     >
                         <Zap size={18} /> <span>Optimize</span>
                     </button>

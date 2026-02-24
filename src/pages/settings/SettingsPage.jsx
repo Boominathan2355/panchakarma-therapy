@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Bell, Lock, Moon, Sun, Users, Plus, Trash2 } from 'lucide-react';
+import { Bell, Lock, Users, Plus, Trash2 } from 'lucide-react';
 import { useSelector } from 'react-redux';
 
 import Button from '../../components/atoms/Button';
@@ -9,8 +9,7 @@ import './SettingsPage.css';
 
 const SettingsPage = () => {
     const { user } = useSelector(state => state.auth);
-    const [activeTab, setActiveTab] = useState('general');
-    const [theme, setTheme] = useState('light');
+    const [activeTab, setActiveTab] = useState('notifications');
     const [notifications, setNotifications] = useState({
         email: true,
         sms: false,
@@ -50,12 +49,6 @@ const SettingsPage = () => {
             <div className="settings-container">
                 <div className="settings-sidebar">
                     <button
-                        className={`settings-nav-item ${activeTab === 'general' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('general')}
-                    >
-                        <User size={18} /> General
-                    </button>
-                    <button
                         className={`settings-nav-item ${activeTab === 'notifications' ? 'active' : ''}`}
                         onClick={() => setActiveTab('notifications')}
                     >
@@ -78,37 +71,6 @@ const SettingsPage = () => {
                 </div>
 
                 <div className="settings-content">
-                    {activeTab === 'general' && (
-                        <div className="settings-section">
-                            <h3>General Preferences</h3>
-                            <div className="form-group">
-                                <Label>Display Name</Label>
-                                <Input defaultValue="Admin User" />
-                            </div>
-                            <div className="form-group">
-                                <Label>Email Address</Label>
-                                <Input defaultValue="admin@example.com" disabled />
-                            </div>
-                            <div className="form-group">
-                                <Label>Theme</Label>
-                                <div className="theme-options">
-                                    <button
-                                        className={`theme-btn ${theme === 'light' ? 'active' : ''}`}
-                                        onClick={() => setTheme('light')}
-                                    >
-                                        <Sun size={20} /> Light
-                                    </button>
-                                    <button
-                                        className={`theme-btn ${theme === 'dark' ? 'active' : ''}`}
-                                        onClick={() => setTheme('dark')}
-                                    >
-                                        <Moon size={20} /> Dark
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
                     {activeTab === 'notifications' && (
                         <div className="settings-section">
                             <h3>Notification Preferences</h3>

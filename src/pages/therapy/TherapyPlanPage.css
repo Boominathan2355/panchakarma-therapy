@@ -534,13 +534,4 @@
     box-shadow: var(--shadow-sm);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .plan-cards-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .plan-detail-stats {
-        flex-direction: column;
-    }
-}
+/* removed mobile breakpoints */

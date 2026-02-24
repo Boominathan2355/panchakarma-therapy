@@ -242,17 +242,4 @@
     font-size: var(--font-size-sm);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .therapy-dash-header {
-        flex-direction: column;
-    }
-
-    .therapy-search-bar {
-        min-width: 100%;
-    }
-
-    .therapy-cards-grid {
-        grid-template-columns: 1fr;
-    }
-}
+/* removed mobile breakpoints */
