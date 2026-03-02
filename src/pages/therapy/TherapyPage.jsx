@@ -7,7 +7,7 @@ import WorkflowEditor from '../../components/organisms/WorkflowEditor';
 import SafetyPanel from '../../components/organisms/SafetyPanel';
 import DocumentUploader from '../../components/organisms/DocumentUploader';
 import Skeleton from '../../components/atoms/Skeleton';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ChevronRight } from 'lucide-react';
 import './TherapyPage.css';
 
 const TherapyPage = () => {
@@ -54,9 +54,15 @@ const TherapyPage = () => {
                 /* === Detail / Info View === */
                 <div className="therapy-detail-view">
                     <div className="dashboard-navigation">
-                        <button className="back-btn" onClick={handleBack}>
-                            <ArrowLeft size={16} /> Back to Therapies
-                        </button>
+                        <div className="breadcrumb">
+                            <span className="breadcrumb-item clickable" onClick={handleBack}>
+                                Therapy Protocols
+                            </span>
+                            <ChevronRight size={14} className="breadcrumb-separator" />
+                            <span className="breadcrumb-item active">
+                                {selectedTherapy?.name || id}
+                            </span>
+                        </div>
                     </div>
 
                     {isDetailLoading || !selectedTherapy ? (

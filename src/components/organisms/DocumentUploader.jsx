@@ -3,6 +3,7 @@ import FileInput from '../atoms/FileInput';
 import Button from '../atoms/Button';
 import ProcessingLog from '../molecules/ProcessingLog';
 import { FileText, Download, CheckCircle, Loader, FileJson } from 'lucide-react';
+import documentService from '../../services/documentService';
 import './DocumentUploader.css';
 
 const DocumentUploader = ({ documents = [], onUpload }) => {
@@ -16,53 +17,43 @@ const DocumentUploader = ({ documents = [], onUpload }) => {
         setLogs(prev => [...prev, { time, message, type }]);
     };
 
-    const handleUpload = (file) => {
-        // Start simulation of Algorithm 1: Document Upload and LLM Processing
+    const handleUpload = async (file) => {
         setUploadStatus('uploading');
         setLogs([]);
-        addLog(`[Step 1] Input received: ${file.name}`, 'info');
+        addLog(`[Step 1] Upload started: ${file.name}`, 'info');
 
-        // Step 3: Extract text
-        setTimeout(() => {
+        try {
+            // Real API Call
+            const response = await documentService.uploadDocument(file);
+
             setUploadStatus('extracting');
-            addLog('[Step 3] Extracting text from document...', 'info');
+            addLog('[Step 3] Backend extracting text and processing with LLM...', 'info');
 
-            // Step 4: Preprocess
+            // Simulating further steps if backend doesn't provide granular progress
+            // In a production app, we might use WebSockets or polling for these steps
             setTimeout(() => {
                 setUploadStatus('analyzing');
-                addLog('[Step 4] Preprocessing: Cleaning and segmentation...', 'info');
-                addLog('Text cleaned. Segments identified: 14 sections.', 'info');
+                addLog('[Step 5] LLM identifying therapy patterns...', 'warning');
 
-                // Step 5: Send to LLM
-                addLog('[Step 5] Sending processed text to LLM for parsing...', 'warning');
-
-                // Step 6: Generate JSON
                 setTimeout(() => {
-                    addLog('[Step 6] Generating structured JSON representation...', 'info');
+                    setUploadStatus('complete');
+                    addLog('[Step 9] Digitization Complete. Results stored.', 'success');
 
-                    // Step 7: Store JSON & Embeddings
-                    addLog('[Step 7] Storing JSON J and semantic embeddings in database...', 'success');
+                    if (response.extractedData) {
+                        setExtractedData(JSON.stringify(response.extractedData, null, 2));
+                    } else if (response.json) {
+                        setExtractedData(JSON.stringify(response.json, null, 2));
+                    }
 
-                    // Step 9: Notify Administrator
-                    setTimeout(() => {
-                        setUploadStatus('complete');
-                        addLog('[Step 9] COMPLETED. Notification sent to Administrator.', 'success');
+                    if (onUpload) onUpload(response);
+                }, 1500);
+            }, 1000);
 
-                        const mockJson = {
-                            metadata: { title: "Vamana Protocol v2", author: "Chief Vaidya" },
-                            sequence: [
-                                { step: 1, action: "Snehana", duration: "45 mins", notes: "Use warm oil" },
-                                { step: 2, action: "Swedana", duration: "30 mins", notes: "Steam box" }
-                            ],
-                            safety: ["Check BP prep-procedure", "Monitor pulse"]
-                        };
-                        setExtractedData(JSON.stringify(mockJson, null, 2));
-
-                        if (onUpload) onUpload(file);
-                    }, 1000);
-                }, 2000);
-            }, 1500);
-        }, 1000);
+        } catch (error) {
+            setUploadStatus('idle');
+            addLog(`Error: ${error.message}`, 'error');
+            console.error('Upload failed:', error);
+        }
     };
 
     const StatusBadge = ({ status }) => {

@@ -7,16 +7,15 @@
 /* Header */
 .therapy-dash-header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: flex-start;
     margin-bottom: var(--spacing-xl);
-    gap: var(--spacing-lg);
-    flex-wrap: wrap;
+    gap: var(--spacing-md);
 }
 
 .therapy-dash-title {
-    font-size: var(--font-size-2xl);
-    font-weight: 800;
+    font-size: 1.5rem;
+    font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 4px;
     letter-spacing: -0.5px;

@@ -1,23 +1,26 @@
-.audit-table-card {
-    background-color: var(--surface-color);
-    padding: var(--spacing-lg);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-color);
-    flex: 1;
-    overflow: hidden;
+.audit-log-layout {
     display: flex;
     flex-direction: column;
+    gap: var(--spacing-lg);
 }
 
-.table-header {
+.audit-table-card {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+}
+
+.audit-header-card .table-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-lg);
 }
 
-.table-header h3 {
+.audit-header-card .table-header h3 {
     font-size: var(--font-size-lg);
+    margin: 0;
 }
 
 .search-input {
@@ -27,28 +30,10 @@
     width: 250px;
 }
 
-.table-responsive {
-    overflow-y: auto;
-    flex: 1;
-}
-
-.audit-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.audit-table th {
-    text-align: left;
-    padding: var(--spacing-sm);
-    color: var(--text-secondary);
-    border-bottom: 2px solid var(--border-color);
+/* Custom styles for specific columns if needed */
+.font-mono {
+    font-family: 'Inter', monospace;
     font-size: 0.85rem;
-}
-
-.audit-table td {
-    padding: var(--spacing-md) var(--spacing-sm);
-    border-bottom: 1px solid var(--border-color);
-    font-size: 0.9rem;
 }
 
 .font-mono {

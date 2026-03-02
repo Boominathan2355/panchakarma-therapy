@@ -2,14 +2,15 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './NavItem.css';
 
-const NavItem = ({ to, icon: Icon, label }) => {
+const NavItem = ({ to, icon: Icon, label, isCollapsed }) => {
     return (
         <NavLink
             to={to}
-            className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+            className={({ isActive }) => `nav-item ${isActive ? 'active' : ''} ${isCollapsed ? 'collapsed' : ''}`}
+            title={label}
         >
             <Icon size={20} className="nav-icon" />
-            <span className="nav-label">{label}</span>
+            {!isCollapsed && <span className="nav-label">{label}</span>}
         </NavLink>
     );
 };

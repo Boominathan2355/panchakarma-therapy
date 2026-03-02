@@ -20,14 +20,46 @@
 }
 
 .patient-content.full-width {
-    max-width: 1200px;
     margin: 0 auto;
 }
 
 .dashboard-navigation {
-    margin-bottom: var(--spacing-md);
-    padding: var(--spacing-sm) 0;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
     border-bottom: 1px solid var(--border-color);
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.breadcrumb-item {
+    font-weight: 500;
+}
+
+.breadcrumb-item.clickable {
+    cursor: pointer;
+    color: var(--primary-color);
+    transition: color 0.2s;
+}
+
+.breadcrumb-item.clickable:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.breadcrumb-separator {
+    color: var(--text-muted);
+    opacity: 0.5;
 }
 
 .management-dashboard-view {
@@ -64,12 +96,14 @@
 
 .page-header {
     margin-bottom: var(--spacing-lg);
+    text-align: left;
 }
 
 .page-title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: var(--text-primary);
     font-weight: 700;
+    margin: 0;
 }
 
 @keyframes fadeIn {

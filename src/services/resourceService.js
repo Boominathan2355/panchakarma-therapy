@@ -1,4 +1,4 @@
-// Mock data for Resource Module
+import therapistService from './therapistService';
 
 const mockStaff = [
     { id: 's1', name: 'Dr. Arya', role: 'Senior Therapist', skills: ['Vamana', 'Virechana', 'Consultation'], shifts: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'] },
@@ -20,15 +20,21 @@ const mockUtilization = {
 };
 
 const getResourceData = async () => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({
-                staff: mockStaff,
-                inventory: mockInventory,
-                utilization: mockUtilization
-            });
-        }, 600);
-    });
+    try {
+        const staff = await therapistService.getAllTherapists();
+        return {
+            staff: staff.length > 0 ? staff : mockStaff, // Fallback to mock if API returns empty during transition
+            inventory: mockInventory,
+            utilization: mockUtilization
+        };
+    } catch (error) {
+        console.error('Error fetching resource data:', error);
+        return {
+            staff: mockStaff,
+            inventory: mockInventory,
+            utilization: mockUtilization
+        };
+    }
 };
 
 const checkFeasibility = async (therapyId) => {
@@ -62,17 +68,19 @@ const checkFeasibility = async (therapyId) => {
 };
 
 const updateStaffMember = async (updatedStaff) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const index = mockStaff.findIndex(s => s.id === updatedStaff.id);
-            if (index !== -1) {
-                mockStaff[index] = updatedStaff;
-                resolve({ success: true, staff: updatedStaff });
-            } else {
-                resolve({ success: false, error: 'Staff member not found' });
-            }
-        }, 300);
-    });
+    try {
+        const response = await therapistService.updateTherapist(updatedStaff.id, updatedStaff);
+        return { success: true, staff: response };
+    } catch (error) {
+        console.error('Error updating staff member:', error);
+        // Fallback for mock data if ID is mock format
+        const index = mockStaff.findIndex(s => s.id === updatedStaff.id);
+        if (index !== -1) {
+            mockStaff[index] = updatedStaff;
+            return { success: true, staff: updatedStaff };
+        }
+        return { success: false, error: error.message };
+    }
 };
 
 const resourceService = {

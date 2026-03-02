@@ -1,6 +1,17 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Stethoscope, Users, Calendar, Settings, FileText, ShieldAlert, Layers } from 'lucide-react';
+import {
+    LayoutDashboard,
+    Stethoscope,
+    Users,
+    Calendar,
+    Settings,
+    FileText,
+    ShieldAlert,
+    ChevronLeft,
+    ChevronRight,
+    Menu
+} from 'lucide-react';
 import NavItem from '../molecules/NavItem';
 import './Sidebar.css';
 
@@ -8,18 +19,20 @@ const navItems = [
     { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { to: '/patients', label: 'Patients', icon: Users },
     { to: '/therapies', label: 'Therapies', icon: Stethoscope },
-    { to: '/therapy-plans', label: 'Therapy Plans', icon: Layers },
     { to: '/scheduler', label: 'Scheduler', icon: Calendar },
     { to: '/resources', label: 'Resources', icon: FileText },
     { to: '/audit', label: 'Audit Log', icon: ShieldAlert },
     { to: '/settings', label: 'Settings', icon: Settings },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ isCollapsed, onToggle }) => {
     return (
-        <aside className="sidebar">
+        <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
             <div className="sidebar-header">
-                <span className="brand-logo">AyurSoft</span>
+                {!isCollapsed && <span className="brand-logo">AyurSoft</span>}
+                <button className="sidebar-toggle-btn" onClick={onToggle} title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}>
+                    {isCollapsed ? <Menu size={20} /> : <ChevronLeft size={20} />}
+                </button>
             </div>
 
             <nav className="sidebar-nav">
@@ -29,6 +42,7 @@ const Sidebar = () => {
                         to={item.to}
                         label={item.label}
                         icon={item.icon}
+                        isCollapsed={isCollapsed}
                     />
                 ))}
             </nav>

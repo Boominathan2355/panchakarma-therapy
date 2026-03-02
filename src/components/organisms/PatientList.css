@@ -9,13 +9,11 @@
 }
 
 .list-management-header {
-    padding: var(--spacing-lg);
-    border-bottom: 2px solid var(--background-color);
+    padding: var(--spacing-xl) var(--spacing-lg);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--secondary-color);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    background-color: var(--surface-color);
 }
 
 .mgmt-stat {
@@ -167,50 +165,27 @@
 
 .patient-list-container.grid {
     width: 100%;
+    background: none;
     border: none;
-    background: var(--surface-color);
+    padding: 0;
+    box-shadow: none;
+}
+
+.patient-grid-layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.stats-card,
+.table-card {
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
 }
 
 .patient-table-view {
     display: flex;
     flex-direction: column;
-}
-
-.patient-table-header {
-    display: flex;
-    padding: var(--spacing-md) var(--spacing-lg);
-    background-color: var(--secondary-color);
-    border-bottom: 2px solid var(--background-color);
-    font-weight: 600;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.patient-table-row {
-    display: flex;
-    align-items: center;
-    padding: var(--spacing-md) var(--spacing-lg);
-    border-bottom: 1px solid var(--border-color);
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.patient-table-row:hover {
-    background-color: var(--secondary-color);
-}
-
-.patient-table-row.active {
-    background-color: var(--primary-color);
-}
-
-.patient-table-row.active .patient-name,
-.patient-table-row.active .patient-sub {
-    color: white;
 }
 
 .col-avatar {

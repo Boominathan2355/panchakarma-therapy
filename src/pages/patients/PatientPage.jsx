@@ -13,7 +13,7 @@ import FeasibilityPanel from '../../components/organisms/FeasibilityPanel';
 import Button from '../../components/atoms/Button';
 import Skeleton from '../../components/atoms/Skeleton';
 import resourceService from '../../services/resourceService';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ChevronRight } from 'lucide-react';
 import './PatientPage.css';
 
 const PatientPage = () => {
@@ -85,9 +85,15 @@ const PatientPage = () => {
             ) : (
                 <div className="patient-content full-width">
                     <div className="dashboard-navigation">
-                        <button className="back-btn" onClick={handleBack}>
-                            <ArrowLeft size={16} /> Back to Patients List
-                        </button>
+                        <div className="breadcrumb">
+                            <span className="breadcrumb-item clickable" onClick={handleBack}>
+                                Patients Management
+                            </span>
+                            <ChevronRight size={14} className="breadcrumb-separator" />
+                            <span className="breadcrumb-item active">
+                                {selectedPatient?.name || id}
+                            </span>
+                        </div>
                     </div>
 
                     {isDetailLoading || !selectedPatient ? (

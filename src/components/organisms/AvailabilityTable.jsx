@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import Skeleton from '../atoms/Skeleton';
 import Badge from '../atoms/Badge';
+import Table from '../molecules/Table';
+import Card from '../atoms/Card';
 import './AvailabilityTable.css';
 
 const AvailabilityTable = ({ therapists, rooms, loading }) => {
 
     const [activeTab, setActiveTab] = useState('therapists');
+    const [currentPage, setCurrentPage] = useState(1);
+    const PAGE_SIZE = 10;
 
     if (loading) {
         return (
@@ -52,57 +56,75 @@ const AvailabilityTable = ({ therapists, rooms, loading }) => {
         }
     };
 
-    const data = activeTab === 'therapists' ? therapists : rooms;
+    const fullData = activeTab === 'therapists' ? therapists : rooms;
+    const totalPages = Math.ceil((fullData?.length || 0) / PAGE_SIZE);
+    const paginatedData = (fullData || []).slice(
+        (currentPage - 1) * PAGE_SIZE,
+        currentPage * PAGE_SIZE
+    );
+
+    const tableColumns = [
+        {
+            header: 'Name',
+            key: 'name',
+            className: 'font-medium'
+        },
+        {
+            header: activeTab === 'therapists' ? 'Specialty' : 'Type',
+            key: 'type',
+            className: 'text-muted',
+            render: (_, item) => activeTab === 'therapists' ? item.specialty : 'Treatment Room'
+        },
+        {
+            header: 'Status',
+            key: 'status',
+            render: (status) => (
+                <Badge variant={getStatusVariant(status)}>
+                    {status}
+                </Badge>
+            )
+        }
+    ];
 
     return (
-        <div className="availability-panel">
-            <div className="panel-header">
-                <h3 className="section-title">Resource Availability</h3>
-                <div className="tabs">
-                    <button
-                        className={`tab-btn ${activeTab === 'therapists' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('therapists')}
-                    >
-                        Therapists
-                    </button>
-                    <button
-                        className={`tab-btn ${activeTab === 'rooms' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('rooms')}
-                    >
-                        Rooms
-                    </button>
+        <div className="availability-layout">
+            <Card className="availability-header-card">
+                <div className="panel-header">
+                    <h3 className="section-title">Resource Availability</h3>
+                    <div className="tabs">
+                        <button
+                            className={`tab-btn ${activeTab === 'therapists' ? 'active' : ''}`}
+                            onClick={() => {
+                                setActiveTab('therapists');
+                                setCurrentPage(1);
+                            }}
+                        >
+                            Therapists
+                        </button>
+                        <button
+                            className={`tab-btn ${activeTab === 'rooms' ? 'active' : ''}`}
+                            onClick={() => {
+                                setActiveTab('rooms');
+                                setCurrentPage(1);
+                            }}
+                        >
+                            Rooms
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </Card>
 
-            <div className="table-responsive">
-                <table className="custom-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>{activeTab === 'therapists' ? 'Specialty' : 'Type'}</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map((item) => (
-                            <tr key={item.id}>
-                                <td className="font-medium">{item.name}</td>
-                                <td className="text-muted">{activeTab === 'therapists' ? item.specialty : 'Treatment Room'}</td>
-                                <td>
-                                    <Badge variant={getStatusVariant(item.status)}>
-                                        {item.status}
-                                    </Badge>
-                                </td>
-                            </tr>
-                        ))}
-                        {data.length === 0 && (
-                            <tr>
-                                <td colSpan="3" className="text-center p-4 text-muted">No data available</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
-            </div>
+            <Table
+                columns={tableColumns}
+                data={paginatedData}
+                loading={loading}
+                loadingRows={5}
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+                emptyMessage="No data available"
+                className="availability-table-card"
+            />
         </div>
     );
 };

@@ -13,7 +13,7 @@ import ResourceGantt from '../../components/organisms/ResourceGantt';
 import ConflictModal from '../../components/molecules/ConflictModal';
 import ScheduleOptimizer from '../../components/organisms/ScheduleOptimizer';
 import ScheduleExplainer from '../../components/organisms/ScheduleExplainer';
-import { Calendar, AlignLeft, Zap } from 'lucide-react';
+import { Calendar, AlignLeft, Zap, ChevronRight } from 'lucide-react';
 import './SchedulePage.css';
 
 // Import mock data services for the optimizer
@@ -111,10 +111,24 @@ const SchedulePage = () => {
         end: new Date(s.end)
     }));
 
+    const viewNames = {
+        calendar: 'Calendar',
+        gantt: 'Resource View',
+        optimize: 'Optimizer'
+    };
+
     return (
         <div className="schedule-page">
             <div className="schedule-header">
-                <h2>Scheduling & Resources</h2>
+                <div className="breadcrumb">
+                    <span className="breadcrumb-item clickable" onClick={() => navigate('/scheduler/calendar')}>
+                        Scheduling & Resources
+                    </span>
+                    <ChevronRight size={14} className="breadcrumb-separator" />
+                    <span className="breadcrumb-item active">
+                        {viewNames[viewMode]}
+                    </span>
+                </div>
                 <div className="view-toggles">
                     <button
                         className={`toggle-btn ${viewMode === 'calendar' ? 'active' : ''}`}

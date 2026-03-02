@@ -8,6 +8,9 @@
     text-decoration: none;
     transition: all 0.2s ease;
     font-weight: 500;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .nav-item:hover {
@@ -22,6 +25,17 @@
 
 .nav-icon {
     margin-right: var(--spacing-md);
+    transition: margin 0.3s ease;
+    flex-shrink: 0;
+}
+
+.nav-item.collapsed {
+    justify-content: center;
+    padding: var(--spacing-md) 0;
+}
+
+.nav-item.collapsed .nav-icon {
+    margin-right: 0;
 }
 
 .nav-label {

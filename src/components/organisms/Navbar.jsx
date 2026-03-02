@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Search, LogOut, User, Menu } from 'lucide-react';
+import { LogOut, User, Menu } from 'lucide-react';
 import { logout, reset } from '../../store/slices/authSlice';
 import NotificationBell from '../molecules/NotificationBell';
 import Avatar from '../atoms/Avatar';
@@ -22,29 +22,16 @@ const Navbar = () => {
     const getPageTitle = () => {
         const path = location.pathname;
         if (path === '/dashboard') return 'Dashboard';
-        if (path.startsWith('/patients')) return 'Patients Management';
-        if (path.startsWith('/therapies')) return 'Therapy Plans';
-        if (path.startsWith('/scheduler')) return 'Session Scheduler';
-        if (path.startsWith('/resources')) return 'Resource Management';
-        if (path.startsWith('/settings')) return 'Settings';
         return 'Panchakarma Care';
     };
 
     return (
         <header className="navbar">
             <div className="navbar-left">
-                <button className="mobile-menu-btn">
-                    <Menu size={20} />
-                </button>
                 <h2 className="navbar-title">{getPageTitle()}</h2>
             </div>
 
-            <div className="navbar-center">
-                <div className="search-bar">
-                    <Search size={18} className="search-icon" />
-                    <input type="text" placeholder="Search patients, therapies..." />
-                </div>
-            </div>
+
 
             <div className="navbar-right">
                 <NotificationBell />

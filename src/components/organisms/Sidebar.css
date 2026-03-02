@@ -9,11 +9,49 @@
     left: 0;
     top: 0;
     z-index: 10;
+    transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar.collapsed .brand-logo {
+    display: none;
+}
+
+.sidebar.collapsed .sidebar-header {
+    padding: var(--spacing-lg) 0;
+    justify-content: center;
+}
+
+.sidebar.collapsed .sidebar-nav {
+    padding: var(--spacing-md) 0;
 }
 
 .sidebar-header {
     padding: var(--spacing-lg);
     border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s;
+}
+
+.sidebar-toggle-btn:hover {
+    background-color: var(--secondary-color);
 }
 
 .brand-logo {

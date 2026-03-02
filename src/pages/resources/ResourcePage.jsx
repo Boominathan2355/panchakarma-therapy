@@ -8,6 +8,7 @@ import MaterialInventory from '../../components/organisms/MaterialInventory';
 import UtilizationChart from '../../components/organisms/UtilizationChart';
 import Skeleton from '../../components/atoms/Skeleton';
 import { startOfWeek, addDays, format, isSameDay } from 'date-fns';
+import { ChevronRight } from 'lucide-react';
 import './ResourcePage.css';
 
 const ResourcePage = () => {
@@ -79,10 +80,24 @@ const ResourcePage = () => {
         };
     }, [sessions, staff]);
 
+    const tabNames = {
+        staff: 'Staff & Skills',
+        inventory: 'Inventory',
+        analytics: 'Analytics'
+    };
+
     return (
         <div className="resource-page">
             <div className="resource-header">
-                <h2>{isLoading ? <Skeleton width="220px" height="2.5rem" /> : 'Resources & Inventory'}</h2>
+                <div className="breadcrumb">
+                    <span className="breadcrumb-item clickable" onClick={() => navigate('/resources/staff')}>
+                        Resources & Inventory
+                    </span>
+                    <ChevronRight size={14} className="breadcrumb-separator" />
+                    <span className="breadcrumb-item active">
+                        {isLoading ? <Skeleton width="100px" height="1.2rem" /> : tabNames[activeTab]}
+                    </span>
+                </div>
                 <div className="resource-tabs">
                     {isLoading ? (
                         <div style={{ display: 'flex', gap: '8px', padding: '4px' }}>
