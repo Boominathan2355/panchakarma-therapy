@@ -1,10 +1,10 @@
 import axios from 'axios';
 import storage from '../utils/storage';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+import appConfig from '../constants/appConfig';
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: appConfig.api.baseUrl,
+  timeout: appConfig.api.timeout,
   headers: {
     'Content-Type': 'application/json',
   },
