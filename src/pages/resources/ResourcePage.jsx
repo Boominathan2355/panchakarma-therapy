@@ -45,10 +45,10 @@ const ResourcePage = () => {
         const roomUtil = [];
         const staffUtil = [];
 
-        // Generate next 7 days
-        for (let i = 0; i < 7; i++) {
+        // Generate next 30 days
+        for (let i = 0; i < 30; i++) {
             const date = addDays(start, i);
-            dates.push(format(date, 'EEE')); // Mon, Tue...
+            dates.push(format(date, 'MMM do')); // e.g. Mar 10th
 
             // Filter sessions for this day
             const daySessions = sessions.filter(s => isSameDay(new Date(s.start), date));
@@ -62,6 +62,7 @@ const ResourcePage = () => {
 
             const roomCapacity = 3 * 10; // 3 rooms * 10 hours/day
             const roomPercent = Math.min(100, Math.round((totalHoursBoxed / roomCapacity) * 100));
+
 
             // Staff Utilization (Assuming 3 staff * 8 hours = 24 slot-hours)
             // Just using simplified metric: unique therapists active / total staff

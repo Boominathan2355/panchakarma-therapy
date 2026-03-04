@@ -13,11 +13,22 @@ const mockInventory = [
     { id: 'i4', name: 'Steam Towels', stock: 50, unit: 'Count', status: 'optimal' },
 ];
 
-const mockUtilization = {
-    dates: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    rooms: [80, 65, 90, 85, 70, 95, 40], // Room Occupancy %
-    staff: [90, 75, 85, 80, 85, 60, 30] // Staff Utilization %
-};
+const mockUtilization = (() => {
+    const dates = [];
+    const rooms = [];
+    const staff = [];
+    const today = new Date();
+
+    // Generate 30 days of data (last 30 days)
+    for (let i = 29; i >= 0; i--) {
+        const date = new Date(today);
+        date.setDate(date.getDate() - i);
+        dates.push(date.toLocaleDateString('en-US', { weekday: 'short' }));
+        rooms.push(Math.floor(Math.random() * 40) + 40); // 40-80%
+        staff.push(Math.floor(Math.random() * 50) + 40); // 40-90%
+    }
+    return { dates, rooms, staff };
+})();
 
 const getResourceData = async () => {
     try {

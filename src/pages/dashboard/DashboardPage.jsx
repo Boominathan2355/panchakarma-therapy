@@ -4,6 +4,7 @@ import { Users, Calendar, DollarSign, Activity } from 'lucide-react';
 
 import StatsCard from '../../components/molecules/StatsCard';
 import TherapyTrendChart from '../../components/organisms/TherapyTrendChart';
+import PatientRiskChart from '../../components/organisms/PatientRiskChart';
 import AvailabilityTable from '../../components/organisms/AvailabilityTable';
 import dashboardService from '../../services/dashboardService';
 import './DashboardPage.css';
@@ -14,19 +15,22 @@ const DashboardPage = () => {
     const [loading, setLoading] = useState(true);
     const [kpis, setKpis] = useState(null);
     const [trends, setTrends] = useState(null);
+    const [riskTrends, setRiskTrends] = useState(null);
     const [availability, setAvailability] = useState({ therapists: [], rooms: [] });
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [kpiData, trendData, availData] = await Promise.all([
+                const [kpiData, trendData, riskData, availData] = await Promise.all([
                     dashboardService.getKPIs(),
                     dashboardService.getTherapyTrends(),
+                    dashboardService.getPatientRiskTrends(),
                     dashboardService.getAvailability()
                 ]);
 
                 setKpis(kpiData);
                 setTrends(trendData);
+                setRiskTrends(riskData);
                 setAvailability(availData);
             } catch (error) {
                 console.error("Failed to fetch dashboard data", error);
@@ -80,12 +84,24 @@ const DashboardPage = () => {
 
                 {/* Main Content Grid - Now a stack since Alerts are gone */}
                 <div className="dashboard-content-stack">
-                    <div className="card-container">
-                        <TherapyTrendChart
-                            dates={trends?.dates}
-                            values={trends?.values}
-                            loading={loading}
-                        />
+                    <div className="card-container" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', background: 'transparent', boxShadow: 'none', padding: 0 }}>
+                        <div className="dashboard-card-wrapper" style={{ background: 'white', borderRadius: 'var(--radius-lg)', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+                            <TherapyTrendChart
+                                dates={trends?.dates}
+                                values={trends?.values}
+                                loading={loading}
+                            />
+                        </div>
+                        <div className="dashboard-card-wrapper" style={{ background: 'white', borderRadius: 'var(--radius-lg)', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+                            <PatientRiskChart
+                                dates={riskTrends?.dates}
+                                high={riskTrends?.high}
+                                medium={riskTrends?.medium}
+                                low={riskTrends?.low}
+                                emergency={riskTrends?.emergency}
+                                loading={loading}
+                            />
+                        </div>
                     </div>
 
                     <div className="card-container">

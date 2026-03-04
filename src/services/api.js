@@ -35,4 +35,24 @@ api.interceptors.response.use(
   }
 );
 
+// If mock mode is enabled, override the adapter entirely
+if (appConfig.api.useMock) {
+  api.defaults.adapter = async function (config) {
+    console.warn(`Mock API Intercepted [${config.method?.toUpperCase()}]:`, config.url);
+
+    return import('./mockData').then(({ getMockResponse }) => {
+      const mockResponse = getMockResponse(config.url, config.method);
+      return {
+        data: mockResponse,
+        status: 200,
+        statusText: 'OK (Mocked)',
+        headers: {},
+        config,
+        request: {}
+      };
+    });
+  };
+}
+
 export default api;
+

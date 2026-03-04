@@ -27,11 +27,7 @@ const mockLogin = async (credentials) => {
 
 const authService = {
     login: async (credentials) => {
-        // UNCOMMENT for real API
-        // return api.post('/auth/login', credentials);
-
-        // USING MOCK FOR NOW
-        return mockLogin(credentials);
+        return api.post('/auth/login', credentials);
     },
     logout: () => {
         storage.remove('token');

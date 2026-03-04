@@ -16,10 +16,21 @@ const getKPIs = async () => {
 const getTherapyTrends = async () => {
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve({
-                dates: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                values: [12, 19, 15, 25, 22, 30, 18],
-            });
+            const dates = [];
+            const values = [];
+            const today = new Date();
+
+            for (let i = 29; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                dates.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+
+                // Add some randomness to values, simulating 10-40 sessions
+                const randomValue = Math.floor(Math.random() * 30) + 10;
+                values.push(randomValue);
+            }
+
+            resolve({ dates, values });
         }, 1000);
     });
 };
@@ -69,9 +80,36 @@ const getNotifications = async () => {
     });
 };
 
+const getPatientRiskTrends = async () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const dates = [];
+            const high = [];
+            const medium = [];
+            const low = [];
+            const emergency = [];
+            const today = new Date();
+
+            for (let i = 29; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                dates.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+
+                high.push(Math.floor(Math.random() * 8) + 2);
+                medium.push(Math.floor(Math.random() * 15) + 5);
+                low.push(Math.floor(Math.random() * 20) + 10);
+                emergency.push(Math.floor(Math.random() * 3));
+            }
+
+            resolve({ dates, high, medium, low, emergency });
+        }, 1000);
+    });
+};
+
 const dashboardService = {
     getKPIs,
     getTherapyTrends,
+    getPatientRiskTrends,
     getAvailability,
     getAlerts,
     getNotifications

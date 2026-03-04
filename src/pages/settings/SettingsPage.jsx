@@ -18,9 +18,13 @@ const SettingsPage = () => {
 
     // Mock User Management State
     const [systemUsers, setSystemUsers] = useState([
-        { id: 1, name: 'Admin User', email: 'admin@example.com', role: 'Admin' },
-        { id: 2, name: 'Dr. Arya', email: 'arya@ayursoft.com', role: 'Physician' },
-        { id: 3, name: 'Sarah Jones', email: 'sarah@ayursoft.com', role: 'Scheduler' },
+        { id: 1, name: 'Admin User', email: 'admin@ayursoft.com', role: 'Admin' },
+        { id: 2, name: 'Dr. Arya Sharma', email: 'arya@ayursoft.com', role: 'Physician' },
+        { id: 3, name: 'Dr. Rahul Verma', email: 'rahul@ayursoft.com', role: 'Physician' },
+        { id: 4, name: 'Sarah Jones', email: 'sarah@ayursoft.com', role: 'Scheduler' },
+        { id: 5, name: 'Nurse Joy', email: 'joy@ayursoft.com', role: 'Technician' },
+        { id: 6, name: 'Arun Kumar', email: 'arun@ayursoft.com', role: 'Scheduler' },
+        { id: 7, name: 'IT Support', email: 'it@ayursoft.com', role: 'Admin' },
     ]);
     const [newUser, setNewUser] = useState({ name: '', email: '', role: 'Physician' });
 
