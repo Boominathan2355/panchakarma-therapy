@@ -15,6 +15,7 @@ const TherapyPage = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const { therapies, selectedTherapy, isLoading, isListLoading, isDetailLoading } = useSelector((state) => state.therapy);
+    const { user } = useSelector((state) => state.auth);
     const [activeTab, setActiveTab] = useState('workflow');
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -97,12 +98,14 @@ const TherapyPage = () => {
                                 >
                                     Safety & Contraindications
                                 </button>
-                                <button
-                                    className={`tab-link ${activeTab === 'docs' ? 'active' : ''}`}
-                                    onClick={() => setActiveTab('docs')}
-                                >
-                                    Documents
-                                </button>
+                                {user?.role?.toLowerCase() !== 'physician' && (
+                                    <button
+                                        className={`tab-link ${activeTab === 'docs' ? 'active' : ''}`}
+                                        onClick={() => setActiveTab('docs')}
+                                    >
+                                        Documents
+                                    </button>
+                                )}
                             </div>
 
                             <div className="tab-content">
@@ -115,7 +118,7 @@ const TherapyPage = () => {
                                         safetyNotes={selectedTherapy.safetyNotes}
                                     />
                                 )}
-                                {activeTab === 'docs' && (
+                                {activeTab === 'docs' && user?.role?.toLowerCase() !== 'physician' && (
                                     <DocumentUploader documents={selectedTherapy.documents} />
                                 )}
                             </div>

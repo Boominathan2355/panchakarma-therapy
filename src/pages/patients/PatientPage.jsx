@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchPatients, fetchPatientDetails, clearSelectedPatient } from '../../store/slices/patientSlice';
 import { fetchTherapies } from '../../store/slices/therapySlice';
+import { fetchSessions } from '../../store/slices/scheduleSlice';
 import PatientList from '../../components/organisms/PatientList';
 import PatientProfileHeader from '../../components/organisms/PatientProfileHeader';
 import PatientStatsDashboard from '../../components/organisms/PatientStatsDashboard';
@@ -22,6 +23,8 @@ const PatientPage = () => {
     const { id } = useParams();
     const { patients, selectedPatient, isLoading, isListLoading, isDetailLoading } = useSelector((state) => state.patient);
     const { therapies } = useSelector((state) => state.therapy);
+    const { sessions } = useSelector((state) => state.schedule);
+    const { user } = useSelector((state) => state.auth);
 
     const [showAssignModal, setShowAssignModal] = useState(false);
     const [selectedTherapyId, setSelectedTherapyId] = useState('');
@@ -30,7 +33,18 @@ const PatientPage = () => {
 
     useEffect(() => {
         dispatch(fetchTherapies());
+        dispatch(fetchSessions());
     }, [dispatch]);
+
+    const visiblePatients = React.useMemo(() => {
+        if (user?.role?.toLowerCase() === 'physician') {
+            const doctorPatientIds = new Set(
+                sessions.filter(s => s.therapistId === user.id).map(s => s.patientId)
+            );
+            return patients.filter(p => doctorPatientIds.has(p.id));
+        }
+        return patients;
+    }, [patients, sessions, user]);
 
     useEffect(() => {
         if (id) {
@@ -76,7 +90,7 @@ const PatientPage = () => {
                         <h1 className="page-title">Patients Management</h1>
                     </header>
                     <PatientList
-                        patients={patients}
+                        patients={visiblePatients}
                         onSelect={handleSelectPatient}
                         variant="grid"
                         isLoading={isListLoading}

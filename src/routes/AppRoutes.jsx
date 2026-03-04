@@ -42,8 +42,8 @@ const AppRoutes = () => {
                     <Route path="/therapies/:id" element={<TherapyPage />} />
                 </Route>
 
-                {/* Scheduler: Scheduler, Admin */}
-                <Route element={<PrivateRoute allowedRoles={[ROLES.SCHEDULER, ROLES.ADMIN]} />}>
+                {/* Scheduler: Physician, Scheduler, Admin */}
+                <Route element={<PrivateRoute allowedRoles={[ROLES.PHYSICIAN, ROLES.SCHEDULER, ROLES.ADMIN]} />}>
                     <Route path="/scheduler" element={<Navigate to="/scheduler/calendar" replace />} />
                     <Route path="/scheduler/:view" element={<SchedulePage />} />
                 </Route>

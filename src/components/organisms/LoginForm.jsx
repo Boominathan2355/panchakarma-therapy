@@ -89,8 +89,9 @@ const LoginForm = () => {
                 Sign In
             </Button>
 
-            <div className="form-footer">
-                <p>Use <b>admin@example.com</b> / <b>password</b> to test</p>
+            <div className="form-footer" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <p>Test Admin: <b>admin@ayursoft.com</b> / <b>password</b></p>
+                <p>Test Doctor: <b>doctor@ayursoft.com</b> / <b>password</b></p>
             </div>
         </form>
     );

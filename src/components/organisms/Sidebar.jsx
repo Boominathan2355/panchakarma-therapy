@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {
     LayoutDashboard,
     Stethoscope,
@@ -26,6 +27,7 @@ const navItems = [
 ];
 
 const Sidebar = ({ isCollapsed, onToggle }) => {
+    const { user } = useSelector((state) => state.auth);
     return (
         <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
             <div className="sidebar-header">
@@ -36,15 +38,23 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
             </div>
 
             <nav className="sidebar-nav">
-                {navItems.map((item) => (
-                    <NavItem
-                        key={item.to}
-                        to={item.to}
-                        label={item.label}
-                        icon={item.icon}
-                        isCollapsed={isCollapsed}
-                    />
-                ))}
+                {navItems
+                    .filter(item => {
+                        const isDoctor = user?.role?.toLowerCase() === 'physician';
+                        if (isDoctor && (item.label === 'Resources' || item.label === 'Audit Log')) {
+                            return false;
+                        }
+                        return true;
+                    })
+                    .map((item) => (
+                        <NavItem
+                            key={item.to}
+                            to={item.to}
+                            label={item.label}
+                            icon={item.icon}
+                            isCollapsed={isCollapsed}
+                        />
+                    ))}
             </nav>
 
             <div className="sidebar-footer">

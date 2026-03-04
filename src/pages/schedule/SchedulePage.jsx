@@ -28,6 +28,7 @@ const SchedulePage = () => {
     const viewMode = view || 'calendar'; // 'calendar', 'gantt', or 'optimize'
 
     const { sessions, resources, conflictSession, explanations, isOptimizing } = useSelector(state => state.schedule);
+    const { user } = useSelector(state => state.auth);
 
     // State for optimizer data
     const [therapies, setTherapies] = useState([]);
@@ -105,11 +106,18 @@ const SchedulePage = () => {
     };
 
     // Parse dates for calendar/gantt
-    const parsedSessions = sessions.map(s => ({
-        ...s,
-        start: new Date(s.start),
-        end: new Date(s.end)
-    }));
+    const parsedSessions = sessions
+        .filter(s => {
+            if (user?.role?.toLowerCase() === 'physician') {
+                return s.therapistId === user.id;
+            }
+            return true;
+        })
+        .map(s => ({
+            ...s,
+            start: new Date(s.start),
+            end: new Date(s.end)
+        }));
 
     const viewNames = {
         calendar: 'Calendar',
@@ -136,18 +144,22 @@ const SchedulePage = () => {
                     >
                         <Calendar size={18} /> Calendar
                     </button>
-                    <button
-                        className={`toggle-btn ${viewMode === 'gantt' ? 'active' : ''}`}
-                        onClick={() => navigate('/scheduler/gantt')}
-                    >
-                        <AlignLeft size={18} /> Resource View
-                    </button>
-                    <button
-                        className={`toggle-btn optimize ${viewMode === 'optimize' ? 'active' : ''}`}
-                        onClick={() => navigate('/scheduler/optimize')}
-                    >
-                        <Zap size={18} /> <span>Optimize</span>
-                    </button>
+                    {user?.role?.toLowerCase() !== 'physician' && (
+                        <>
+                            <button
+                                className={`toggle-btn ${viewMode === 'gantt' ? 'active' : ''}`}
+                                onClick={() => navigate('/scheduler/gantt')}
+                            >
+                                <AlignLeft size={18} /> Resource View
+                            </button>
+                            <button
+                                className={`toggle-btn optimize ${viewMode === 'optimize' ? 'active' : ''}`}
+                                onClick={() => navigate('/scheduler/optimize')}
+                            >
+                                <Zap size={18} /> <span>Optimize</span>
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
 

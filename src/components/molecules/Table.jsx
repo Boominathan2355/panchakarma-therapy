@@ -121,9 +121,17 @@ const Table = ({
             {onPageChange && totalPages > 1 && (
                 <div className="table-pagination">
                     <div className="pagination-info">
-                        Page <span>{currentPage}</span> of <span>{totalPages}</span>
+                        Showing <span>{((currentPage - 1) * 10) + 1}</span>–<span>{Math.min(currentPage * 10, data.length > 0 ? ((currentPage - 1) * 10) + data.length : 0)}</span> of <span>{totalPages * 10}</span>
                     </div>
                     <div className="pagination-controls">
+                        <button
+                            className="page-btn"
+                            onClick={() => onPageChange(1)}
+                            disabled={currentPage === 1}
+                            title="First Page"
+                        >
+                            «
+                        </button>
                         <button
                             className="page-btn"
                             onClick={() => onPageChange(currentPage - 1)}
@@ -132,6 +140,33 @@ const Table = ({
                         >
                             <ChevronLeft size={16} />
                         </button>
+                        {Array.from({ length: totalPages }, (_, i) => i + 1)
+                            .filter(page => {
+                                if (totalPages <= 5) return true;
+                                if (page === 1 || page === totalPages) return true;
+                                return Math.abs(page - currentPage) <= 1;
+                            })
+                            .reduce((acc, page, idx, arr) => {
+                                if (idx > 0 && page - arr[idx - 1] > 1) {
+                                    acc.push('ellipsis-' + page);
+                                }
+                                acc.push(page);
+                                return acc;
+                            }, [])
+                            .map(item => (
+                                typeof item === 'string' ? (
+                                    <span key={item} className="page-ellipsis">…</span>
+                                ) : (
+                                    <button
+                                        key={item}
+                                        className={`page-btn page-num ${currentPage === item ? 'active-page' : ''}`}
+                                        onClick={() => onPageChange(item)}
+                                    >
+                                        {item}
+                                    </button>
+                                )
+                            ))
+                        }
                         <button
                             className="page-btn"
                             onClick={() => onPageChange(currentPage + 1)}
@@ -139,6 +174,14 @@ const Table = ({
                             title="Next Page"
                         >
                             <ChevronRight size={16} />
+                        </button>
+                        <button
+                            className="page-btn"
+                            onClick={() => onPageChange(totalPages)}
+                            disabled={currentPage === totalPages}
+                            title="Last Page"
+                        >
+                            »
                         </button>
                     </div>
                 </div>

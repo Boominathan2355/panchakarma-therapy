@@ -4,10 +4,10 @@ const getKPIs = async () => {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve({
-                totalSessions: 42,
-                activePatients: 18,
-                todaysRevenue: 12500, // INR
-                occupancyRate: 85, // Percent
+                totalSessions: 100,
+                activePatients: 78,
+                todaysRevenue: 34500,
+                occupancyRate: 82,
             });
         }, 800);
     });
@@ -40,16 +40,16 @@ const getAvailability = async () => {
         setTimeout(() => {
             resolve({
                 therapists: [
-                    { id: 1, name: 'Dr. Arya', status: 'Available', specialty: 'Vamana' },
-                    { id: 2, name: 'Dr. Rahul', status: 'Busy', specialty: 'Basti' },
-                    { id: 3, name: 'Dr. Priya', status: 'Available', specialty: 'Nasya' },
-                    { id: 4, name: 'Dr. Amit', status: 'On Leave', specialty: 'General' },
+                    { id: 1, name: 'Dr. Arya Sharma', status: 'Available', specialty: 'Vamana' },
+                    { id: 3, name: 'Dr. Rahul Verma', status: 'Busy', specialty: 'Basti' },
+                    { id: 4, name: 'Dr. Priya Nair', status: 'Available', specialty: 'Nasya' },
+                    { id: 5, name: 'Dr. Amit Patel', status: 'On Leave', specialty: 'General' },
                 ],
                 rooms: [
-                    { id: 101, name: 'Room A (Vamana)', status: 'Occupied' },
-                    { id: 102, name: 'Room B (Basti)', status: 'Available' },
-                    { id: 103, name: 'Room C (Shirodhara)', status: 'Maintenance' },
-                    { id: 104, name: 'Room D (General)', status: 'Occupied' },
+                    { id: 'room1', name: 'Room A (Vamana)', status: 'Occupied' },
+                    { id: 'room2', name: 'Room B (Basti)', status: 'Available' },
+                    { id: 'room3', name: 'Room C (Shirodhara)', status: 'Maintenance' },
+                    { id: 'room4', name: 'Room D (General)', status: 'Occupied' },
                 ]
             });
         }, 600);
@@ -59,23 +59,38 @@ const getAvailability = async () => {
 const getAlerts = async () => {
     return new Promise((resolve) => {
         resolve([
-            { id: 1, type: 'warning', message: 'Low inventory: Herbal Oil Type B', time: '10 mins ago' },
-            { id: 2, type: 'info', message: 'New patient registration: John Doe', time: '1 hour ago' },
-            { id: 3, type: 'error', message: 'Room C Maintenance Overdue', time: '2 hours ago' },
-            { id: 4, type: 'success', message: 'Dr. Arya completed Vamana session', time: '3 hours ago' },
+            { id: 1, type: 'warning', message: 'Low inventory: Mahanarayan Oil — 5 bottles remaining', time: '10 mins ago' },
+            { id: 2, type: 'info', message: 'New patient registration: Nandini Saxena', time: '1 hour ago' },
+            { id: 3, type: 'error', message: 'Room C (Shirodhara) — Maintenance Overdue', time: '2 hours ago' },
+            { id: 4, type: 'success', message: 'Dr. Arya Sharma completed Vamana session with Ramesh Gupta', time: '3 hours ago' },
         ]);
     });
 };
 
-const getNotifications = async () => {
+const getNotifications = async (role) => {
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve([
-                { id: 1, type: 'info', title: 'Appointment Warning', message: 'You have 3 appointments starting in 15 mins', time: '5 mins ago', read: false },
-                { id: 2, type: 'warning', title: 'Low Stock', message: 'Dhanwantharam Thailam stock is below 10%', time: '20 mins ago', read: false },
-                { id: 3, type: 'success', title: 'Report Ready', message: 'Patient Arjun\'s discharge summary is ready', time: '1 hour ago', read: true },
-                { id: 4, type: 'error', title: 'System Error', message: 'Automated backup failed last night', time: '3 hours ago', read: false },
-            ]);
+            if (role?.toLowerCase() === 'physician') {
+                resolve([
+                    { id: 1, type: 'warning', title: 'Upcoming Session', message: 'Vamana session with Ramesh Gupta starts in 15 mins', time: '5 mins ago', read: false },
+                    { id: 2, type: 'error', title: 'Emergency Patient', message: 'Patient Arjun Das (Arthritis) marked as Emergency — immediate review needed', time: '12 mins ago', read: false },
+                    { id: 3, type: 'info', title: 'Lab Results Ready', message: 'Blood work results for Sita Verma are now available', time: '30 mins ago', read: false },
+                    { id: 4, type: 'success', title: 'Session Completed', message: 'Virechana session with Priya Sharma marked as completed', time: '1 hour ago', read: true },
+                    { id: 5, type: 'warning', title: 'Patient Follow-Up', message: 'Kavita Singh requires follow-up consultation — pending 2 days', time: '2 hours ago', read: false },
+                    { id: 6, type: 'info', title: 'Schedule Update', message: 'Basti session for Deepak Kumar rescheduled to 3:00 PM tomorrow', time: '3 hours ago', read: true },
+                    { id: 7, type: 'warning', title: 'Contraindication Alert', message: 'New condition (Hypertension) flagged for patient Mohan Chauhan — review therapy plan', time: '4 hours ago', read: false },
+                    { id: 8, type: 'success', title: 'Discharge Ready', message: 'Patient Meera Reddy has completed full Panchakarma protocol — discharge summary pending', time: '5 hours ago', read: true },
+                ]);
+            } else {
+                resolve([
+                    { id: 1, type: 'info', title: 'Appointment Warning', message: 'You have 3 appointments starting in 15 mins', time: '5 mins ago', read: false },
+                    { id: 2, type: 'warning', title: 'Low Stock', message: 'Dhanwantharam Thailam stock is below 10%', time: '20 mins ago', read: false },
+                    { id: 3, type: 'success', title: 'Report Ready', message: 'Patient Arjun\'s discharge summary is ready', time: '1 hour ago', read: true },
+                    { id: 4, type: 'error', title: 'System Error', message: 'Automated backup failed last night', time: '3 hours ago', read: false },
+                    { id: 5, type: 'info', title: 'New Patient', message: '5 new patient registrations today', time: '4 hours ago', read: true },
+                    { id: 6, type: 'warning', title: 'Room Maintenance', message: 'Therapy Room B scheduled for maintenance tomorrow', time: '5 hours ago', read: false },
+                ]);
+            }
         }, 500);
     });
 };

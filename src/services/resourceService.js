@@ -1,9 +1,10 @@
 import therapistService from './therapistService';
 
 const mockStaff = [
-    { id: 's1', name: 'Dr. Arya', role: 'Senior Therapist', skills: ['Vamana', 'Virechana', 'Consultation'], shifts: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'] },
-    { id: 's2', name: 'Nurse Joy', role: 'Junior Therapist', skills: ['Abhyanga', 'Shirodhara'], shifts: ['Mon', 'Wed', 'Fri'] },
-    { id: 's3', name: 'Rahul K.', role: 'Masseur', skills: ['Deep Tissue', 'Abhyanga'], shifts: ['Tue', 'Thu', 'Sat'] },
+    { id: 's1', name: 'Dr. Arya Sharma', role: 'Senior Therapist', skills: ['Vamana', 'Virechana', 'Consultation'], shifts: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'] },
+    { id: 's2', name: 'Dr. Rahul Verma', role: 'Therapist', skills: ['Basti', 'Abhyanga', 'Shirodhara'], shifts: ['Mon', 'Wed', 'Fri'] },
+    { id: 's3', name: 'Dr. Priya Nair', role: 'Therapist', skills: ['Nasya', 'Deep Tissue', 'Abhyanga'], shifts: ['Tue', 'Thu', 'Sat'] },
+    { id: 's4', name: 'Dr. Amit Patel', role: 'Junior Therapist', skills: ['Raktamokshana', 'General'], shifts: ['Mon', 'Tue', 'Wed'] },
 ];
 
 const mockInventory = [

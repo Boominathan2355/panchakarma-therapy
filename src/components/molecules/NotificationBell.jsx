@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import { Bell, Check, X, AlertCircle, AlertTriangle, CheckCircle, Info } from 'lucide-react';
 import dashboardService from '../../services/dashboardService';
 import './NotificationBell.css';
 
 const NotificationBell = () => {
+    const { user } = useSelector((state) => state.auth);
     const [notifications, setNotifications] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
@@ -13,7 +15,7 @@ const NotificationBell = () => {
     useEffect(() => {
         const fetchNotifications = async () => {
             try {
-                const data = await dashboardService.getNotifications();
+                const data = await dashboardService.getNotifications(user?.role);
                 setNotifications(data);
             } catch (error) {
                 console.error("Failed to fetch notifications", error);
@@ -21,7 +23,7 @@ const NotificationBell = () => {
         };
 
         fetchNotifications();
-    }, []);
+    }, [user?.role]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {

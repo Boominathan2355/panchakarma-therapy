@@ -41,7 +41,7 @@ if (appConfig.api.useMock) {
     console.warn(`Mock API Intercepted [${config.method?.toUpperCase()}]:`, config.url);
 
     return import('./mockData').then(({ getMockResponse }) => {
-      const mockResponse = getMockResponse(config.url, config.method);
+      const mockResponse = getMockResponse(config.url, config.method, config.data);
       return {
         data: mockResponse,
         status: 200,
