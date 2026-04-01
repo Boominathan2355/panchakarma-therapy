@@ -25,14 +25,8 @@
 }
 
 .table-col {
-    flex: 2;
-    min-width: 0;
-    /* Fix flex overflow */
-}
-
-.explainer-col {
     flex: 1;
-    overflow-y: auto;
+    width: 100%;
 }
 
 .mb-4 {

@@ -32,12 +32,8 @@
 
 /* Custom styles for specific columns if needed */
 .font-mono {
-    font-family: 'Inter', monospace;
-    font-size: 0.85rem;
-}
-
-.font-mono {
     font-family: monospace;
+    font-size: 0.85rem;
 }
 
 .text-sm {

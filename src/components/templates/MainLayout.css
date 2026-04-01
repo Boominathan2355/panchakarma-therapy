@@ -1,24 +1,34 @@
 .main-layout {
     display: flex;
     min-height: 100vh;
+    background-color: var(--background-color);
 }
 
 .main-container {
     flex: 1;
     margin-left: 260px;
-    /* Offset for fixed sidebar */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    transition: margin-left 0.3s ease;
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: calc(100% - 260px);
 }
 
 .main-layout.collapsed .main-container {
     margin-left: 80px;
+    width: calc(100% - 80px);
 }
 
 .main-content {
     flex: 1;
-    background-color: var(--background-color);
     padding: var(--spacing-xl);
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1440px;
+}
+
+@media (max-width: 1024px) {
+    .main-content {
+        padding: var(--spacing-lg);
+    }
 }

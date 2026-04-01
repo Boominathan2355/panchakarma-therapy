@@ -13,17 +13,19 @@
 
 .inventory-table th {
     text-align: left;
-    padding: var(--spacing-sm);
-    font-size: 0.8rem;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 0.75rem;
     color: var(--text-secondary);
     text-transform: uppercase;
+    letter-spacing: 0.05em;
     border-bottom: 2px solid var(--border-color);
 }
 
 .inventory-table td {
-    padding: var(--spacing-md) var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
     border-bottom: 1px solid var(--border-color);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    vertical-align: middle;
 }
 
 .font-mono {
