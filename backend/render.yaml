@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: ptas-backend
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: MONGODB_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: HF_API_TOKEN
+        sync: false
+      - key: HF_MODEL_ID
+        value: mistralai/Mistral-7B-Instruct-v0.3
+      - key: CORS_ORIGINS
+        value: http://localhost:5173,https://panchakarma-therapy.vercel.app
+      - key: UPLOAD_DIR
+        value: ./uploads
