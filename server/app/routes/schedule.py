@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from app.models.schedule import ScheduleEntry
 from app.middleware.auth import get_current_user
 from app.services.audit_service import log_action
+from app.schemas.schedule import CreateScheduleEntry, UpdateScheduleEntry
 import uuid
 
 router = APIRouter(prefix="/schedule", tags=["Schedule"])
@@ -78,13 +79,15 @@ async def get_session(entry_id: str, user=Depends(get_current_user)):
 
 
 @router.post("/")
-async def create_session(data: dict, user=Depends(get_current_user)):
-    if "id" in data:
-        data["sid"] = data.pop("id")
-    if "sid" not in data:
-        data["sid"] = f"s-{uuid.uuid4().hex[:8]}"
+async def create_session(data: CreateScheduleEntry, user=Depends(get_current_user)):
+    entry_dict = data.model_dump()
+    sid = entry_dict.pop("id", None)
+    if sid:
+        entry_dict["sid"] = sid
+    if "sid" not in entry_dict:
+        entry_dict["sid"] = f"s-{uuid.uuid4().hex[:8]}"
 
-    conflicts = await detect_conflicts(data)
+    conflicts = await detect_conflicts(entry_dict)
     if conflicts:
         return {
             "success": False,
@@ -92,7 +95,7 @@ async def create_session(data: dict, user=Depends(get_current_user)):
             "message": "Scheduling conflicts detected",
         }
 
-    entry = ScheduleEntry(**data)
+    entry = ScheduleEntry(**entry_dict)
     await entry.insert()
 
     await log_action(
@@ -107,14 +110,16 @@ async def create_session(data: dict, user=Depends(get_current_user)):
 
 
 @router.put("/{entry_id}")
-async def update_session(entry_id: str, data: dict, user=Depends(get_current_user)):
+async def update_session(entry_id: str, data: UpdateScheduleEntry, user=Depends(get_current_user)):
     entry = await ScheduleEntry.find_one(ScheduleEntry.sid == entry_id)
     if not entry:
         raise HTTPException(status_code=404, detail="Schedule entry not found")
 
-    if "start" in data or "end" in data or "resourceId" in data or "therapistId" in data:
+    updates = data.model_dump(exclude_none=True)
+
+    if "start" in updates or "end" in updates or "resourceId" in updates or "therapistId" in updates:
         check_data = entry_to_dict(entry)
-        check_data.update(data)
+        check_data.update(updates)
         conflicts = await detect_conflicts(check_data, exclude_id=entry_id)
         if conflicts:
             return {
@@ -123,7 +128,7 @@ async def update_session(entry_id: str, data: dict, user=Depends(get_current_use
                 "message": "Scheduling conflicts detected",
             }
 
-    for key, value in data.items():
+    for key, value in updates.items():
         if key == "id":
             continue
         if key == "status":

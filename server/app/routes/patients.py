@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, Depends
 from typing import List
 from app.models.patient import Patient
 from app.middleware.auth import get_current_user
+from app.schemas.patient import CreatePatient, UpdatePatient
 
 router = APIRouter(prefix="/patients", tags=["Patients"])
 
@@ -46,18 +47,30 @@ async def get_patient(patient_id: str, user=Depends(get_current_user)):
 
 
 @router.post("/")
-async def create_patient(data: dict, user=Depends(get_current_user)):
-    patient = Patient(**data)
+async def create_patient(data: CreatePatient, user=Depends(get_current_user)):
+    patient = Patient(
+        pid=data.id,
+        name=data.name,
+        age=data.age,
+        gender=data.gender,
+        email=data.email,
+        phone=data.phone,
+        complaint=data.complaint,
+        conditions=data.conditions,
+        history=[],
+        availability=[],
+    )
     await patient.insert()
     return {"id": patient.pid, "name": patient.name}
 
 
 @router.put("/{patient_id}")
-async def update_patient(patient_id: str, data: dict, user=Depends(get_current_user)):
+async def update_patient(patient_id: str, data: UpdatePatient, user=Depends(get_current_user)):
     patient = await Patient.find_one(Patient.pid == patient_id)
     if not patient:
         raise HTTPException(status_code=404, detail="Patient not found")
-    for key, value in data.items():
+    updates = data.model_dump(exclude_none=True)
+    for key, value in updates.items():
         if hasattr(patient, key):
             setattr(patient, key, value)
     await patient.save()
