@@ -15,7 +15,7 @@ export interface AppConfig {
 
 const appConfig: AppConfig = {
   api: {
-    baseUrl: import.meta.env.VITE_API_URL || 'http://localhost:8000/api',
+    baseUrl: import.meta.env.VITE_API_URL || '/api',
     timeout: 10000,
     useMock: import.meta.env.VITE_USE_MOCK === 'true', // Disabled by default now that backend is ready
   },
