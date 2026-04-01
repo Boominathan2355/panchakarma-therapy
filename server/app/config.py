@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     HF_MODEL_ID: str = "mistralai/Mistral-7B-Instruct-v0.3"
     CORS_ORIGINS: str = "http://localhost:5173,http://localhost:4173"
     UPLOAD_DIR: str = "./uploads"
+    LOG_LEVEL: str = "INFO"
 
     @property
     def cors_origins_list(self) -> List[str]:
