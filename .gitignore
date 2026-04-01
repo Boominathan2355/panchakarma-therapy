@@ -23,14 +23,17 @@ dist-ssr
 *.sln
 *.sw?
 
-# Backend
-backend/__pycache__/
-backend/**/__pycache__/
-backend/*.pyc
-backend/.env
-backend/uploads/
-backend/faiss_index/
-backend/.pytest_cache/
+# Vite cache
+.vite/
+
+# Backend (server)
+server/__pycache__/
+server/**/__pycache__/
+server/*.pyc
+server/.env
+server/uploads/
+server/faiss_index/
+server/.pytest_cache/
 
 # Plans & temp
 plans/
