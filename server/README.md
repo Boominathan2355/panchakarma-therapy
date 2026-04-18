@@ -51,3 +51,4 @@ API docs: `http://localhost:8000/docs`
 ```bash
 python -m pytest tests/ -v
 ```
+python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000

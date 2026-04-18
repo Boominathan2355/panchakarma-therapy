@@ -284,10 +284,10 @@ def get_materials():
 
 def get_users():
     return [
-        User(uid="u1", name="Admin User", email="admin@panchakarma.com", password_hash=hash_password("admin123"), role="Admin"),
-        User(uid="u2", name="Dr. Anand Sharma", email="doctor@panchakarma.com", password_hash=hash_password("doctor123"), role="Physician"),
-        User(uid="u3", name="Therapist Priya", email="therapist@panchakarma.com", password_hash=hash_password("therapist123"), role="Therapist"),
-        User(uid="u4", name="Staff Member", email="staff@panchakarma.com", password_hash=hash_password("staff123"), role="Staff"),
+        User(uid="u1", name="Admin User", email="admin@panchakarma.com", username="admin", password_hash=hash_password("admin@2024"), role="Admin"),
+        User(uid="u2", name="Dr. Anand Sharma", email="doctor@panchakarma.com", username="doctor", password_hash=hash_password("doctor@2024"), role="Physician"),
+        User(uid="u3", name="Therapist Priya", email="therapist@panchakarma.com", username="therapist", password_hash=hash_password("therapist@2024"), role="Therapist"),
+        User(uid="u4", name="Staff Member", email="staff@panchakarma.com", username="staff", password_hash=hash_password("staff@2024"), role="Staff"),
     ]
 
 
@@ -419,10 +419,10 @@ async def seed(force: bool = False):
 
     print("\nSeeding complete!")
     print("Demo credentials:")
-    print("  Admin:     admin@panchakarma.com / admin123")
-    print("  Physician: doctor@panchakarma.com / doctor123")
-    print("  Therapist: therapist@panchakarma.com / therapist123")
-    print("  Staff:     staff@panchakarma.com / staff123")
+    print("  Admin:     username: admin / password: admin@2024")
+    print("  Physician: username: doctor / password: doctor@2024")
+    print("  Therapist: username: therapist / password: therapist@2024")
+    print("  Staff:     username: staff / password: staff@2024")
 
     await close_db()
 

@@ -19,4 +19,14 @@ class UserResponse(BaseModel):
 
 class AuthResponse(BaseModel):
     token: str
+    refresh_token: str
     user: UserResponse
+
+
+class RefreshTokenRequest(BaseModel):
+    refresh_token: str
+
+
+class RefreshTokenResponse(BaseModel):
+    token: str
+    refresh_token: str
