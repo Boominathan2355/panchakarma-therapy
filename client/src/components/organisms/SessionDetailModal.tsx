@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useAppDispatch } from '../../store/hooks';
-import { updateSessionStatus, logSessionNote } from '../../store/slices/scheduleSlice';
+import { useUpdateSession, useLogSessionNote } from '../../hooks/useSchedule';
 import therapyService from '../../services/therapyService';
 import {
     X,
@@ -39,7 +38,8 @@ export interface SessionDetailModalProps {
 }
 
 const SessionDetailModal: React.FC<SessionDetailModalProps> = ({ session, onClose }) => {
-    const dispatch = useAppDispatch();
+    const { mutate: updateSession } = useUpdateSession();
+    const { mutate: logNote } = useLogSessionNote();
     const [therapy, setTherapy] = useState<any>(null);
     const [currentStep, setCurrentStep] = useState<any>(null);
     const [note, setNote] = useState('');
@@ -48,12 +48,6 @@ const SessionDetailModal: React.FC<SessionDetailModalProps> = ({ session, onClos
     useEffect(() => {
         if (session?.therapyId) {
             loadTherapyData();
-        }
-    }, [session]);
-
-    useEffect(() => {
-        if (session) {
-            setStatus(session.status);
         }
     }, [session]);
 
@@ -71,12 +65,12 @@ const SessionDetailModal: React.FC<SessionDetailModalProps> = ({ session, onClos
     const handleStatusChange = (newStatus: 'scheduled' | 'in-progress' | 'completed') => {
         if (!session) return;
         setStatus(newStatus);
-        dispatch(updateSessionStatus({ sessionId: session.id, status: newStatus }));
+        updateSession({ id: session.id, updates: { status: newStatus } as any });
     };
 
     const handleAddNote = () => {
         if (!session || !note.trim()) return;
-        dispatch(logSessionNote({ sessionId: session.id, note }));
+        logNote({ id: session.id, note });
         setNote('');
     };
 

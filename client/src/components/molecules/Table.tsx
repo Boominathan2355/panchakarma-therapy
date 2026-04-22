@@ -1,5 +1,6 @@
 import React from 'react';
-import './Table.css';
+import { ChevronUp, ChevronDown, MoreHorizontal } from 'lucide-react';
+import './Table.scss';
 
 export interface Column<T> {
     header: string;
@@ -29,7 +30,7 @@ const Table = <T extends Record<string, any>>({
 }: TableProps<T>) => {
     return (
         <div className={`table-container ${className}`} id={id}>
-            <table className="custom-table">
+            <table className="table">
                 <thead>
                     <tr>
                         {columns.map((column, index) => (

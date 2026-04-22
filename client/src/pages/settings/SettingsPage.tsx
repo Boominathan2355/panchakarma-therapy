@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Bell, Lock, Users, Plus, Trash2 } from 'lucide-react';
-import { useAppSelector } from '../../store/hooks';
+import { useAuth } from '../../features/auth';
 
 import Button from '../../components/atoms/Button';
 import Input from '../../components/atoms/Input';
@@ -15,7 +15,8 @@ interface SystemUser {
 }
 
 const SettingsPage: React.FC = () => {
-    const { user } = useAppSelector(state => state.auth);
+    const { user } = useAuth();
+
     const [activeTab, setActiveTab] = useState<'notifications' | 'security' | 'users'>('notifications');
     const [notifications, setNotifications] = useState({
         email: true,

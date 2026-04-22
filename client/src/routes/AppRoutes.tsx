@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 // Pages
-import LoginPage from '../pages/auth/LoginPage';
+import { LoginPage } from '../features/auth';
 import DashboardPage from '../pages/dashboard/DashboardPage';
 import TherapyPage from '../pages/therapy/TherapyPage';
 import PatientPage from '../pages/patients/PatientPage';

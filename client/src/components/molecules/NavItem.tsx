@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { LucideIcon } from 'lucide-react';
-import './NavItem.css';
+import './NavItem.scss';
 
 export interface NavItemProps {
     to: string;

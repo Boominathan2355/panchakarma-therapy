@@ -1,0 +1,10 @@
+
+.card {
+  @include card-premium;
+  padding: $spacing-lg;
+  overflow: hidden;
+  
+  &.glass {
+    @include glassmorphism;
+  }
+}

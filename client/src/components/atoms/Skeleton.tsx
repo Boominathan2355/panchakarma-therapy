@@ -7,6 +7,7 @@ export interface SkeletonProps {
     height?: string | number;
     borderRadius?: string | number;
     className?: string;
+    style?: React.CSSProperties;
 }
 
 const Skeleton: React.FC<SkeletonProps> = ({ 
@@ -14,9 +15,10 @@ const Skeleton: React.FC<SkeletonProps> = ({
     width, 
     height, 
     borderRadius, 
-    className = '' 
+    className = '',
+    style = {}
 }) => {
-    const style: React.CSSProperties = {
+    const computedStyle: React.CSSProperties = {
         width: width || (variant === 'circle' ? '40px' : '100%'),
         height: height || (variant === 'text' ? '1rem' : '40px'),
         borderRadius: borderRadius || (variant === 'circle' ? '50%' : 'var(--radius-md)')
@@ -25,7 +27,7 @@ const Skeleton: React.FC<SkeletonProps> = ({
     return (
         <div
             className={`skeleton skeleton-${variant} ${className}`}
-            style={style}
+            style={{ ...computedStyle, ...style }}
         ></div>
     );
 };

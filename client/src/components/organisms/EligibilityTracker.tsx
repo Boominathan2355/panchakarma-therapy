@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAppSelector } from '../../store/hooks';
+import { useTherapies } from '../../hooks/useTherapy';
 import { AlertTriangle, CheckCircle } from 'lucide-react';
 import Skeleton from '../atoms/Skeleton';
 import './EligibilityTracker.css';
@@ -13,8 +13,9 @@ const EligibilityTracker: React.FC<EligibilityTrackerProps> = ({
     patientConditions = [], 
     loading = false 
 }) => {
-    const { therapies } = useAppSelector(state => state.therapy);
+    const { data: therapies = [] } = useTherapies();
     const [selectedTherapyId, setSelectedTherapyId] = useState('');
+
 
     if (loading) {
         return (

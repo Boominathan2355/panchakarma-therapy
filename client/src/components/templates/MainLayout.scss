@@ -1,0 +1,50 @@
+
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: $background-color;
+
+  .main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 280px;
+    transition: margin-left $transition-slow;
+    min-width: 0; // Prevent flex item from overflowing
+  }
+
+  &.collapsed {
+    .main-container {
+      margin-left: 80px;
+    }
+  }
+
+  .main-content {
+    flex: 1;
+    padding: $spacing-xl;
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+    animation: fadeIn 0.4s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@include mobile {
+  .main-layout {
+    .main-container {
+      margin-left: 0 !important;
+    }
+    
+    .sidebar {
+      transform: translateX(-100%);
+      &.open {
+        transform: translateX(0);
+      }
+    }
+  }
+}

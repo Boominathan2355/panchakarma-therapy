@@ -1,0 +1,8 @@
+
+.input {
+  @include input-premium;
+  
+  &.has-icon {
+    padding-left: 2.75rem;
+  }
+}

@@ -8,8 +8,8 @@ FastAPI backend for the Panchakarma Therapy Automation System.
 pip install -r requirements.txt
 cp .env.example .env
 # Edit .env with your MongoDB URL
-python seed_data.py
-uvicorn app.main:app --reload --port 8000
+./.venv/bin/python seed_data.py
+./.venv/bin/python -m uvicorn app.main:app --reload --port 8000
 ```
 
 ## API Endpoints

@@ -1,18 +1,17 @@
 import React from 'react';
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import { logout } from '../../store/slices/authSlice';
+import { useAuth } from '../../features/auth';
 import NotificationBell from '../molecules/NotificationBell';
 import Avatar from '../atoms/Avatar';
 import { LogOut, Settings, User } from 'lucide-react';
-import './Navbar.css';
+import './Navbar.scss';
 
 const Navbar: React.FC = () => {
-    const { user } = useAppSelector((state) => state.auth);
-    const dispatch = useAppDispatch();
+    const { user, logout } = useAuth();
 
     const handleLogout = () => {
-        dispatch(logout());
+        logout();
     };
+
 
     return (
         <nav className="navbar">

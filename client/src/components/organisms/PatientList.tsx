@@ -4,7 +4,7 @@ import Skeleton from '../atoms/Skeleton';
 import Table, { Column } from '../molecules/Table';
 import Card from '../atoms/Card';
 import { Filter } from 'lucide-react';
-import './PatientList.css';
+import './PatientList.scss';
 
 export interface Patient {
     id: string;

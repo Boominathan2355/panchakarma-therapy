@@ -1,0 +1,157 @@
+src/App.tsx(4,8): error TS2882: Cannot find module or type declarations for side-effect import of './App.css'.
+src/algorithms/ruleBasedConstraints.ts(220,40): error TS2345: Argument of type 'string' is not assignable to parameter of type 'Weekday'.
+src/algorithms/ruleBasedConstraints.ts(325,26): error TS2339: Property 'stock' does not exist on type 'Material'.
+src/algorithms/ruleBasedConstraints.ts(326,40): error TS2339: Property 'stock' does not exist on type 'Material'.
+src/algorithms/ruleBasedConstraints.ts(329,32): error TS2339: Property 'status' does not exist on type 'Material'.
+src/components/atoms/Avatar.tsx(2,8): error TS2882: Cannot find module or type declarations for side-effect import of './Avatar.css'.
+src/components/atoms/Badge.tsx(2,8): error TS2882: Cannot find module or type declarations for side-effect import of './Badge.css'.
+src/components/atoms/Button.tsx(3,8): error TS2882: Cannot find module or type declarations for side-effect import of './Button.css'.
+src/components/atoms/Card.tsx(2,8): error TS2882: Cannot find module or type declarations for side-effect import of './Card.css'.
+src/components/atoms/FileInput.tsx(3,8): error TS2882: Cannot find module or type declarations for side-effect import of './FileInput.css'.
+src/components/atoms/Input.tsx(2,8): error TS2882: Cannot find module or type declarations for side-effect import of './Input.css'.
+src/components/atoms/Label.tsx(2,8): error TS2882: Cannot find module or type declarations for side-effect import of './Label.css'.
+src/components/atoms/Skeleton.tsx(2,8): error TS2882: Cannot find module or type declarations for side-effect import of './Skeleton.css'.
+src/components/molecules/AlertItem.tsx(3,8): error TS2882: Cannot find module or type declarations for side-effect import of './AlertItem.css'.
+src/components/molecules/ConflictModal.tsx(5,8): error TS2882: Cannot find module or type declarations for side-effect import of './ConflictModal.css'.
+src/components/molecules/FormField.tsx(3,8): error TS2882: Cannot find module or type declarations for side-effect import of './FormField.css'.
+src/components/molecules/InfoItem.tsx(2,8): error TS2882: Cannot find module or type declarations for side-effect import of './InfoItem.css'.
+src/components/molecules/NavItem.tsx(4,8): error TS2882: Cannot find module or type declarations for side-effect import of './NavItem.css'.
+src/components/molecules/NotificationBell.tsx(4,48): error TS2307: Cannot find module '../../store/hooks' or its corresponding type declarations.
+src/components/molecules/NotificationBell.tsx(5,8): error TS2882: Cannot find module or type declarations for side-effect import of './NotificationBell.css'.
+src/components/molecules/ProcessingLog.tsx(3,8): error TS2882: Cannot find module or type declarations for side-effect import of './ProcessingLog.css'.
+src/components/molecules/SkillBadge.tsx(2,8): error TS2882: Cannot find module or type declarations for side-effect import of './SkillBadge.css'.
+src/components/molecules/StatsCard.tsx(4,8): error TS2882: Cannot find module or type declarations for side-effect import of './StatsCard.css'.
+src/components/molecules/Table.tsx(2,8): error TS2882: Cannot find module or type declarations for side-effect import of './Table.css'.
+src/components/organisms/AlertsPanel.tsx(5,8): error TS2882: Cannot find module or type declarations for side-effect import of './AlertsPanel.css'.
+src/components/organisms/AuditLogTable.tsx(5,8): error TS2882: Cannot find module or type declarations for side-effect import of './AuditLogTable.css'.
+src/components/organisms/AvailabilityManager.tsx(2,32): error TS2307: Cannot find module '../../store/hooks' or its corresponding type declarations.
+src/components/organisms/AvailabilityManager.tsx(3,39): error TS2307: Cannot find module '../../store/slices/patientSlice' or its corresponding type declarations.
+src/components/organisms/AvailabilityManager.tsx(6,8): error TS2882: Cannot find module or type declarations for side-effect import of './AvailabilityManager.css'.
+src/components/organisms/AvailabilityManager.tsx(35,55): error TS2322: Type '{ width: string; height: string; style: { marginTop: string; }; }' is not assignable to type 'IntrinsicAttributes & SkeletonProps'.
+  Property 'style' does not exist on type 'IntrinsicAttributes & SkeletonProps'.
+src/components/organisms/AvailabilityTable.tsx(6,8): error TS2882: Cannot find module or type declarations for side-effect import of './AvailabilityTable.css'.
+src/components/organisms/DecisionExplainer.tsx(3,8): error TS2882: Cannot find module or type declarations for side-effect import of './DecisionExplainer.css'.
+src/components/organisms/DocumentUploader.tsx(7,8): error TS2882: Cannot find module or type declarations for side-effect import of './DocumentUploader.css'.
+src/components/organisms/DocumentUploader.tsx(68,41): error TS2339: Property 'json' does not exist on type 'UploadResponse'.
+src/components/organisms/DocumentUploader.tsx(69,66): error TS2339: Property 'json' does not exist on type 'UploadResponse'.
+src/components/organisms/EligibilityTracker.tsx(2,32): error TS2307: Cannot find module '../../store/hooks' or its corresponding type declarations.
+src/components/organisms/EligibilityTracker.tsx(5,8): error TS2882: Cannot find module or type declarations for side-effect import of './EligibilityTracker.css'.
+src/components/organisms/EligibilityTracker.tsx(16,42): error TS7006: Parameter 'state' implicitly has an 'any' type.
+src/components/organisms/EligibilityTracker.tsx(33,44): error TS7006: Parameter 't' implicitly has an 'any' type.
+src/components/organisms/EligibilityTracker.tsx(39,57): error TS7006: Parameter 'contra' implicitly has an 'any' type.
+src/components/organisms/EligibilityTracker.tsx(58,36): error TS7006: Parameter 't' implicitly has an 'any' type.
+src/components/organisms/FeasibilityPanel.tsx(4,8): error TS2882: Cannot find module or type declarations for side-effect import of './FeasibilityPanel.css'.
+src/components/organisms/MaterialInventory.tsx(3,8): error TS2882: Cannot find module or type declarations for side-effect import of './MaterialInventory.css'.
+src/components/organisms/MedicalHistory.tsx(4,8): error TS2882: Cannot find module or type declarations for side-effect import of './MedicalHistory.css'.
+src/components/organisms/Navbar.tsx(6,8): error TS2882: Cannot find module or type declarations for side-effect import of './Navbar.css'.
+src/components/organisms/PatientList.tsx(7,8): error TS2882: Cannot find module or type declarations for side-effect import of './PatientList.css'.
+src/components/organisms/PatientList.tsx(153,76): error TS2322: Type '{ width: string; height: string; style: { marginTop: string; }; }' is not assignable to type 'IntrinsicAttributes & SkeletonProps'.
+  Property 'style' does not exist on type 'IntrinsicAttributes & SkeletonProps'.
+src/components/organisms/PatientList.tsx(158,76): error TS2322: Type '{ width: string; height: string; style: { marginTop: string; }; }' is not assignable to type 'IntrinsicAttributes & SkeletonProps'.
+  Property 'style' does not exist on type 'IntrinsicAttributes & SkeletonProps'.
+src/components/organisms/PatientList.tsx(177,75): error TS2322: Type '{ width: string; height: string; style: { marginBottom: string; }; }' is not assignable to type 'IntrinsicAttributes & SkeletonProps'.
+  Property 'style' does not exist on type 'IntrinsicAttributes & SkeletonProps'.
+src/components/organisms/PatientProfileHeader.tsx(5,8): error TS2882: Cannot find module or type declarations for side-effect import of './PatientProfileHeader.css'.
+src/components/organisms/PatientRiskChart.tsx(4,8): error TS2882: Cannot find module or type declarations for side-effect import of './PatientRiskChart.css'.
+src/components/organisms/PatientStatsDashboard.tsx(5,8): error TS2882: Cannot find module or type declarations for side-effect import of './PatientStatsDashboard.css'.
+src/components/organisms/ResourceGantt.tsx(2,57): error TS7016: Could not find a declaration file for module 'react-big-calendar'. '/home/bn/projects/panchakarma-therapy/client/node_modules/react-big-calendar/lib/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/react-big-calendar` if it exists or add a new declaration (.d.ts) file containing `declare module 'react-big-calendar';`
+src/components/organisms/ResourceGantt.tsx(4,8): error TS2613: Module '"/home/bn/projects/panchakarma-therapy/client/node_modules/date-fns/locale/en-US"' has no default export. Did you mean to use 'import { enUS } from "/home/bn/projects/panchakarma-therapy/client/node_modules/date-fns/locale/en-US"' instead?
+src/components/organisms/ResourceGantt.tsx(5,8): error TS2882: Cannot find module or type declarations for side-effect import of 'react-big-calendar/lib/css/react-big-calendar.css'.
+src/components/organisms/ResourceGantt.tsx(6,8): error TS2882: Cannot find module or type declarations for side-effect import of './ResourceGantt.css'.
+src/components/organisms/SafetyPanel.tsx(3,8): error TS2882: Cannot find module or type declarations for side-effect import of './SafetyPanel.css'.
+src/components/organisms/ScheduleExplainer.tsx(17,8): error TS2882: Cannot find module or type declarations for side-effect import of './ScheduleExplainer.css'.
+src/components/organisms/ScheduleOptimizer.tsx(4,10): error TS2305: Module '"../../types/therapy"' has no exported member 'Therapy'.
+src/components/organisms/ScheduleOptimizer.tsx(6,8): error TS2882: Cannot find module or type declarations for side-effect import of './ScheduleOptimizer.css'.
+src/components/organisms/SessionDetailModal.tsx(2,32): error TS2307: Cannot find module '../../store/hooks' or its corresponding type declarations.
+src/components/organisms/SessionDetailModal.tsx(3,53): error TS2307: Cannot find module '../../store/slices/scheduleSlice' or its corresponding type declarations.
+src/components/organisms/SessionDetailModal.tsx(16,8): error TS2882: Cannot find module or type declarations for side-effect import of './SessionDetailModal.css'.
+src/components/organisms/Sidebar.tsx(15,8): error TS2882: Cannot find module or type declarations for side-effect import of './Sidebar.css'.
+src/components/organisms/StaffDirectory.tsx(2,32): error TS2307: Cannot find module '../../store/hooks' or its corresponding type declarations.
+src/components/organisms/StaffDirectory.tsx(3,29): error TS2307: Cannot find module '../../store/slices/resourceSlice' or its corresponding type declarations.
+src/components/organisms/StaffDirectory.tsx(6,8): error TS2882: Cannot find module or type declarations for side-effect import of './StaffDirectory.css'.
+src/components/organisms/TherapyCalendar.tsx(2,69): error TS7016: Could not find a declaration file for module 'react-big-calendar'. '/home/bn/projects/panchakarma-therapy/client/node_modules/react-big-calendar/lib/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/react-big-calendar` if it exists or add a new declaration (.d.ts) file containing `declare module 'react-big-calendar';`
+src/components/organisms/TherapyCalendar.tsx(3,55): error TS7016: Could not find a declaration file for module 'react-big-calendar/lib/addons/dragAndDrop'. '/home/bn/projects/panchakarma-therapy/client/node_modules/react-big-calendar/lib/addons/dragAndDrop/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/react-big-calendar` if it exists or add a new declaration (.d.ts) file containing `declare module 'react-big-calendar/lib/addons/dragAndDrop';`
+src/components/organisms/TherapyCalendar.tsx(5,8): error TS2613: Module '"/home/bn/projects/panchakarma-therapy/client/node_modules/date-fns/locale/en-US"' has no default export. Did you mean to use 'import { enUS } from "/home/bn/projects/panchakarma-therapy/client/node_modules/date-fns/locale/en-US"' instead?
+src/components/organisms/TherapyCalendar.tsx(6,8): error TS2882: Cannot find module or type declarations for side-effect import of 'react-big-calendar/lib/css/react-big-calendar.css'.
+src/components/organisms/TherapyCalendar.tsx(7,8): error TS2882: Cannot find module or type declarations for side-effect import of 'react-big-calendar/lib/addons/dragAndDrop/styles.css'.
+src/components/organisms/TherapyCalendar.tsx(8,8): error TS2882: Cannot find module or type declarations for side-effect import of './TherapyCalendar.css'.
+src/components/organisms/TherapyDashboard.tsx(4,8): error TS2882: Cannot find module or type declarations for side-effect import of './TherapyDashboard.css'.
+src/components/organisms/TherapyTrendChart.tsx(4,8): error TS2882: Cannot find module or type declarations for side-effect import of './TherapyTrendChart.css'.
+src/components/organisms/UpcomingSchedule.tsx(6,8): error TS2882: Cannot find module or type declarations for side-effect import of './UpcomingSchedule.css'.
+src/components/organisms/UtilizationChart.tsx(3,8): error TS2882: Cannot find module or type declarations for side-effect import of './UtilizationChart.css'.
+src/components/organisms/WorkflowEditor.tsx(4,8): error TS2882: Cannot find module or type declarations for side-effect import of './WorkflowEditor.css'.
+src/components/templates/MainLayout.tsx(6,8): error TS2882: Cannot find module or type declarations for side-effect import of './MainLayout.css'.
+src/constants/appConfig.ts(18,26): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/constants/appConfig.ts(20,26): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/constants/appConfig.ts(22,20): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/constants/appConfig.ts(23,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/features/auth/components/AuthLayout.tsx(2,8): error TS2882: Cannot find module or type declarations for side-effect import of './AuthLayout.scss'.
+src/features/auth/components/LoginForm.stories.tsx(34,50): error TS2339: Property 'authState' does not exist on type '{}'.
+src/features/auth/components/LoginForm.test.tsx(13,7): error TS2322: Type 'Reducer<AuthState>' is not assignable to type 'Reducer<AuthState, UnknownAction, { user: null; isLoading: boolean; isError: boolean; isSuccess: boolean; message: string; }>'.
+  Types of parameters 'state' and 'state' are incompatible.
+    Type 'AuthState | { user: null; isLoading: boolean; isError: boolean; isSuccess: boolean; message: string; } | undefined' is not assignable to type 'AuthState | undefined'.
+      Type '{ user: null; isLoading: boolean; isError: boolean; isSuccess: boolean; message: string; }' is missing the following properties from type 'AuthState': token, isAuthenticated
+src/features/auth/components/LoginForm.test.tsx(39,47): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/features/auth/components/LoginForm.test.tsx(40,48): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/features/auth/components/LoginForm.test.tsx(41,48): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/features/auth/components/LoginForm.test.tsx(42,62): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/features/auth/components/LoginForm.test.tsx(49,62): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/features/auth/components/LoginForm.test.tsx(50,62): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/features/auth/components/LoginForm.test.tsx(55,48): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/features/auth/components/LoginForm.test.tsx(56,40): error TS2339: Property 'toBeDisabled' does not exist on type 'Assertion<HTMLElement>'.
+src/features/auth/components/LoginForm.test.tsx(62,44): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/features/auth/components/LoginForm.test.tsx(70,62): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/features/auth/components/LoginForm.test.tsx(77,63): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement | null>'.
+src/features/auth/components/LoginForm.tsx(9,8): error TS2882: Cannot find module or type declarations for side-effect import of './LoginForm.scss'.
+src/features/auth/components/LoginForm.tsx(67,43): error TS2322: Type '{ children: Element[]; className: string; id: string; }' is not assignable to type 'IntrinsicAttributes & CardProps'.
+  Property 'id' does not exist on type 'IntrinsicAttributes & CardProps'.
+src/hooks/useAudit.ts(7,31): error TS2339: Property 'getAuditLogs' does not exist on type '{ getLogs: () => Promise<any[]>; createLog: (entry: Partial<AuditLog>) => Promise<any>; AUDIT_ACTIONS: Record<string, AuditAction>; }'.
+src/hooks/useSchedule.ts(8,40): error TS2551: Property 'getSchedules' does not exist on type '{ getSessions: () => Promise<ScheduleEntry[]>; getResources: () => Promise<{ id: string; title: string; }[]>; generateSchedule: (therapy: any, patient: Patient, priorityToken: string, resources: any[], onProgress?: ((progress: number) => void) | undefined) => Promise<...>; ... 5 more ...; PRIORITY_LEVELS: Record<......'. Did you mean 'getSchedule'?
+src/hooks/useSchedule.ts(15,34): error TS2551: Property 'getScheduleStats' does not exist on type '{ getSessions: () => Promise<ScheduleEntry[]>; getResources: () => Promise<{ id: string; title: string; }[]>; generateSchedule: (therapy: any, patient: Patient, priorityToken: string, resources: any[], onProgress?: ((progress: number) => void) | undefined) => Promise<...>; ... 5 more ...; PRIORITY_LEVELS: Record<......'. Did you mean 'getSchedule'?
+src/hooks/useSchedule.ts(22,37): error TS2339: Property 'optimizeSchedule' does not exist on type '{ getSessions: () => Promise<ScheduleEntry[]>; getResources: () => Promise<{ id: string; title: string; }[]>; generateSchedule: (therapy: any, patient: Patient, priorityToken: string, resources: any[], onProgress?: ((progress: number) => void) | undefined) => Promise<...>; ... 5 more ...; PRIORITY_LEVELS: Record<......'.
+src/hooks/useTherapy.ts(15,40): error TS2554: Expected 2 arguments, but got 1.
+src/main.tsx(8,8): error TS2882: Cannot find module or type declarations for side-effect import of './index.css'.
+src/pages/audit/AuditPage.tsx(4,8): error TS2882: Cannot find module or type declarations for side-effect import of './AuditPage.css'.
+src/pages/dashboard/DashboardPage.tsx(28,8): error TS2882: Cannot find module or type declarations for side-effect import of './DashboardPage.css'.
+src/pages/dashboard/DashboardPage.tsx(184,46): error TS2339: Property 'todaysRevenue' does not exist on type 'DashboardKPIs | { totalSessions: number; activePatients: number; }'.
+  Property 'todaysRevenue' does not exist on type '{ totalSessions: number; activePatients: number; }'.
+src/pages/dashboard/DashboardPage.tsx(184,71): error TS2339: Property 'todaysRevenue' does not exist on type 'DashboardKPIs | { totalSessions: number; activePatients: number; }'.
+  Property 'todaysRevenue' does not exist on type '{ totalSessions: number; activePatients: number; }'.
+src/pages/dashboard/DashboardPage.tsx(192,46): error TS2339: Property 'occupancyRate' does not exist on type 'DashboardKPIs | { totalSessions: number; activePatients: number; }'.
+  Property 'occupancyRate' does not exist on type '{ totalSessions: number; activePatients: number; }'.
+src/pages/dashboard/DashboardPage.tsx(192,70): error TS2339: Property 'occupancyRate' does not exist on type 'DashboardKPIs | { totalSessions: number; activePatients: number; }'.
+  Property 'occupancyRate' does not exist on type '{ totalSessions: number; activePatients: number; }'.
+src/pages/patients/PatientPage.tsx(19,8): error TS2882: Cannot find module or type declarations for side-effect import of './PatientPage.css'.
+src/pages/patients/PatientPage.tsx(40,29): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(predicate: (value: ScheduleEntry, index: number, array: ScheduleEntry[]) => value is ScheduleEntry, thisArg?: any): ScheduleEntry[]', gave the following error.
+    Argument of type '(s: TherapySession) => boolean' is not assignable to parameter of type '(value: ScheduleEntry, index: number, array: ScheduleEntry[]) => value is ScheduleEntry'.
+      Types of parameters 's' and 'value' are incompatible.
+        Type 'ScheduleEntry' is missing the following properties from type 'TherapySession': therapyType, date, duration
+  Overload 2 of 2, '(predicate: (value: ScheduleEntry, index: number, array: ScheduleEntry[]) => unknown, thisArg?: any): ScheduleEntry[]', gave the following error.
+    Argument of type '(s: TherapySession) => boolean' is not assignable to parameter of type '(value: ScheduleEntry, index: number, array: ScheduleEntry[]) => unknown'.
+      Types of parameters 's' and 'value' are incompatible.
+        Type 'ScheduleEntry' is missing the following properties from type 'TherapySession': therapyType, date, duration
+src/pages/patients/PatientPage.tsx(41,26): error TS2345: Argument of type '(s: TherapySession) => any' is not assignable to parameter of type '(value: ScheduleEntry, index: number, array: ScheduleEntry[]) => any'.
+  Types of parameters 's' and 'value' are incompatible.
+    Type 'ScheduleEntry' is missing the following properties from type 'TherapySession': therapyType, date, duration
+src/pages/patients/PatientPage.tsx(64,50): error TS2554: Expected 2 arguments, but got 1.
+src/pages/patients/PatientPage.tsx(65,28): error TS2345: Argument of type '{ feasible: boolean; reasons: string[]; }' is not assignable to parameter of type 'SetStateAction<FeasibilityData | null>'.
+src/pages/resources/ResourcePage.tsx(3,10): error TS2305: Module '"../../hooks/useSchedule"' has no exported member 'useSessions'.
+src/pages/resources/ResourcePage.tsx(12,8): error TS2882: Cannot find module or type declarations for side-effect import of './ResourcePage.css'.
+src/pages/resources/ResourcePage.tsx(54,49): error TS7006: Parameter 's' implicitly has an 'any' type.
+src/pages/resources/ResourcePage.tsx(57,57): error TS7006: Parameter 'acc' implicitly has an 'any' type.
+src/pages/resources/ResourcePage.tsx(57,62): error TS7006: Parameter 's' implicitly has an 'any' type.
+src/pages/schedule/SchedulePage.tsx(4,10): error TS2305: Module '"../../hooks/useSchedule"' has no exported member 'useSessions'.
+src/pages/schedule/SchedulePage.tsx(19,8): error TS2882: Cannot find module or type declarations for side-effect import of './SchedulePage.css'.
+src/pages/schedule/SchedulePage.tsx(61,13): error TS2304: Cannot find name 'dispatch'.
+src/pages/schedule/SchedulePage.tsx(61,22): error TS2304: Cannot find name 'fetchSessions'.
+src/pages/settings/SettingsPage.tsx(8,8): error TS2882: Cannot find module or type declarations for side-effect import of './SettingsPage.css'.
+src/pages/therapy/TherapyPage.tsx(3,24): error TS2724: '"../../hooks/useTherapy"' has no exported member named 'useTherapy'. Did you mean 'useTherapies'?
+src/pages/therapy/TherapyPage.tsx(12,8): error TS2882: Cannot find module or type declarations for side-effect import of './TherapyPage.css'.
+src/stories/Button.tsx(3,8): error TS2882: Cannot find module or type declarations for side-effect import of './button.css'.
+src/stories/Header.tsx(4,8): error TS2882: Cannot find module or type declarations for side-effect import of './header.css'.
+src/stories/Page.tsx(4,8): error TS2882: Cannot find module or type declarations for side-effect import of './page.css'.
+src/types/index.ts(3,70): error TS2307: Cannot find module './auth' or its corresponding type declarations.

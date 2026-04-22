@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 /**
  * Application Configuration
  * Centralized settings for the application, primarily sourced from environment variables.
@@ -17,7 +18,7 @@ const appConfig: AppConfig = {
   api: {
     baseUrl: import.meta.env.VITE_API_URL || '/api',
     timeout: 10000,
-    useMock: import.meta.env.VITE_USE_MOCK === 'true', // Disabled by default now that backend is ready
+    useMock: false,
   },
   env: import.meta.env.MODE || 'development',
   isProduction: import.meta.env.PROD,

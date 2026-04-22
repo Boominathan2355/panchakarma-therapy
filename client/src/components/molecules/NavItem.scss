@@ -1,0 +1,52 @@
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: 0.75rem $spacing-md;
+  border-radius: $radius-md;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  transition: $transition-base;
+  margin-bottom: 2px;
+
+  .nav-icon {
+    flex-shrink: 0;
+    transition: $transition-fast;
+  }
+
+  .nav-label {
+    @include text-truncate;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  &.active {
+    color: white;
+    background-color: $accent-color;
+    box-shadow: 0 4px 12px rgba($accent-color, 0.3);
+
+    .nav-icon {
+      color: white;
+    }
+  }
+
+  &.collapsed {
+    padding: 0.75rem;
+    justify-content: center;
+
+    .nav-label {
+      display: none;
+    }
+    
+    .nav-icon {
+      margin-right: 0;
+    }
+  }
+}

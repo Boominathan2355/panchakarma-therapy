@@ -8,13 +8,13 @@ dev-client:
 	cd client && npm run dev
 
 dev-server:
-	cd server && uvicorn app.main:app --reload --port 8000
+	cd server && ./.venv/bin/python -m uvicorn app.main:app --reload --port 8000
 
 seed:
-	cd server && python seed_data.py
+	cd server && ./.venv/bin/python seed_data.py
 
 test:
-	cd server && python -m pytest tests/ -v
+	cd server && ./.venv/bin/python -m pytest tests/ -v
 
 lint:
 	cd client && npm run lint

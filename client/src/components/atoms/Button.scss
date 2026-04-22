@@ -1,0 +1,111 @@
+
+.btn {
+  @include button-premium;
+  position: relative;
+  overflow: hidden;
+
+  // Variants
+  &-primary {
+    background-color: $primary-color;
+    color: $primary-foreground;
+    border-color: $primary-color;
+
+    &:hover:not(:disabled) {
+      background-color: $primary-hover;
+      border-color: $primary-hover;
+      box-shadow: 0 0 0 4px rgba($primary-color, 0.15);
+    }
+  }
+
+  &-secondary {
+    background-color: $secondary-color;
+    color: $secondary-foreground;
+    border-color: $border-color;
+
+    &:hover:not(:disabled) {
+      background-color: $secondary-hover;
+    }
+  }
+
+  &-outline {
+    background-color: transparent;
+    border-color: $border-color;
+    color: $text-primary;
+
+    &:hover:not(:disabled) {
+      background-color: $secondary-color;
+      border-color: $text-muted;
+    }
+  }
+
+  &-ghost {
+    background-color: transparent;
+    border-color: transparent;
+    color: $text-secondary;
+
+    &:hover:not(:disabled) {
+      background-color: $secondary-color;
+      color: $text-primary;
+    }
+  }
+
+  &-danger {
+    background-color: $error-bg;
+    color: $error-text;
+    border-color: rgba($error-color, 0.2);
+
+    &:hover:not(:disabled) {
+      background-color: $error-color;
+      color: white;
+      border-color: $error-color;
+    }
+  }
+
+  &-success {
+    background-color: $success-bg;
+    color: $success-text;
+    border-color: rgba($success-color, 0.2);
+
+    &:hover:not(:disabled) {
+      background-color: $success-color;
+      color: white;
+      border-color: $success-color;
+    }
+  }
+
+  // Sizes
+  &-small {
+    padding: 0.375rem 0.75rem;
+    font-size: $font-size-xs;
+  }
+
+  &-medium {
+    padding: 0.625rem 1.25rem;
+    font-size: $font-size-sm;
+  }
+
+  &-large {
+    padding: 0.875rem 1.75rem;
+    font-size: $font-size-base;
+  }
+
+  &-icon {
+    padding: $spacing-sm;
+    aspect-ratio: 1/1;
+    border-radius: $radius-full;
+  }
+
+  // Width Utility
+  &.w-full {
+    width: 100%;
+  }
+
+  // States
+  .spinner {
+    animation: rotate 1s linear infinite;
+  }
+}
+
+@keyframes rotate {
+  100% { transform: rotate(360deg); }
+}

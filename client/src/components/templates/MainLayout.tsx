@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import Sidebar from '../organisms/Sidebar';
 import Navbar from '../organisms/Navbar';
-import { Outlet, useLocation } from 'react-router-dom';
-import './MainLayout.css';
+import { useUIStore } from '../../store/uiStore';
+import './MainLayout.scss';
 
 const MainLayout: React.FC = () => {
-    const [isCollapsed, setIsCollapsed] = useState(false);
-
-    const toggleSidebar = () => {
-        setIsCollapsed(!isCollapsed);
-    };
+    const { sidebarOpen, toggleSidebar } = useUIStore();
+    const isCollapsed = !sidebarOpen;
 
     const location = useLocation();
     const isDashboard = location.pathname === '/dashboard';
+
 
     return (
         <div className={`main-layout ${isCollapsed ? 'collapsed' : ''}`}>

@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useAppDispatch } from '../../store/hooks';
-import { addAvailabilityWindow } from '../../store/slices/patientSlice';
 import Badge from '../atoms/Badge';
 import Skeleton from '../atoms/Skeleton';
 import './AvailabilityManager.css';
@@ -14,10 +12,10 @@ export interface AvailabilityWindow {
 export interface AvailabilityManagerProps {
     windows?: AvailabilityWindow[];
     loading?: boolean;
+    onAdd?: (window: AvailabilityWindow) => void;
 }
 
-const AvailabilityManager: React.FC<AvailabilityManagerProps> = ({ windows = [], loading = false }) => {
-    const dispatch = useAppDispatch();
+const AvailabilityManager: React.FC<AvailabilityManagerProps> = ({ windows = [], loading = false, onAdd }) => {
     const [isAdding, setIsAdding] = useState(false);
     const [newWindow, setNewWindow] = useState<AvailabilityWindow>({ start: '', end: '' });
 
@@ -32,7 +30,7 @@ const AvailabilityManager: React.FC<AvailabilityManagerProps> = ({ windows = [],
                         </div>
                     ))}
                 </div>
-                <Skeleton width="100px" height="32px" style={{ marginTop: '1rem' }} />
+                <Skeleton width="100px" height="32px" />
             </div>
         );
     }
@@ -48,11 +46,12 @@ const AvailabilityManager: React.FC<AvailabilityManagerProps> = ({ windows = [],
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (newWindow.start && newWindow.end) {
-            dispatch(addAvailabilityWindow({ ...newWindow, confirmed: true }));
+        if (newWindow.start && newWindow.end && onAdd) {
+            onAdd({ ...newWindow, confirmed: true });
             handleCancel();
         }
     };
+
 
     return (
         <div className="availability-card">

@@ -1,6 +1,6 @@
 import React from 'react';
 import Label from '../atoms/Label';
-import './FormField.css';
+import './FormField.scss';
 
 export interface FormFieldProps {
     label?: string;

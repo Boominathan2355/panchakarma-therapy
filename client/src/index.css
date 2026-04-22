@@ -1,40 +1,21 @@
 :root {
-  /* Colors */
-  --primary-color: #4f46e5;
-  --primary-hover: #4338ca;
-  --primary-foreground: #ffffff;
-
-  --secondary-color: #f3f4f6;
-  --secondary-hover: #e5e7eb;
-  --secondary-foreground: #111827;
-
-  --accent-color: #8b5cf6;
-
-  --background-color: #f3f5f2;
-  --surface-color: #fefeff;
-
-  --text-primary: #2e2c51;
-  --text-secondary: #6b7280;
-  --text-muted: #9ca3af;
-
-  --border-color: #e5e7eb;
-
+  /* Sync with SCSS Variables (for JS access if needed) */
+  --primary-color: #0d121f;
+  --accent-color: #0ea5e9;
+  --background-color: #f8fafc;
+  --surface-color: #ffffff;
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  
+  --border-color: #e2e8f0;
+  
   /* Status Colors */
   --success-color: #10b981;
-  --success-bg: #d1fae5;
-  --success-text: #065f46;
-
   --warning-color: #f59e0b;
-  --warning-bg: #fef3c7;
-  --warning-text: #92400e;
-
   --error-color: #ef4444;
-  --error-bg: #fee2e2;
-  --error-text: #b91c1c;
-
-  --info-color: #3b82f6;
-  --info-bg: #dbeafe;
-  --info-text: #1e40af;
+  --info-color: #0ea5e9;
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -51,19 +32,11 @@
 
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-
-  /* Fonts */
-  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 }
 
+/* Base Resets */
 *,
 *::before,
 *::after {
@@ -72,81 +45,69 @@
   padding: 0;
 }
 
-button,
-input,
-select,
-textarea {
-  font: inherit;
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: var(--font-family);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background-color: var(--background-color);
   color: var(--text-primary);
-  line-height: 1.5;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* --- Layouts --- */
-
-.app-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* Accessibility: Focus Rings */
+:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }
 
-/* Utility Helper for Full Height */
-.h-full {
-  height: 100%;
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
-/* --- Bootstrap Overrides --- */
-/* Preserve custom font across all elements */
-body,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span,
-a,
-li,
-td,
-th,
-label,
-div {
-  font-family: var(--font-family) !important;
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+
+p { margin-bottom: 1rem; }
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
 }
 
-/* Preserve custom body styles over Bootstrap */
-body {
-  background-color: var(--background-color) !important;
-  color: var(--text-primary) !important;
+a:hover {
+  opacity: 0.8;
 }
 
-/* Prevent Bootstrap from adding bottom margin to headings/paragraphs */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  margin-bottom: 0;
+button {
+  font-family: inherit;
 }
 
-/* Prevent Bootstrap row negative margins from breaking layout */
-.main-layout,
-.main-container,
-.main-content {
-  --bs-gutter-x: 0;
-  --bs-gutter-y: 0;
+/* Utility Classes */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }

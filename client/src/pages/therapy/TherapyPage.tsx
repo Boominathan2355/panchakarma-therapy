@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAuth } from '../../features/auth';
+import { useTherapies, useTherapy } from '../../hooks/useTherapy';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchTherapies, fetchTherapyDetails, clearSelectedTherapy } from '../../store/slices/therapySlice';
 // Organisms
 import TherapyDashboard from '../../components/organisms/TherapyDashboard';
 import WorkflowEditor from '../../components/organisms/WorkflowEditor';
@@ -12,36 +12,25 @@ import { ChevronRight } from 'lucide-react';
 import './TherapyPage.css';
 
 const TherapyPage: React.FC = () => {
-    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
+    const { user } = useAuth();
     
-    const { therapies, selectedTherapy, isListLoading, isDetailLoading } = useAppSelector((state) => state.therapy);
-    const { user } = useAppSelector((state) => state.auth);
+    const { data: therapies = [], isLoading: isListLoading } = useTherapies();
+    const { data: selectedTherapy, isLoading: isDetailLoading } = useTherapy(id);
     
     const [activeTab, setActiveTab] = useState<'workflow' | 'safety' | 'docs'>('workflow');
     const [searchTerm, setSearchTerm] = useState('');
 
-    useEffect(() => {
-        dispatch(fetchTherapies());
-    }, [dispatch]);
-
-    useEffect(() => {
-        if (id) {
-            dispatch(fetchTherapyDetails(id));
-        }
-    }, [id, dispatch]);
-
     const handleSelectTherapy = (therapyId: string) => {
-        dispatch(clearSelectedTherapy());
         navigate(`/therapies/${therapyId}`);
         setActiveTab('workflow');
     };
 
     const handleBack = () => {
-        dispatch(clearSelectedTherapy());
         navigate('/therapies');
     };
+
 
     return (
         <div className="therapy-page">

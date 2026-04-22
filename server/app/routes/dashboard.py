@@ -128,3 +128,20 @@ async def get_notifications(
         })
 
     return notifications
+@router.get("/risk-trends")
+async def get_risk_trends(user=Depends(get_current_user)):
+    # Simulating trend calculation from patients
+    # In a real app, this would query historical snapshots
+    dates = []
+    today = datetime.now(timezone.utc)
+    for i in range(29, -1, -1):
+        date = today - timedelta(days=i)
+        dates.append(date.strftime("%b %d"))
+        
+    return {
+        "dates": dates,
+        "high": [5, 6, 4, 7, 8, 5, 4, 3, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 5, 6],
+        "medium": [10, 12, 11, 13, 14, 15, 12, 11, 10, 12, 13, 14, 15, 16, 14, 13, 12, 11, 10, 12, 13, 14, 15, 16, 14, 13, 12, 11, 10, 12],
+        "low": [20, 22, 21, 23, 24, 25, 22, 21, 20, 22, 23, 24, 25, 26, 24, 23, 22, 21, 20, 22, 23, 24, 25, 26, 24, 23, 22, 21, 20, 22],
+        "emergency": [1, 0, 1, 2, 1, 0, 1, 0, 1, 2, 1, 0, 1, 0, 1, 2, 1, 0, 1, 0, 1, 2, 1, 0, 1, 0, 1, 2, 1, 0]
+    }

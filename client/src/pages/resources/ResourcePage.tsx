@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useResourcesData } from '../../hooks/useResources';
+import { useSessions } from '../../hooks/useSchedule';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchResourceData } from '../../store/slices/resourceSlice';
-import { fetchSessions } from '../../store/slices/scheduleSlice';
 // Organisms
 import StaffDirectory from '../../components/organisms/StaffDirectory';
 import MaterialInventory from '../../components/organisms/MaterialInventory';
@@ -13,19 +12,19 @@ import { ChevronRight } from 'lucide-react';
 import './ResourcePage.css';
 
 const ResourcePage: React.FC = () => {
-    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const { tab } = useParams<{ tab: string }>();
     const activeTab = (tab as 'staff' | 'inventory' | 'analytics') || 'staff';
 
-    const { staff, inventory, isLoading } = useAppSelector(state => state.resource);
-    const { sessions } = useAppSelector(state => state.schedule);
+    const { data: resourceData, isLoading: isResourceLoading } = useResourcesData();
+    const { data: sessions = [], isLoading: isSessionsLoading } = useSessions();
+    
+    const staff = resourceData?.staff || [];
+    const inventory = resourceData?.inventory || [];
+    const isLoading = isResourceLoading || isSessionsLoading;
+
     const [isTransitioning, setIsTransitioning] = useState(false);
 
-    useEffect(() => {
-        dispatch(fetchResourceData());
-        dispatch(fetchSessions());
-    }, [dispatch]);
 
     useEffect(() => {
         setIsTransitioning(true);

@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../atoms/Card';
 import { LucideIcon } from 'lucide-react';
-import './StatsCard.css';
+import './StatsCard.scss';
 
 export interface StatsCardProps {
     title: string;

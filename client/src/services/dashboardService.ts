@@ -95,25 +95,13 @@ const getNotifications = async (role: string): Promise<Notification[]> => {
 };
 
 const getPatientRiskTrends = async (): Promise<RiskTrendData> => {
-    // Risk trends are computed client-side from patient data for now
-    const dates: string[] = [];
-    const high: number[] = [];
-    const medium: number[] = [];
-    const low: number[] = [];
-    const emergency: number[] = [];
-    const today = new Date();
-
-    for (let i = 29; i >= 0; i--) {
-        const date = new Date(today);
-        date.setDate(date.getDate() - i);
-        dates.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
-        high.push(Math.floor(Math.random() * 8) + 2);
-        medium.push(Math.floor(Math.random() * 15) + 5);
-        low.push(Math.floor(Math.random() * 20) + 10);
-        emergency.push(Math.floor(Math.random() * 3));
+    try {
+        const response = await api.get<RiskTrendData>('/dashboard/risk-trends');
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching risk trends:', error);
+        return { dates: [], high: [], medium: [], low: [], emergency: [] };
     }
-
-    return { dates, high, medium, low, emergency };
 };
 
 const dashboardService = {

@@ -1,15 +1,22 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useAppSelector } from '../../store/hooks';
-import type { RootState } from '../../store';
+import { useAuth } from '../../features/auth';
 import { 
-    Users, 
-    Calendar, 
-    DollarSign, 
-    Activity, 
-    AlertTriangle, 
-    AlertCircle, 
-    ShieldCheck, 
-    ShieldAlert 
+    useDashboardKPIs,
+    useTherapyTrends,
+    usePatientRiskTrends,
+    useAvailability,
+    useSessions
+} from '../../hooks/useDashboard';
+
+import {
+    Users,
+    Calendar,
+    DollarSign,
+    Activity,
+    AlertTriangle,
+    AlertCircle,
+    ShieldCheck,
+    ShieldAlert
 } from 'lucide-react';
 
 import StatsCard from '../../components/molecules/StatsCard';
@@ -18,8 +25,6 @@ import PatientRiskChart from '../../components/organisms/PatientRiskChart';
 import AvailabilityTable, { ResourceItem } from '../../components/organisms/AvailabilityTable';
 import UpcomingSchedule from '../../components/organisms/UpcomingSchedule';
 import type { ScheduleEntry } from '../../types';
-import dashboardService from '../../services/dashboardService';
-import scheduleService from '../../services/scheduleService';
 import './DashboardPage.css';
 
 interface KPIs {
@@ -56,72 +61,59 @@ const getRiskForPatient = (patientId: string | number): RiskLevel => {
 };
 
 const DashboardPage: React.FC = () => {
-    // Explicitly use RootState to ensure correct state inference
-    const { user } = useAppSelector((state: RootState) => state.auth);
+    const { user } = useAuth();
+
     const isDoctor = user?.role?.toLowerCase() === 'physician';
 
-    const [loading, setLoading] = useState(true);
-    const [kpis, setKpis] = useState<KPIs | null>(null);
-    const [trends, setTrends] = useState<TrendData | null>(null);
-    const [riskTrends, setRiskTrends] = useState<RiskTrendData | null>(null);
-    const [availability, setAvailability] = useState<AvailabilityData>({ therapists: [], rooms: [] });
-    const [doctorSchedule, setDoctorSchedule] = useState<ScheduleEntry[]>([]);
-    const [allDoctorSessions, setAllDoctorSessions] = useState<ScheduleEntry[]>([]);
+    const { data: kpisData, isLoading: kpisLoading } = useDashboardKPIs();
+    const { data: trends, isLoading: trendsLoading } = useTherapyTrends();
+    const { data: riskTrends, isLoading: riskLoading } = usePatientRiskTrends();
+    const { data: availabilityData, isLoading: availLoading } = useAvailability();
+    const { data: sessions = [], isLoading: sessionsLoading } = useSessions();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const [kpiData, trendData, riskData, availData, sessions] = await Promise.all([
-                    dashboardService.getKPIs(),
-                    dashboardService.getTherapyTrends(),
-                    dashboardService.getPatientRiskTrends(),
-                    dashboardService.getAvailability(),
-                    scheduleService.getSessions()
-                ]);
+    const loading = kpisLoading || trendsLoading || riskLoading || availLoading || sessionsLoading;
 
-                setTrends(trendData);
-                setRiskTrends(riskData);
-                
-                // Map availability to ResourceItem (string IDs)
-                setAvailability({
-                    therapists: availData.therapists.map(t => ({ ...t, id: String(t.id) })),
-                    rooms: availData.rooms
-                });
+    const availability = useMemo(() => ({
+        therapists: (availabilityData?.therapists || []).map(t => ({ ...t, id: String(t.id) })),
+        rooms: availabilityData?.rooms || []
+    }), [availabilityData]);
 
-                if (isDoctor && user) {
-                    const now = new Date();
-                    const userIdString = String(user.id);
-                    const doctorSessions = sessions.filter((s: ScheduleEntry) => String(s.therapistId) === userIdString);
-                    setAllDoctorSessions(doctorSessions);
+    const doctorData = useMemo(() => {
+        if (!isDoctor || !user) return null;
+        
+        const now = new Date();
+        const userIdString = String(user.id);
+        const doctorSessions = sessions.filter((s: ScheduleEntry) => String(s.therapistId) === userIdString);
+        
+        const uniquePatients = new Set(doctorSessions.map((s: ScheduleEntry) => s.patientId)).size;
+        
+        const upcoming = doctorSessions
+            .filter((s: ScheduleEntry) => s.end && new Date(s.end) > now)
+            .sort((a: ScheduleEntry, b: ScheduleEntry) => {
+                if (!a.start || !b.start) return 0;
+                return new Date(a.start).getTime() - new Date(b.start).getTime();
+            })
+            .slice(0, 10);
 
-                    const uniquePatients = new Set(doctorSessions.map((s: ScheduleEntry) => s.patientId)).size;
-
-                    setKpis({
-                        totalSessions: doctorSessions.length,
-                        activePatients: uniquePatients
-                    });
-
-                    const upcoming = doctorSessions
-                        .filter((s: ScheduleEntry) => s.end && new Date(s.end) > now)
-                        .sort((a: ScheduleEntry, b: ScheduleEntry) => {
-                            if (!a.start || !b.start) return 0;
-                            return new Date(a.start).getTime() - new Date(b.start).getTime();
-                        })
-                        .slice(0, 10);
-                    setDoctorSchedule(upcoming);
-                } else {
-                    setKpis(kpiData);
-                }
-            } catch (error) {
-                console.error("Failed to fetch dashboard data", error);
-            } finally {
-                // Simulate a slight delay for smoother transition
-                setTimeout(() => setLoading(false), 800);
-            }
+        return {
+            totalSessions: doctorSessions.length,
+            activePatients: uniquePatients,
+            upcoming,
+            allSessions: doctorSessions
         };
+    }, [isDoctor, user, sessions]);
 
-        fetchData();
-    }, [user, isDoctor]);
+    const kpis = isDoctor ? {
+        totalSessions: doctorData?.totalSessions || 0,
+        activePatients: doctorData?.activePatients || 0,
+        todaysRevenue: 0,
+        occupancyRate: 0
+    } : kpisData;
+
+
+    const doctorSchedule = doctorData?.upcoming || [];
+    const allDoctorSessions = doctorData?.allSessions || [];
+
 
     const riskCounts = useMemo(() => {
         const counts: Record<RiskLevel, number> = { Emergency: 0, High: 0, Medium: 0, Low: 0 };

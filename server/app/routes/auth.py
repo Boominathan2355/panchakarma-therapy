@@ -7,6 +7,8 @@ from app.services.audit_service import log_action
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
+from beanie.operators import Or
+
 @router.post("/login", response_model=AuthResponse)
 async def login(credentials: LoginRequest):
     login_email = credentials.email or credentials.username
@@ -15,7 +17,7 @@ async def login(credentials: LoginRequest):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Email or username is required",
         )
-    user = await User.find_one(User.email == login_email)
+    user = await User.find_one(Or(User.email == login_email, User.username == login_email))
     if not user or not verify_password(credentials.password, user.password_hash):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

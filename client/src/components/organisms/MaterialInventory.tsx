@@ -28,7 +28,7 @@ const MaterialInventory: React.FC<MaterialInventoryProps> = ({ items = [] }) => 
                     </tr>
                 </thead>
                 <tbody>
-                    {items.map(item => (
+                    {Array.isArray(items) ? items.map(item => (
                         <tr key={item.id}>
                             <td>{item.name}</td>
                             <td className="font-mono">{item.stock}</td>
@@ -43,10 +43,16 @@ const MaterialInventory: React.FC<MaterialInventoryProps> = ({ items = [] }) => 
                                 )}
                             </td>
                         </tr>
-                    ))}
+                    )) : (
+                        <tr>
+                            <td colSpan={4} className="text-center p-4 text-warning">
+                                Invalid data format received.
+                            </td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
-            {items.length === 0 && (
+            {Array.isArray(items) && items.length === 0 && (
                 <p className="no-items">No inventory items found.</p>
             )}
         </div>

@@ -1,0 +1,47 @@
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  line-height: 1.4;
+  border: 1px solid transparent;
+
+  &-success {
+    background-color: $success-bg;
+    color: $success-text;
+    border-color: rgba($success-color, 0.1);
+  }
+
+  &-warning {
+    background-color: $warning-bg;
+    color: $warning-text;
+    border-color: rgba($warning-color, 0.1);
+  }
+
+  &-error {
+    background-color: $error-bg;
+    color: $error-text;
+    border-color: rgba($error-color, 0.1);
+  }
+
+  &-info {
+    background-color: $info-bg;
+    color: $info-text;
+    border-color: rgba($info-color, 0.1);
+  }
+
+  &-primary {
+    background-color: rgba($primary-color, 0.1);
+    color: $primary-color;
+    border-color: rgba($primary-color, 0.1);
+  }
+
+  &-secondary {
+    background-color: $secondary-color;
+    color: $secondary-foreground;
+    border-color: $border-color;
+  }
+}

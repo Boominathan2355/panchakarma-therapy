@@ -1,13 +1,13 @@
 import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useAppSelector } from '../store/hooks';
+import { useAuth } from '../features/auth';
 
 export interface PrivateRouteProps {
     allowedRoles?: string[];
 }
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ allowedRoles }) => {
-    const { isAuthenticated, user, isLoading } = useAppSelector((state) => state.auth);
+    const { isAuthenticated, user, isLoading } = useAuth();
     const location = useLocation();
 
     if (isLoading) {

@@ -38,12 +38,12 @@ make dev-client   # Terminal 2: Frontend on :5173
 
 ## Demo Credentials
 
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@panchakarma.com | admin123 |
-| Physician | doctor@panchakarma.com | doctor123 |
-| Therapist | therapist@panchakarma.com | therapist123 |
-| Staff | staff@panchakarma.com | staff123 |
+| Role | Username | Password |
+|------|----------|----------|
+| Admin | admin | admin@2024 |
+| Physician | doctor | doctor@2024 |
+| Therapist | therapist | therapist@2024 |
+| Staff | staff | staff@2024 |
 
 ## Tech Stack
 

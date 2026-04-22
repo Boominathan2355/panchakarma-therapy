@@ -1,0 +1,119 @@
+
+.patient-list-container {
+  width: 100%;
+  
+  &.grid {
+    .patient-grid-layout {
+      @include flex-column;
+      gap: $spacing-md;
+    }
+  }
+}
+
+.list-management-header {
+  @include flex-center;
+  justify-content: space-around;
+  padding: $spacing-sm 0;
+
+  .mgmt-stat {
+    @include flex-column;
+    align-items: center;
+    gap: 4px;
+    
+    &.clickable {
+      cursor: pointer;
+      transition: $transition-fast;
+      padding: $spacing-sm $spacing-md;
+      border-radius: $radius-md;
+
+      &:hover {
+        background-color: $secondary-color;
+      }
+
+      &.active {
+        background-color: rgba($accent-color, 0.1);
+        .mgmt-label { color: $accent-color; }
+      }
+    }
+
+    .mgmt-label {
+      font-size: $font-size-xs;
+      font-weight: 600;
+      color: $text-muted;
+      @include flex-center;
+      gap: 4px;
+
+      &.label-red { color: $error-text; }
+      &.label-orange { color: $warning-text; }
+    }
+
+    .mgmt-value {
+      font-size: $font-size-lg;
+      font-weight: 800;
+      color: $text-primary;
+
+      &.value-red { color: $error-color; }
+      &.value-orange { color: $warning-color; }
+    }
+
+    &.separator {
+      width: 1px;
+      height: 40px;
+      background-color: $border-color;
+    }
+  }
+}
+
+.patient-scroll-list {
+  @include flex-column;
+  gap: $spacing-sm;
+  max-height: 700px;
+  overflow-y: auto;
+  padding-right: $spacing-xs;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $border-color;
+    border-radius: $radius-full;
+  }
+}
+
+.patient-card-item {
+  @include flex-center;
+  justify-content: flex-start;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  background-color: $surface-color;
+  border: 1px solid $border-light;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  transition: $transition-base;
+
+  &:hover {
+    border-color: $accent-color;
+    background-color: rgba($accent-color, 0.02);
+  }
+
+  &.active {
+    background-color: rgba($accent-color, 0.05);
+    border-color: $accent-color;
+    box-shadow: $shadow-sm;
+  }
+
+  .patient-info {
+    @include flex-column;
+    
+    .patient-name {
+      font-size: $font-size-sm;
+      font-weight: 700;
+      color: $text-primary;
+    }
+
+    .patient-sub {
+      font-size: $font-size-xs;
+      color: $text-muted;
+    }
+  }
+}

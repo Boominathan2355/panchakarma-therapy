@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAuth } from '../../features/auth';
+import { usePatients, usePatient } from '../../hooks/usePatients';
+import { useTherapies } from '../../hooks/useTherapy';
+import { useSessions } from '../../hooks/useDashboard';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchPatients, fetchPatientDetails, clearSelectedPatient } from '../../store/slices/patientSlice';
-import { fetchTherapies } from '../../store/slices/therapySlice';
-import { fetchSessions } from '../../store/slices/scheduleSlice';
 // Organisms
 import PatientList from '../../components/organisms/PatientList';
 import PatientProfileHeader from '../../components/organisms/PatientProfileHeader';
@@ -15,74 +15,63 @@ import FeasibilityPanel, { FeasibilityData } from '../../components/organisms/Fe
 import Button from '../../components/atoms/Button';
 import resourceService from '../../services/resourceService';
 import { ChevronRight } from 'lucide-react';
-import { Patient, TherapyType, TherapySession } from '../../types';
+import { Patient, TherapyType, TherapySession, ScheduleEntry } from '../../types';
+
 import './PatientPage.css';
 
 const PatientPage: React.FC = () => {
-    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
+    const { user } = useAuth();
     
-    const { patients, selectedPatient, isListLoading, isDetailLoading } = useAppSelector((state) => state.patient);
-    const { therapies } = useAppSelector((state) => state.therapy);
-    const { sessions } = useAppSelector((state) => state.schedule);
-    const { user } = useAppSelector((state) => state.auth);
+    const { data: patients = [], isLoading: isListLoading } = usePatients();
+    const { data: selectedPatient, isLoading: isDetailLoading } = usePatient(id);
+    const { data: therapies = [] } = useTherapies();
+    const { data: sessions = [] } = useSessions();
 
     const [showAssignModal, setShowAssignModal] = useState(false);
     const [selectedTherapyId, setSelectedTherapyId] = useState('');
     const [feasibility, setFeasibility] = useState<FeasibilityData | null>(null);
     const [isChecking, setIsChecking] = useState(false);
 
-    useEffect(() => {
-        dispatch(fetchTherapies());
-        dispatch(fetchSessions());
-    }, [dispatch]);
-
     const visiblePatients = useMemo(() => {
         if (user?.role?.toLowerCase() === 'physician') {
             const doctorPatientIds = new Set(
-                sessions
-                    .filter((s: TherapySession) => (s as any).therapistId === user.id)
-                    .map((s: TherapySession) => (s as any).patientId)
+                (sessions as any[])
+                    .filter((s: any) => String(s.therapistId) === String(user.id))
+                    .map((s: any) => s.patientId)
             );
             return patients.filter(p => doctorPatientIds.has(p.id));
         }
         return patients;
     }, [patients, sessions, user]);
 
-    useEffect(() => {
-        if (id) {
-            dispatch(fetchPatientDetails(id));
-        } else {
-            dispatch(clearSelectedPatient());
-            dispatch(fetchPatients()); // Re-fetch list when coming back
-        }
-    }, [id, dispatch]);
 
     const handleSelectPatient = (patientId: string) => {
-        dispatch(clearSelectedPatient()); // Proactive clear
         navigate(`/patients/${patientId}`);
         setShowAssignModal(false);
         setFeasibility(null);
     };
 
     const handleBack = () => {
-        dispatch(clearSelectedPatient()); // Proactive clear
         navigate('/patients');
     };
+
 
     const handleTherapySelect = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         const therapyId = e.target.value;
         setSelectedTherapyId(therapyId);
-        if (therapyId) {
+        if (therapyId && id) {
             setIsChecking(true);
-            const result = await resourceService.checkFeasibility(therapyId);
-            setFeasibility(result);
+            const result = await resourceService.checkFeasibility(therapyId, id);
+            setFeasibility(result as any as FeasibilityData);
+
             setIsChecking(false);
         } else {
             setFeasibility(null);
         }
     };
+
 
     const selectedTherapyForPanel = therapies.find(t => t.id === selectedTherapyId);
 

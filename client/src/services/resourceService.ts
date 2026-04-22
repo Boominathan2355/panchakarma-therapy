@@ -50,12 +50,16 @@ const getResourceData = async (): Promise<{ staff: Therapist[]; rooms: Room[]; i
     return { staff, rooms, inventory };
 };
 
-const checkFeasibility = async (therapyId: string, patientId: string): Promise<{ feasible: boolean; reasons: string[] }> => {
-    return {
-        feasible: true,
-        reasons: [`Patient ${patientId} and Therapy ${therapyId} are compatible with available resources.`]
-    };
+const checkFeasibility = async (therapyId: string, patientId: string): Promise<any> => {
+    try {
+        const response = await api.get(`/feasibility?therapy_id=${therapyId}&patient_id=${patientId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error checking feasibility:', error);
+        throw error;
+    }
 };
+
 
 const updateStaffMember = async (staffMember: Therapist): Promise<{ success: boolean; staff: Therapist }> => {
     try {
@@ -74,7 +78,9 @@ const resourceService = {
     updateMaterialStock,
     getResourceData,
     checkFeasibility,
-    updateStaffMember
+    updateStaffMember,
+    updateStaff: updateStaffMember
 };
+
 
 export default resourceService;

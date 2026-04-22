@@ -12,7 +12,7 @@ import {
     Search
 } from 'lucide-react';
 import NavItem from '../molecules/NavItem';
-import './Sidebar.css';
+import './Sidebar.scss';
 
 export interface SidebarProps {
     isCollapsed: boolean;

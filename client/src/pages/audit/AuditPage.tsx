@@ -1,16 +1,11 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { fetchAuditData } from '../../store/slices/auditSlice';
+import React from 'react';
+import { useAuditLogs } from '../../hooks/useAudit';
 import AuditLogTable from '../../components/organisms/AuditLogTable';
 import './AuditPage.css';
 
 const AuditPage: React.FC = () => {
-    const dispatch = useAppDispatch();
-    const { logs, isLoading } = useAppSelector(state => state.audit);
+    const { data: logs = [], isLoading } = useAuditLogs();
 
-    useEffect(() => {
-        dispatch(fetchAuditData());
-    }, [dispatch]);
 
     return (
         <div className="audit-page">

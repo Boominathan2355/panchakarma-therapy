@@ -1,0 +1,106 @@
+
+.staff-directory {
+  @include flex-column;
+  gap: $spacing-xl;
+
+  .directory-header {
+    @include flex-between;
+    
+    h3 {
+      font-size: $font-size-xl;
+      color: $text-primary;
+    }
+
+    .edit-mode-btn {
+      @include button-premium;
+      background-color: $secondary-color;
+      color: $secondary-foreground;
+
+      &.active {
+        background-color: $success-color;
+        color: white;
+      }
+    }
+  }
+
+  .staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: $spacing-lg;
+  }
+}
+
+.staff-card {
+  @include card-premium;
+  padding: $spacing-lg;
+  @include flex-column;
+  gap: $spacing-md;
+
+  .staff-header {
+    display: flex;
+    gap: $spacing-md;
+    align-items: center;
+
+    .staff-info {
+      @include flex-column;
+      
+      .staff-name {
+        font-size: $font-size-base;
+        font-weight: 700;
+        color: $text-primary;
+      }
+
+      .staff-role {
+        font-size: $font-size-xs;
+        color: $text-muted;
+      }
+    }
+  }
+
+  .section-label {
+    font-size: $font-size-xs;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $text-muted;
+    margin-bottom: $spacing-xs;
+    display: block;
+  }
+
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .shifts-editor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    .day-toggle {
+      padding: 4px 8px;
+      font-size: 0.625rem;
+      font-weight: 700;
+      border: 1px solid $border-color;
+      background-color: transparent;
+      border-radius: $radius-sm;
+      cursor: pointer;
+      transition: $transition-fast;
+
+      &.selected {
+        background-color: $accent-color;
+        color: white;
+        border-color: $accent-color;
+      }
+
+      &:hover:not(.selected) {
+        background-color: $secondary-color;
+      }
+    }
+  }
+
+  .shift-text {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+  }
+}

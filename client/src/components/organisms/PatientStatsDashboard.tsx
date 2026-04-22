@@ -2,7 +2,7 @@ import React from 'react';
 import { Calendar, ShieldAlert, CheckCircle, ArrowRightCircle, LucideIcon } from 'lucide-react';
 import StatsCard from '../molecules/StatsCard';
 import Skeleton from '../atoms/Skeleton';
-import './PatientStatsDashboard.css';
+import './PatientStatsDashboard.scss';
 
 export interface PatientStatsDashboardProps {
     patient?: {

@@ -21,9 +21,22 @@ const getPatientById = async (id: string): Promise<Patient | undefined> => {
     }
 };
 
+const updatePatient = async (id: string, updates: Partial<Patient>): Promise<Patient> => {
+    try {
+        const response = await api.put<Patient>(`/patients/${id}`, updates);
+        return response.data;
+    } catch (error) {
+        console.error(`Error updating patient ${id}:`, error);
+        throw error;
+    }
+};
+
 const patientService = {
     getPatients,
-    getPatientById
+    getPatientById,
+    getPatientDetails: getPatientById,
+    updatePatient
 };
+
 
 export default patientService;

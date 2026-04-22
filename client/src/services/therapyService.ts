@@ -50,7 +50,9 @@ const getTherapyById = async (id: string): Promise<TherapyDefinition | undefined
 
 const therapyService = {
     getTherapies,
-    getTherapyById
+    getTherapyById,
+    getTherapyDetails: getTherapyById
 };
+
 
 export default therapyService;

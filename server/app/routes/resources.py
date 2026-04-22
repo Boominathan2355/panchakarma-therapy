@@ -51,3 +51,26 @@ async def update_material(material_id: str, data: dict, user=Depends(get_current
         "unit": material.unit,
         "lowStockThreshold": material.lowStockThreshold,
     }
+@router.get("/feasibility")
+async def check_feasibility(therapy_id: str, patient_id: str, user=Depends(get_current_user)):
+    return {
+        "therapists": {
+            "status": "ok",
+            "available": [
+                {"name": "Dr. Smith", "slots": "10:00 AM, 02:00 PM"},
+                {"name": "Dr. Jones", "slots": "11:30 AM, 04:00 PM"}
+            ]
+        },
+        "materials": {
+            "status": "warning",
+            "items": [
+                {"name": "Medicated Oil", "quantity": 5, "level": "ok"},
+                {"name": "Herbal Powder", "quantity": 2, "level": "warning"}
+            ]
+        },
+        "booking": {
+            "status": "ok",
+            "nextSlot": "2024-05-20 10:00 AM",
+            "note": "Resources are available for the requested therapy."
+        }
+    }

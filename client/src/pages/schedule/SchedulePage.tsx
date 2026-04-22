@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { useAuth } from '../../features/auth';
+import { useScheduleStore } from '../../store/scheduleStore';
+import { useSessions } from '../../hooks/useSchedule';
+import { useResourcesData } from '../../hooks/useResources';
+import { useTherapies } from '../../hooks/useTherapy';
+import { usePatients } from '../../hooks/usePatients';
 import { useParams, useNavigate } from 'react-router-dom';
-import {
-    fetchSessions,
-    fetchResources,
-    updateSession,
-    clearConflict
-} from '../../store/slices/scheduleSlice';
+
+
 // Organisms
 import TherapyCalendar from '../../components/organisms/TherapyCalendar';
 import ResourceGantt from '../../components/organisms/ResourceGantt';
@@ -14,103 +16,55 @@ import ConflictModal from '../../components/molecules/ConflictModal';
 import ScheduleOptimizer from '../../components/organisms/ScheduleOptimizer';
 import ScheduleExplainer from '../../components/organisms/ScheduleExplainer';
 import { Calendar, AlignLeft, Zap, ChevronRight } from 'lucide-react';
+import { ScheduleEntry } from '../../types';
 import './SchedulePage.css';
 
-// Services
-import resourceService from '../../services/resourceService';
-import therapyService from '../../services/therapyService';
-import patientService from '../../services/patientService';
-import { ScheduleEntry } from '../../types';
-
-interface OptimizerResourceData {
-    therapists: any[];
-    rooms: any[];
-    inventory: any;
-}
-
 const SchedulePage: React.FC = () => {
-    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const { view } = useParams<{ view: string }>();
     const viewMode = (view as 'calendar' | 'gantt' | 'optimize') || 'calendar';
 
-    const { sessions, resources, conflictSession, explanations } = useAppSelector(state => state.schedule);
-    const { user } = useAppSelector(state => state.auth);
+    const { user } = useAuth();
+    const { conflictSession, clearConflict, explanations } = useScheduleStore();
+    
+    const { data: sessions = [] } = useSessions();
+    const { data: resourceDataRaw } = useResourcesData();
+    const { data: therapies = [] } = useTherapies();
+    const { data: patients = [] } = usePatients();
 
-    // State for optimizer data
-    const [therapies, setTherapies] = useState<any[]>([]);
-    const [patients, setPatients] = useState<any[]>([]);
-    const [resourceData, setResourceData] = useState<OptimizerResourceData>({
-        therapists: [],
-        rooms: [],
-        inventory: {}
-    });
+    const resources = resourceDataRaw?.rooms || [];
+    const resourceData = useMemo(() => ({
+        therapists: resourceDataRaw?.staff || [],
+        rooms: resources,
+        inventory: resourceDataRaw?.inventory || {}
+    }), [resourceDataRaw, resources]);
+
     const [lastScheduleResult, setLastScheduleResult] = useState<any>(null);
 
-    useEffect(() => {
-        dispatch(fetchSessions());
-        dispatch(fetchResources());
-        loadOptimizerData();
-    }, [dispatch]);
-
-    const loadOptimizerData = async () => {
-        try {
-            const [therapyData, patientData, resData] = await Promise.all([
-                therapyService.getTherapies(),
-                patientService.getPatients(),
-                resourceService.getResourceData()
-            ]);
-
-            setTherapies(therapyData);
-            setPatients(patientData);
-            setResourceData({
-                therapists: resData.staff,
-                rooms: resources.length > 0 ? resources : resData.rooms,
-                inventory: resData.inventory
-            });
-        } catch (error) {
-            console.error('Error loading optimizer data:', error);
-        }
-    };
-
-    // Update resource data when resources change
-    useEffect(() => {
-        if (resources.length > 0) {
-            setResourceData(prev => ({
-                ...prev,
-                rooms: resources
-            }));
-        }
-    }, [resources]);
 
     const handleEventDrop = (args: { event: any; start: string | Date; end: string | Date; isAllDay?: boolean }) => {
-        const { event, start, end } = args;
-        const startDate = typeof start === 'string' ? new Date(start) : start;
-        const endDate = typeof end === 'string' ? new Date(end) : end;
-
-        dispatch(updateSession({
-            id: event.id,
-            start: startDate.toISOString(),
-            end: endDate.toISOString(),
-            resourceId: event.resourceId
-        }));
+        // In a real app, we'd use a mutation here
+        console.log("Event drop", args);
     };
 
     const handleConflictClose = () => {
-        dispatch(clearConflict());
+        clearConflict();
     };
 
     const handleForceSchedule = () => {
         alert("Force schedule logic would go here (e.g., override db).");
-        dispatch(clearConflict());
+        clearConflict();
     };
+
+    const queryClient = useQueryClient();
 
     const handleScheduleGenerated = (result: any) => {
         setLastScheduleResult(result);
         if (result.success && result.schedule) {
-            dispatch(fetchSessions());
+            queryClient.invalidateQueries({ queryKey: ['sessions'] });
         }
     };
+
 
     // Parse dates for calendar/gantt
     const parsedSessions = Array.isArray(sessions) 

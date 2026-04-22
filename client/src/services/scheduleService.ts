@@ -148,6 +148,17 @@ const updateSessionStatus = async (sessionId: string | number, status: string): 
     });
 };
 
+const logSessionNote = async (sessionId: string | number, note: string): Promise<ScheduleEntry> => {
+    try {
+        // Mock implementation: send note as a partial update
+        const response = await api.put<ScheduleEntry>(`/schedule/${sessionId}`, { clinicalNote: note });
+        return response.data;
+    } catch (error) {
+        console.error(`Error logging note for session ${sessionId}:`, error);
+        throw error;
+    }
+};
+
 const scheduleService = {
     getSessions,
     getResources,
@@ -157,7 +168,9 @@ const scheduleService = {
     updateSession,
     deleteSession,
     updateSessionStatus,
+    logSessionNote,
     PRIORITY_LEVELS
 };
+
 
 export default scheduleService;

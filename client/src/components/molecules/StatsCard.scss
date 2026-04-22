@@ -1,0 +1,86 @@
+
+.stats-card {
+  padding: $spacing-lg;
+  @include flex-column;
+  gap: $spacing-md;
+
+  .stats-header {
+    @include flex-between;
+    align-items: flex-start;
+  }
+
+  .stats-icon-wrapper {
+    @include flex-center;
+    width: 44px;
+    height: 44px;
+    background-color: rgba($accent-color, 0.1);
+    border-radius: $radius-lg;
+    color: $accent-color;
+  }
+
+  .stats-title {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $text-secondary;
+    margin: 0;
+  }
+
+  .stats-body {
+    display: flex;
+    align-items: baseline;
+    gap: $spacing-sm;
+  }
+
+  .stats-value {
+    font-size: $font-size-2xl;
+    font-weight: 800;
+    color: $text-primary;
+    letter-spacing: -0.02em;
+  }
+
+  .stats-trend {
+    font-size: $font-size-xs;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: $radius-sm;
+
+    &.trend-up {
+      background-color: $success-bg;
+      color: $success-text;
+    }
+
+    &.trend-down {
+      background-color: $error-bg;
+      color: $error-text;
+    }
+  }
+
+  .stats-description {
+    font-size: $font-size-xs;
+    color: $text-muted;
+    margin: 0;
+  }
+
+  &.loading {
+    .skeleton-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: $radius-lg;
+      background-color: $secondary-color;
+    }
+    
+    .skeleton-title {
+      width: 60%;
+      height: 16px;
+      background-color: $secondary-color;
+      border-radius: $radius-sm;
+    }
+
+    .skeleton-value {
+      width: 40%;
+      height: 32px;
+      background-color: $secondary-color;
+      border-radius: $radius-sm;
+    }
+  }
+}

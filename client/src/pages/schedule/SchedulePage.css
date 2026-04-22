@@ -54,10 +54,12 @@
 
 .view-toggles {
     display: flex;
+    flex-wrap: wrap;
     background-color: var(--surface-color);
     padding: 4px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
+    width: fit-content;
 }
 
 .toggle-btn {
@@ -72,6 +74,7 @@
     font-weight: 500;
     color: var(--text-secondary);
     transition: all 0.2s;
+    white-space: nowrap;
 }
 
 .toggle-btn.active {

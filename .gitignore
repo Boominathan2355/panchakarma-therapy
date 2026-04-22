@@ -49,3 +49,6 @@ lerna-debug.log*
 # Plans & temp
 plans/
 build_output.txt
+
+*storybook.log
+storybook-static

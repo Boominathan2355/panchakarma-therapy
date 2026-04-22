@@ -1,0 +1,35 @@
+
+.patient-stats-dashboard {
+  margin-bottom: $spacing-xl;
+
+  .dashboard-title {
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: $spacing-md;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: $spacing-lg;
+  }
+
+  &.loading {
+    .stat-card {
+      @include card-premium;
+      padding: $spacing-lg;
+      
+      .stat-header {
+        @include flex-between;
+        margin-bottom: $spacing-md;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

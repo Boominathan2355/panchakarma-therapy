@@ -1,6 +1,7 @@
 // src/types/index.ts — barrel re-export for all domain types
 
-export type { User, LoginCredentials, AuthResponse, AuthState } from './auth';
+export type { User, LoginCredentials, AuthResponse } from '../features/auth/types/auth';
+
 
 export type {
   Patient,

@@ -1,25 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Bell, Check, Trash2 } from 'lucide-react';
 import Badge from '../atoms/Badge';
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { useNotificationStore } from '../../store/notificationStore';
 import './NotificationBell.css';
-
-export interface Notification {
-    id: string;
-    title: string;
-    message: string;
-    type: 'info' | 'success' | 'warning' | 'error';
-    read: boolean;
-    timestamp: string;
-}
 
 const NotificationBell: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     
-    // Fallback if redux state not yet typed for notifications
-    const notifications = useAppSelector((state: any) => state.notifications?.items || []) as Notification[];
+    const { notifications, markAsRead, markAllAsRead, deleteNotification } = useNotificationStore();
     const unreadCount = notifications.filter(n => !n.read).length;
+
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -47,7 +38,7 @@ const NotificationBell: React.FC = () => {
                 <div className="notification-dropdown">
                     <div className="dropdown-header">
                         <h4>Notifications</h4>
-                        {unreadCount > 0 && <button className="mark-all-btn">Mark all as read</button>}
+                        {unreadCount > 0 && <button className="mark-all-btn" onClick={markAllAsRead}>Mark all as read</button>}
                     </div>
                     <div className="dropdown-body">
                         {notifications.length > 0 ? (
@@ -62,11 +53,11 @@ const NotificationBell: React.FC = () => {
                                         <span className="item-time">{notification.timestamp}</span>
                                         <div className="item-actions">
                                             {!notification.read && (
-                                                <button className="action-btn" title="Mark as read">
+                                                <button className="action-btn" title="Mark as read" onClick={() => markAsRead(notification.id)}>
                                                     <Check size={14} />
                                                 </button>
                                             )}
-                                            <button className="action-btn delete" title="Delete">
+                                            <button className="action-btn delete" title="Delete" onClick={() => deleteNotification(notification.id)}>
                                                 <Trash2 size={14} />
                                             </button>
                                         </div>

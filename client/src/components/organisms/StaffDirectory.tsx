@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useAppDispatch } from '../../store/hooks';
-import { updateStaff } from '../../store/slices/resourceSlice';
+import { useUpdateStaff } from '../../hooks/useResources';
 import Avatar from '../atoms/Avatar';
 import SkillBadge from '../molecules/SkillBadge';
-import './StaffDirectory.css';
+import './StaffDirectory.scss';
 
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -20,7 +19,7 @@ export interface StaffDirectoryProps {
 }
 
 const StaffDirectory: React.FC<StaffDirectoryProps> = ({ staff }) => {
-    const dispatch = useAppDispatch();
+    const { mutate: performUpdate } = useUpdateStaff();
     const [editMode, setEditMode] = useState(false);
     const [roster, setRoster] = useState<Staff[]>(Array.isArray(staff) ? staff : []);
 
@@ -50,10 +49,11 @@ const StaffDirectory: React.FC<StaffDirectoryProps> = ({ staff }) => {
             const original = staff.find(s => s.id === member.id);
             if (original && Array.isArray(original.shifts) && Array.isArray(member.shifts) && 
                 JSON.stringify(original.shifts) !== JSON.stringify(member.shifts)) {
-                dispatch(updateStaff(member));
+                performUpdate(member);
             }
         }
     };
+
 
     return (
         <div className="staff-directory">

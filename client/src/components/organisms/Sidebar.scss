@@ -1,0 +1,120 @@
+
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  background-color: $primary-color;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  transition: $transition-slow;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+
+  &.collapsed {
+    width: 80px;
+
+    .group-title {
+      opacity: 0;
+    }
+  }
+}
+
+.sidebar-header {
+  height: 70px;
+  padding: 0 $spacing-md;
+  @include flex-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: $radius-md;
+  padding: 8px 12px;
+  margin-right: $spacing-sm;
+
+  input {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: $font-size-sm;
+    outline: none;
+    width: 100%;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+.toggle-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-md;
+  @include flex-center;
+  cursor: pointer;
+  transition: $transition-fast;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-md;
+  @include flex-column;
+  gap: $spacing-lg;
+}
+
+.nav-group {
+  @include flex-column;
+  gap: $spacing-xs;
+}
+
+.group-title {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.1em;
+  padding-left: $spacing-sm;
+  margin-bottom: $spacing-xs;
+  transition: opacity 0.2s ease;
+}
+
+.sidebar-footer {
+  padding: $spacing-md;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.system-status {
+  @include flex-center;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: $radius-md;
+  font-size: $font-size-xs;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: $radius-full;
+  
+  &.online {
+    background-color: $success-color;
+    box-shadow: 0 0 8px $success-color;
+  }
+}

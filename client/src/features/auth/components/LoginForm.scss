@@ -1,0 +1,100 @@
+@use 'sass:color';
+
+.login-form-card {
+  @include glassmorphism(16px, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: $spacing-2xl;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: $spacing-xl;
+
+  .logo-icon-wrapper {
+    @include flex-center;
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, $accent-color, color.adjust($accent-color, $lightness: -15%));
+    border-radius: $radius-2xl;
+    margin: 0 auto $spacing-lg;
+    box-shadow: 0 8px 16px rgba($accent-color, 0.3);
+    color: white;
+    transform: rotate(-5deg);
+    transition: $transition-base;
+
+    &:hover {
+      transform: rotate(0deg) scale(1.05);
+    }
+  }
+
+  h2 {
+    font-size: $font-size-3xl;
+    font-weight: 800;
+    color: $primary-color;
+    letter-spacing: -0.02em;
+    margin-bottom: $spacing-xs;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: $font-size-sm;
+    font-weight: 500;
+  }
+}
+
+.input-with-icon {
+  position: relative;
+  
+  .input-icon {
+    position: absolute;
+    left: $spacing-md;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $text-muted;
+    pointer-events: none;
+    transition: $transition-fast;
+    z-index: 2;
+  }
+
+  input:focus + .input-icon {
+    color: $accent-color;
+  }
+}
+
+.form-error-banner {
+  @include flex-center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background-color: $error-bg;
+  color: $error-text;
+  border-radius: $radius-md;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  margin-top: $spacing-md;
+  border: 1px solid rgba($error-color, 0.1);
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.login-footer {
+  margin-top: $spacing-xl;
+  text-align: center;
+  font-size: $font-size-xs;
+  color: $text-secondary;
+
+  a {
+    color: $accent-color;
+    font-weight: 700;
+    
+    &:hover {
+      color: color.adjust($accent-color, $lightness: -10%);
+    }
+  }
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
