@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
-import './UtilizationChart.css';
+import './UtilizationChart.scss';
 
 export interface UtilizationData {
     dates: string[];

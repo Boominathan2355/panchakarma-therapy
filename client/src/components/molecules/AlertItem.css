@@ -7,23 +7,23 @@
 }
 
 .alert-item-warning {
-    background-color: #fffbeb;
-    border-color: #fcd34d;
+    background-color: var(--warning-bg);
+    border-color: rgba(245, 158, 11, 0.2);
 }
 
 .alert-item-error {
-    background-color: #fef2f2;
-    border-color: #fecaca;
+    background-color: var(--error-bg);
+    border-color: rgba(239, 68, 68, 0.2);
 }
 
 .alert-item-success {
-    background-color: #ecfdf5;
-    border-color: #a7f3d0;
+    background-color: var(--success-bg);
+    border-color: rgba(16, 185, 129, 0.2);
 }
 
 .alert-item-info {
-    background-color: #eff6ff;
-    border-color: #bfdbfe;
+    background-color: var(--info-bg);
+    border-color: rgba(14, 165, 233, 0.2);
 }
 
 .alert-content {

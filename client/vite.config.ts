@@ -20,8 +20,16 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
+        quietDeps: true,
+        silenceDeprecations: ['import', 'color-functions', 'global-builtin'],
         additionalData: (content: string, filepath: string) => {
-          if (filepath.includes('_variables.scss') || filepath.includes('_mixins.scss')) {
+          // Skip for core layout files and utility modules to prevent circular dependencies/collisions
+          if (
+            filepath.includes('_variables.scss') || 
+            filepath.includes('_mixins.scss') ||
+            filepath.includes('bootstrap-custom.scss') ||
+            filepath.endsWith('index.scss')
+          ) {
             return content;
           }
           return `

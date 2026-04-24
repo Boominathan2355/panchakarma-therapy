@@ -1,9 +1,11 @@
+@use 'sass:color';
 .calendar-container {
     background-color: var(--surface-color);
     padding: var(--spacing-md);
     border-radius: var(--radius-lg);
     border: 1px solid var(--border-color);
     height: 100%;
+    @include glassmorphism;
 }
 
 /* Override RBC Styles for Premium Look */
@@ -25,29 +27,41 @@
 
 .rbc-event {
     border-radius: var(--radius-sm);
-    padding: 2px 5px;
-    font-size: 0.8rem;
+    padding: 2px 8px;
+    font-size: 0.85rem;
     border: none;
     box-shadow: var(--shadow-sm);
     transition: transform 0.1s;
+    background-image: linear-gradient(135deg, var(--accent-color) 0%, color.adjust(#0070f3, $lightness: -10%) 100%);
 }
 
 .rbc-event:hover {
     transform: scale(1.02);
     z-index: 5;
+    box-shadow: var(--shadow-md);
 }
 
 .rbc-off-range-bg {
-    background-color: var(--secondary-color);
+    background-color: var(--glass-bg);
+}
+
+/* Grid Lines Refinement */
+.rbc-time-content, .rbc-month-view, .rbc-time-header {
+    border: 1px solid var(--border-color) !important;
+}
+
+.rbc-day-bg, .rbc-timeslot-group, .rbc-time-slot {
+    border-color: var(--border-color) !important;
+    opacity: 0.6;
 }
 
 /* Event Status Styles */
 .event-completed {
-    background-color: var(--success-color);
+    background-image: linear-gradient(135deg, var(--success-color) 0%, color.adjust(#10b981, $lightness: -10%) 100%);
 }
 
 .event-scheduled {
-    background-color: var(--primary-color);
+    background-image: linear-gradient(135deg, var(--accent-color) 0%, darken(#0070f3, 10%) 100%);
 }
 
 .type-vamana {
@@ -56,15 +70,30 @@
 
 .rbc-toolbar button {
     border: 1px solid var(--border-color);
+    background-color: var(--glass-bg);
     color: var(--text-primary);
     border-radius: var(--radius-md);
-    padding: 4px 10px;
+    padding: 6px 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.rbc-toolbar button:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--accent-color);
 }
 
 .rbc-toolbar button.rbc-active {
-    background-color: var(--primary-color);
+    background-color: var(--accent-color);
     color: white;
-    border-color: var(--primary-color);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px rgba(0, 112, 243, 0.3);
+}
+
+.rbc-toolbar .rbc-toolbar-label {
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 1.1rem;
 }
 
 /* Reorder nav buttons: Back | Today | Next */
@@ -72,7 +101,6 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    /* Increased gap to show radius clearly */
 }
 
 /* Today = 1st button → move to center (order 2) */

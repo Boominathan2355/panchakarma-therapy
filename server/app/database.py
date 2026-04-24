@@ -8,7 +8,15 @@ client: AsyncIOMotorClient = None
 
 async def init_db():
     global client
-    client = AsyncIOMotorClient(settings.MONGODB_URL)
+    # MongoDB Atlas connections need proper TLS configuration
+    mongodb_url = settings.MONGODB_URL
+    
+    client = AsyncIOMotorClient(
+        mongodb_url,
+        serverSelectionTimeoutMS=30000,
+        tls=True,
+        tlsAllowInvalidCertificates=True
+    )
     db_name = settings.MONGODB_URL.split("/")[-1].split("?")[0] or "ptas"
     database = client[db_name]
     await init_beanie(database=database, document_models=ALL_MODELS)

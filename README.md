@@ -68,7 +68,15 @@ panchakarma-therapy/
 └── Makefile         # Common commands
 ```
 
-See [client/README.md](client/README.md) and [server/README.md](server/README.md) for details.
+## Documentation Standards
+
+This project follows strict development standards defined in the `docs/` directory:
+
+- [Frontend Standards](docs/frontend-standards.md) - React, Atomic Design, and Storybook.
+- [Backend Standards](docs/backend-standards.md) - FastAPI, SQLAlchemy, and Layered Architecture.
+- [Markdown Standards](antigravity.md) - General documentation guidelines.
+
+See [client/README.md](client/README.md) and [server/README.md](server/README.md) for module-specific details.
 
 ## Core Algorithms (from IEEE paper)
 

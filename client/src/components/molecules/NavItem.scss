@@ -5,16 +5,18 @@
   gap: $spacing-md;
   padding: 0.75rem $spacing-md;
   border-radius: $radius-md;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
   text-decoration: none;
   font-size: $font-size-sm;
   font-weight: 500;
   transition: $transition-base;
   margin-bottom: 2px;
+  border: 1px solid transparent;
 
   .nav-icon {
     flex-shrink: 0;
     transition: $transition-fast;
+    opacity: 0.7;
   }
 
   .nav-label {
@@ -23,17 +25,24 @@
   }
 
   &:hover {
-    color: white;
-    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    background-color: var(--glass-bg);
+    border-color: var(--glass-border);
+
+    .nav-icon {
+      opacity: 1;
+    }
   }
 
   &.active {
-    color: white;
-    background-color: $accent-color;
-    box-shadow: 0 4px 12px rgba($accent-color, 0.3);
+    color: white; // Active item text is always white on blue background
+    background-color: var(--accent-color);
+    box-shadow: 0 4px 12px rgba($primary, 0.3), 0 0 8px rgba($primary, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
 
     .nav-icon {
       color: white;
+      opacity: 1;
     }
   }
 

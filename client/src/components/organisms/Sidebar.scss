@@ -2,8 +2,9 @@
 .sidebar {
   width: 280px;
   height: 100vh;
-  background-color: $primary-color;
-  color: white;
+  background: linear-gradient(180deg, var(--surface-color) 0%, rgba(var(--primary-rgb), 0.98) 100%);
+  backdrop-filter: blur(20px);
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -11,7 +12,8 @@
   top: 0;
   z-index: 1000;
   transition: $transition-slow;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
 
   &.collapsed {
     width: 80px;
@@ -26,7 +28,7 @@
   height: 70px;
   padding: 0 $spacing-md;
   @include flex-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .search-bar {
@@ -34,29 +36,42 @@
   display: flex;
   align-items: center;
   gap: $spacing-xs;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(4px);
   border-radius: $radius-md;
   padding: 8px 12px;
   margin-right: $spacing-sm;
+  border: 1px solid var(--glass-border);
+  transition: $transition-base;
+
+  &:focus-within {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+    background-color: var(--secondary-bg);
+  }
 
   input {
     background: transparent;
     border: none;
-    color: white;
+    color: var(--text-primary);
     font-size: $font-size-sm;
     outline: none;
     width: 100%;
 
     &::placeholder {
-      color: rgba(255, 255, 255, 0.3);
+      color: var(--text-muted);
     }
+  }
+  
+  svg {
+    color: var(--text-muted);
   }
 }
 
 .toggle-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: none;
-  color: white;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
   width: 32px;
   height: 32px;
   border-radius: $radius-md;
@@ -65,7 +80,8 @@
   transition: $transition-fast;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--secondary-color);
+    border-color: var(--accent-color);
   }
 }
 
@@ -86,7 +102,7 @@
   font-size: 0.625rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   letter-spacing: 0.1em;
   padding-left: $spacing-sm;
   margin-bottom: $spacing-xs;
@@ -95,17 +111,25 @@
 
 .sidebar-footer {
   padding: $spacing-md;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--border-color);
 }
 
 .system-status {
   @include flex-center;
   gap: $spacing-sm;
   padding: $spacing-sm;
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--glass-border);
   border-radius: $radius-md;
   font-size: $font-size-xs;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
+  transition: $transition-base;
+
+  &:hover {
+    background-color: var(--secondary-bg);
+    color: var(--text-primary);
+  }
 }
 
 .status-dot {
@@ -114,7 +138,7 @@
   border-radius: $radius-full;
   
   &.online {
-    background-color: $success-color;
-    box-shadow: 0 0 8px $success-color;
+    background-color: var(--success-color);
+    box-shadow: 0 0 8px var(--success-color);
   }
 }

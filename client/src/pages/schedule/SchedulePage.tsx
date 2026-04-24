@@ -15,9 +15,10 @@ import ResourceGantt from '../../components/organisms/ResourceGantt';
 import ConflictModal from '../../components/molecules/ConflictModal';
 import ScheduleOptimizer from '../../components/organisms/ScheduleOptimizer';
 import ScheduleExplainer from '../../components/organisms/ScheduleExplainer';
+import PendingQueue from '../../components/organisms/PendingQueue';
 import { Calendar, AlignLeft, Zap, ChevronRight } from 'lucide-react';
 import { ScheduleEntry } from '../../types';
-import './SchedulePage.css';
+import './SchedulePage.scss';
 
 const SchedulePage: React.FC = () => {
     const navigate = useNavigate();
@@ -40,6 +41,7 @@ const SchedulePage: React.FC = () => {
     }), [resourceDataRaw, resources]);
 
     const [lastScheduleResult, setLastScheduleResult] = useState<any>(null);
+    const [selectedTask, setSelectedTask] = useState<any>(null);
 
 
     const handleEventDrop = (args: { event: any; start: string | Date; end: string | Date; isAllDay?: boolean }) => {
@@ -88,6 +90,40 @@ const SchedulePage: React.FC = () => {
         optimize: 'Optimizer'
     };
 
+    const pendingTasks = useMemo(() => {
+        if (patients.length === 0 || therapies.length === 0) return [];
+        // Map first 3 patients to some therapies for the demo queue
+        return [
+            { 
+                id: 'task-1', 
+                patientId: patients[0]?.id, 
+                patientName: patients[0]?.name, 
+                therapyId: therapies[0]?.id, 
+                therapyName: therapies[0]?.name, 
+                planStartDate: new Date().toISOString(), 
+                priority: 'EMERGENCY' 
+            },
+            { 
+                id: 'task-2', 
+                patientId: patients[1]?.id, 
+                patientName: patients[1]?.name, 
+                therapyId: (therapies[1] || therapies[0])?.id, 
+                therapyName: (therapies[1] || therapies[0])?.name, 
+                planStartDate: new Date().toISOString(), 
+                priority: 'URGENT' 
+            },
+            { 
+                id: 'task-3', 
+                patientId: (patients[2] || patients[0])?.id, 
+                patientName: (patients[2] || patients[0])?.name, 
+                therapyId: (therapies[2] || therapies[0])?.id, 
+                therapyName: (therapies[2] || therapies[0])?.name, 
+                planStartDate: new Date().toISOString(), 
+                priority: 'NORMAL' 
+            }
+        ];
+    }, [patients, therapies]);
+
     return (
         <div className="schedule-page">
             <div className="schedule-header">
@@ -100,9 +136,9 @@ const SchedulePage: React.FC = () => {
                         {viewNames[viewMode]}
                     </span>
                 </div>
-                <div className="view-toggles">
+                <div className="schedule-view-switcher">
                     <button
-                        className={`toggle-btn ${viewMode === 'calendar' ? 'active' : ''}`}
+                        className={`switcher-btn ${viewMode === 'calendar' ? 'active' : ''}`}
                         onClick={() => navigate('/scheduler/calendar')}
                     >
                         <Calendar size={18} /> Calendar
@@ -110,13 +146,13 @@ const SchedulePage: React.FC = () => {
                     {user?.role?.toLowerCase() !== 'physician' && (
                         <>
                             <button
-                                className={`toggle-btn ${viewMode === 'gantt' ? 'active' : ''}`}
+                                className={`switcher-btn ${viewMode === 'gantt' ? 'active' : ''}`}
                                 onClick={() => navigate('/scheduler/gantt')}
                             >
                                 <AlignLeft size={18} /> Resource View
                             </button>
                             <button
-                                className={`toggle-btn optimize ${viewMode === 'optimize' ? 'active' : ''}`}
+                                className={`switcher-btn optimize ${viewMode === 'optimize' ? 'active' : ''}`}
                                 onClick={() => navigate('/scheduler/optimize')}
                             >
                                 <Zap size={18} /> <span>Optimize</span>
@@ -143,6 +179,15 @@ const SchedulePage: React.FC = () => {
 
                 {viewMode === 'optimize' && (
                     <div className="optimize-layout">
+                        <div className="optimize-queue">
+                            <PendingQueue
+                                tasks={pendingTasks as any}
+                                onSelectTask={(task) => {
+                                    setSelectedTask(task);
+                                    setLastScheduleResult(null);
+                                }}
+                            />
+                        </div>
                         <div className="optimize-main">
                             <ScheduleOptimizer
                                 onScheduleGenerated={handleScheduleGenerated}
@@ -150,6 +195,7 @@ const SchedulePage: React.FC = () => {
                                 patients={patients}
                                 resources={resourceData}
                                 existingSessions={parsedSessions as any}
+                                initialTask={selectedTask}
                             />
                         </div>
                         <div className="optimize-sidebar">

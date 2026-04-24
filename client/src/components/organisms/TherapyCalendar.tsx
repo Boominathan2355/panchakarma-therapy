@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import { Calendar, dateFnsLocalizer, Views, View, EventProps } from 'react-big-calendar';
-import withDragAndDrop, { withDragAndDropProps } from 'react-big-calendar/lib/addons/dragAndDrop';
+import { Calendar, dateFnsLocalizer, Views, View } from 'react-big-calendar';
+import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 import { format, parse, startOfWeek, getDay } from 'date-fns';
-import enUS from 'date-fns/locale/en-US';
+import { enUS } from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
-import './TherapyCalendar.css';
+import './TherapyCalendar.scss';
 
 const locales = {
     'en-US': enUS,

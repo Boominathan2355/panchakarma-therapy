@@ -14,7 +14,7 @@ import {
     LucideIcon
 } from 'lucide-react';
 import { DECISION_TYPES } from '../../algorithms';
-import './ScheduleExplainer.css';
+import './ScheduleExplainer.scss';
 
 export interface Decision {
     id?: string;

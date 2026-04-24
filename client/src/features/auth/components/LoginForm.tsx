@@ -64,7 +64,7 @@ const LoginForm: React.FC = () => {
     };
 
     return (
-        <Card className="login-form-card">
+        <Card className="login-form-card" glass={true}>
             <div className="login-header">
                 <div className="logo-icon-wrapper">
                     <LogIn size={32} />

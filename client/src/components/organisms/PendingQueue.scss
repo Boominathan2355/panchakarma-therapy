@@ -1,0 +1,168 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.pending-queue {
+    background: var(--surface-color);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    @include glassmorphism;
+}
+
+.queue-header {
+    @include flex-between;
+    margin-bottom: var(--spacing-lg);
+
+    h4 {
+        margin: 0;
+        font-size: var(--font-size-md);
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+
+    .badge {
+        background: var(--accent-color);
+        color: white;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 10px;
+        font-weight: 800;
+    }
+}
+
+.queue-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding-right: 4px;
+
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-thumb { 
+        background: var(--border-color); 
+        border-radius: 2px; 
+    }
+}
+
+.queue-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-muted);
+    text-align: center;
+    gap: var(--spacing-sm);
+
+    p { font-size: var(--font-size-sm); }
+}
+
+.queue-item {
+    background: var(--secondary-bg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-md);
+    cursor: pointer;
+    transition: var(--transition-base);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: var(--accent-color);
+        opacity: 0.5;
+    }
+
+    &:hover {
+        transform: translateX(4px);
+        border-color: var(--accent-color);
+        background: var(--surface-color);
+        box-shadow: var(--shadow-sm);
+    }
+
+    &.urgent::before { background: var(--warning-color); }
+    &.emergency::before { background: var(--error-color); }
+}
+
+.item-main {
+    margin-bottom: var(--spacing-sm);
+}
+
+.patient-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+    font-weight: 600;
+}
+
+.therapy-name {
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.item-footer {
+    @include flex-between;
+}
+
+.start-date {
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+.add-btn {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition-fast);
+
+    &:hover {
+        background: var(--accent-color);
+        color: white;
+        border-color: var(--accent-color);
+    }
+}
+
+.batch-run-btn {
+    margin-top: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-lg);
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: var(--transition-base);
+    box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.2);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(var(--accent-rgb), 0.3);
+    }
+}

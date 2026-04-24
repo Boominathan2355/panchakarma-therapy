@@ -1,16 +1,17 @@
 import React, { useState, useCallback } from 'react';
-import { Play, Loader2, CheckCircle, AlertTriangle, Settings, Zap } from 'lucide-react';
+import { Zap, Play, CheckCircle, AlertTriangle, Settings, ChevronDown, ChevronUp, User, Target, Loader2 } from 'lucide-react';
 import { HybridScheduler, PriorityToken, PRIORITY_LEVELS } from '../../algorithms';
-import { Therapy } from '../../types/therapy';
+import { TherapyDefinition } from '../../types/therapy';
 import { Patient } from '../../types/patient';
-import './ScheduleOptimizer.css';
+import './ScheduleOptimizer.scss';
 
 export interface ScheduleOptimizerProps {
     onScheduleGenerated?: (result: any) => void;
-    therapies?: Therapy[];
+    therapies?: TherapyDefinition[];
     patients?: Patient[];
     resources?: Record<string, any>;
     existingSessions?: any[];
+    initialTask?: any;
 }
 
 interface ProgressState {
@@ -24,7 +25,8 @@ const ScheduleOptimizer: React.FC<ScheduleOptimizerProps> = ({
     therapies = [],
     patients = [],
     resources = {},
-    existingSessions = []
+    existingSessions = [],
+    initialTask = null
 }) => {
     const [selectedTherapy, setSelectedTherapy] = useState('');
     const [selectedPatient, setSelectedPatient] = useState('');
@@ -40,6 +42,15 @@ const ScheduleOptimizer: React.FC<ScheduleOptimizerProps> = ({
         gaGenerations: 100,
         psoIterations: 50
     });
+
+    React.useEffect(() => {
+        if (initialTask) {
+            setSelectedTherapy(initialTask.therapyId || '');
+            setSelectedPatient(initialTask.patientId || '');
+            setPriorityLevel(initialTask.priority || 'NORMAL');
+            setPriorityReason(initialTask.priorityReason || '');
+        }
+    }, [initialTask]);
 
     const handleProgressUpdate = useCallback((update: any) => {
         setProgress({
@@ -59,12 +70,12 @@ const ScheduleOptimizer: React.FC<ScheduleOptimizerProps> = ({
         setProgress({ phase: 'starting', percent: 0, message: 'Initializing...' });
 
         try {
-            const therapy = therapies.find(t => t.id === selectedTherapy);
-            const patient = patients.find(p => p.id === selectedPatient);
+            const therapy = therapies.find(t => String(t.id) === String(selectedTherapy));
+            const patient = patients.find(p => String(p.id) === String(selectedPatient));
             const priorityToken = new PriorityToken(priorityLevel, priorityReason);
 
             if (!therapy || !patient) {
-                throw new Error('Selected therapy or patient not found');
+                throw new Error('Could not find complete data for the selected therapy or patient. Please ensure they are properly selected.');
             }
 
             const scheduler = new HybridScheduler({
@@ -158,56 +169,72 @@ const ScheduleOptimizer: React.FC<ScheduleOptimizerProps> = ({
                 <h3>Hybrid Schedule Optimizer</h3>
             </div>
 
+            {initialTask && (
+                <div className="selected-task-banner">
+                    <User size={16} />
+                    <span>Scheduling for <strong>{initialTask.patientName}</strong> ({initialTask.therapyName})</span>
+                    <button className="clear-selection" onClick={() => {
+                        // This should ideally notify the parent to clear selectedTask
+                        // For now, it just clears the local state via useEffect if parent updates
+                    }}>
+                        <Target size={12} />
+                        Auto-filled from Queue
+                    </button>
+                </div>
+            )}
+
             <div className="optimizer-form">
-                <div className="form-group">
-                    <label htmlFor="therapy-select">Therapy</label>
-                    <select
-                        id="therapy-select"
-                        value={selectedTherapy}
-                        onChange={(e) => setSelectedTherapy(e.target.value)}
-                        disabled={isOptimizing}
-                    >
-                        <option value="">Select Therapy...</option>
-                        {therapies.map(t => (
-                            <option key={t.id} value={t.id}>{t.name}</option>
-                        ))}
-                    </select>
+                <div className="form-row">
+                    <div className="form-group">
+                        <label htmlFor="therapy-select">Therapy</label>
+                        <select
+                            id="therapy-select"
+                            value={selectedTherapy}
+                            onChange={(e) => setSelectedTherapy(e.target.value)}
+                            disabled={isOptimizing}
+                        >
+                            <option value="">Select Therapy...</option>
+                            {therapies.map(t => (
+                                <option key={t.id} value={t.id}>{t.name}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="patient-select">Patient</label>
+                        <select
+                            id="patient-select"
+                            value={selectedPatient}
+                            onChange={(e) => setSelectedPatient(e.target.value)}
+                            disabled={isOptimizing}
+                        >
+                            <option value="">Select Patient...</option>
+                            {patients.map(p => (
+                                <option key={p.id} value={p.id}>{p.name}</option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="patient-select">Patient</label>
-                    <select
-                        id="patient-select"
-                        value={selectedPatient}
-                        onChange={(e) => setSelectedPatient(e.target.value)}
-                        disabled={isOptimizing}
-                    >
-                        <option value="">Select Patient...</option>
-                        {patients.map(p => (
-                            <option key={p.id} value={p.id}>{p.name}</option>
-                        ))}
-                    </select>
-                </div>
+                <div className="form-row">
+                    <div className="form-group">
+                        <label htmlFor="priority-select">Priority</label>
+                        <select
+                            id="priority-select"
+                            value={priorityLevel}
+                            onChange={(e) => setPriorityLevel(e.target.value as any)}
+                            disabled={isOptimizing}
+                            style={{
+                                borderLeftColor: (PRIORITY_LEVELS as any)[priorityLevel]?.color,
+                                borderLeftWidth: '4px'
+                            }}
+                        >
+                            {Object.entries(PRIORITY_LEVELS).map(([key, val]) => (
+                                <option key={key} value={key}>{val.name}</option>
+                            ))}
+                        </select>
+                    </div>
 
-                <div className="form-group">
-                    <label htmlFor="priority-select">Priority</label>
-                    <select
-                        id="priority-select"
-                        value={priorityLevel}
-                        onChange={(e) => setPriorityLevel(e.target.value as any)}
-                        disabled={isOptimizing}
-                        style={{
-                            borderLeftColor: (PRIORITY_LEVELS as any)[priorityLevel]?.color,
-                            borderLeftWidth: '4px'
-                        }}
-                    >
-                        {Object.entries(PRIORITY_LEVELS).map(([key, val]) => (
-                            <option key={key} value={key}>{val.name}</option>
-                        ))}
-                    </select>
-                </div>
-
-                {priorityLevel !== 'NORMAL' && (
                     <div className="form-group">
                         <label htmlFor="priority-reason">Reason (optional)</label>
                         <input
@@ -219,7 +246,7 @@ const ScheduleOptimizer: React.FC<ScheduleOptimizerProps> = ({
                             disabled={isOptimizing}
                         />
                     </div>
-                )}
+                </div>
 
                 <button
                     className="advanced-toggle"

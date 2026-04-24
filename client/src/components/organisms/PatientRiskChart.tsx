@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
 import Skeleton from '../atoms/Skeleton';
-import './PatientRiskChart.css';
+import { useTheme } from '../../context/ThemeContext';
+import Card from '../atoms/Card';
+import './PatientRiskChart.scss';
 
 export interface PatientRiskChartProps {
     dates: string[];
@@ -20,6 +22,9 @@ const PatientRiskChart: React.FC<PatientRiskChartProps> = ({
     emergency, 
     loading = false 
 }) => {
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
+
     if (loading) {
         return (
             <div className="chart-container">
@@ -30,29 +35,34 @@ const PatientRiskChart: React.FC<PatientRiskChartProps> = ({
     }
 
     const options = {
+        backgroundColor: 'transparent',
         grid: { top: 40, right: 30, bottom: 20, left: 40, containLabel: true },
         tooltip: {
             trigger: 'axis',
+            backgroundColor: isDark ? '#1e293b' : '#fff',
+            borderColor: isDark ? 'rgba(255,255,255,0.1)' : '#eee',
+            textStyle: { color: isDark ? '#f8fafc' : '#333' },
             axisPointer: { type: 'cross', label: { backgroundColor: '#6a7985' } }
         },
         legend: {
             data: ['Emergency', 'High Risk', 'Medium Risk', 'Low Risk'],
-            top: 0
+            top: 0,
+            textStyle: { color: isDark ? '#94a3b8' : '#64748b' }
         },
         xAxis: [
             {
                 type: 'category',
                 boundaryGap: false,
                 data: dates,
-                axisLabel: { color: '#6b7280' },
-                axisLine: { lineStyle: { color: '#ccc' } }
+                axisLabel: { color: isDark ? '#94a3b8' : '#64748b' },
+                axisLine: { lineStyle: { color: isDark ? 'rgba(255,255,255,0.1)' : '#ccc' } }
             }
         ],
         yAxis: [
             {
                 type: 'value',
-                axisLabel: { color: '#6b7280' },
-                splitLine: { lineStyle: { color: '#eee' } }
+                axisLabel: { color: isDark ? '#94a3b8' : '#64748b' },
+                splitLine: { lineStyle: { color: isDark ? 'rgba(255,255,255,0.05)' : '#eee' } }
             }
         ],
         series: [
@@ -60,46 +70,45 @@ const PatientRiskChart: React.FC<PatientRiskChartProps> = ({
                 name: 'Emergency',
                 type: 'line',
                 stack: 'Total',
-                areaStyle: {},
+                areaStyle: { opacity: 0.3 },
                 emphasis: { focus: 'series' },
-                itemStyle: { color: '#ef4444' }, // Red
+                itemStyle: { color: '#ef4444' },
                 data: emergency
             },
             {
                 name: 'High Risk',
                 type: 'line',
                 stack: 'Total',
-                areaStyle: {},
+                areaStyle: { opacity: 0.3 },
                 emphasis: { focus: 'series' },
-                itemStyle: { color: '#f97316' }, // Orange
+                itemStyle: { color: '#f97316' },
                 data: high
             },
             {
                 name: 'Medium Risk',
                 type: 'line',
                 stack: 'Total',
-                areaStyle: {},
+                areaStyle: { opacity: 0.3 },
                 emphasis: { focus: 'series' },
-                itemStyle: { color: '#eab308' }, // Yellow
+                itemStyle: { color: '#eab308' },
                 data: medium
             },
             {
                 name: 'Low Risk',
                 type: 'line',
                 stack: 'Total',
-                areaStyle: {},
+                areaStyle: { opacity: 0.3 },
                 emphasis: { focus: 'series' },
-                itemStyle: { color: '#22c55e' }, // Green
+                itemStyle: { color: '#22c55e' },
                 data: low
             }
         ]
     };
 
     return (
-        <div className="chart-container">
-            <h3 className="section-title">Patient Risk Trends</h3>
+        <Card className="risk-trend-card" title="Patient Risk Trends" glass>
             <ReactECharts option={options} style={{ height: '300px', width: '100%' }} />
-        </div>
+        </Card>
     );
 };
 

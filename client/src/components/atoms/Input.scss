@@ -1,8 +1,33 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
 
 .input {
   @include input-premium;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.1);
+  font-size: $font-size-base;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  &:focus {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: $accent-color;
+    box-shadow: 0 0 0 4px rgba($accent-color, 0.15);
+  }
   
   &.has-icon {
     padding-left: 2.75rem;
+  }
+
+  &.error {
+    background-color: rgba($error-color, 0.05);
+    border-color: rgba($error-color, 0.4);
+    
+    &:focus {
+      box-shadow: 0 0 0 4px rgba($error-color, 0.15);
+    }
   }
 }

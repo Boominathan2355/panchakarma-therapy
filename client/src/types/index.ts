@@ -16,6 +16,8 @@ export type {
   TherapyPlan,
   TherapyState,
   TherapyPlanState,
+  TherapyDefinition,
+  TherapyDocument,
 } from './therapy';
 
 export type {

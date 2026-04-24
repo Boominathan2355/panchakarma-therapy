@@ -7,8 +7,8 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 
 const Input = forwardRef<HTMLInputElement, InputProps>(({ className = '', error, ...props }, ref) => {
     const classNames = [
-        'input-field',
-        error ? 'input-error' : '',
+        'input',
+        error ? 'error' : '',
         className
     ].filter(Boolean).join(' ');
 

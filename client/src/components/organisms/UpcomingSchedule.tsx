@@ -21,8 +21,7 @@ export interface UpcomingScheduleProps {
 const UpcomingSchedule: React.FC<UpcomingScheduleProps> = ({ sessions = [], loading = false }) => {
     if (loading) {
         return (
-            <Card className="upcoming-schedule-card h-full">
-                <h3 className="section-title mb-4">Upcoming Schedule</h3>
+            <Card className="upcoming-schedule-card h-full" title="Upcoming Schedule" glass>
                 <div className="flex flex-col gap-4">
                     {[1, 2, 3, 4].map(i => (
                         <Skeleton key={i} width="100%" height="70px" borderRadius="12px" />
@@ -34,7 +33,7 @@ const UpcomingSchedule: React.FC<UpcomingScheduleProps> = ({ sessions = [], load
 
     if (!sessions || sessions.length === 0) {
         return (
-            <Card className="upcoming-schedule-card h-full flex flex-col justify-center items-center p-8 text-center text-muted">
+            <Card className="upcoming-schedule-card h-full flex flex-col justify-center items-center p-8 text-center text-muted" title="Upcoming Schedule" glass>
                 <Calendar size={48} className="mb-4 text-gray-300" />
                 <h4>No upcoming sessions for today</h4>
                 <p>You have a free schedule! Take some time to review patient charts.</p>
@@ -53,8 +52,7 @@ const UpcomingSchedule: React.FC<UpcomingScheduleProps> = ({ sessions = [], load
     };
 
     return (
-        <Card className="upcoming-schedule-card h-full">
-            <h3 className="section-title mb-4">Upcoming Schedule</h3>
+        <Card className="upcoming-schedule-card h-full" title="Upcoming Schedule" glass>
             <div className="schedule-list">
                 {sessions.map((session) => {
                     const start = new Date(session.start);

@@ -1,63 +1,76 @@
 
 .stats-card {
-  padding: $spacing-lg;
+  padding: var(--spacing-lg);
   @include flex-column;
-  gap: $spacing-md;
+  gap: var(--spacing-sm);
+  transition: var(--transition-base);
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-color);
+  }
 
   .stats-header {
     @include flex-between;
-    align-items: flex-start;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
   }
 
   .stats-icon-wrapper {
     @include flex-center;
-    width: 44px;
-    height: 44px;
-    background-color: rgba($accent-color, 0.1);
-    border-radius: $radius-lg;
-    color: $accent-color;
+    width: 48px;
+    height: 48px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    color: var(--accent-color);
+    box-shadow: var(--shadow-sm);
   }
 
   .stats-title {
-    font-size: $font-size-sm;
-    font-weight: 600;
-    color: $text-secondary;
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
     margin: 0;
   }
 
   .stats-body {
     display: flex;
-    align-items: baseline;
-    gap: $spacing-sm;
+    align-items: center;
+    gap: var(--spacing-sm);
   }
 
   .stats-value {
-    font-size: $font-size-2xl;
+    font-size: var(--font-size-2xl);
     font-weight: 800;
-    color: $text-primary;
+    color: var(--text-primary);
     letter-spacing: -0.02em;
   }
 
   .stats-trend {
-    font-size: $font-size-xs;
+    font-size: var(--font-size-xs);
     font-weight: 700;
-    padding: 2px 6px;
-    border-radius: $radius-sm;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
 
     &.trend-up {
-      background-color: $success-bg;
-      color: $success-text;
+      background-color: var(--success-bg);
+      color: var(--success-color);
     }
 
     &.trend-down {
-      background-color: $error-bg;
-      color: $error-text;
+      background-color: var(--error-bg);
+      color: var(--error-color);
     }
   }
 
   .stats-description {
-    font-size: $font-size-xs;
-    color: $text-muted;
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
     margin: 0;
   }
 

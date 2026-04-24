@@ -1,11 +1,11 @@
 
 .navbar {
   height: 70px;
-  background-color: $surface-glass;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid $border-light;
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
   @include flex-between;
-  padding: 0 $spacing-xl;
+  padding: 0 var(--spacing-xl);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -16,36 +16,54 @@
   gap: 6px;
 
   .brand-text {
-    font-size: $font-size-xl;
+    font-size: var(--font-size-xl);
     font-weight: 800;
-    color: $primary-color;
+    color: var(--text-primary);
     letter-spacing: -0.02em;
   }
 
   .brand-suffix {
-    font-size: $font-size-xl;
+    font-size: var(--font-size-xl);
     font-weight: 300;
-    color: $text-secondary;
+    color: var(--text-secondary);
   }
 }
 
 .navbar-actions {
   @include flex-center;
-  gap: $spacing-lg;
+  gap: var(--spacing-lg);
+}
+
+.btn-theme-toggle {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  width: 40px;
+  height: 40px;
+  @include flex-center;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-base);
+  
+  &:hover {
+    background-color: var(--secondary-bg);
+    color: var(--text-primary);
+    border-color: var(--accent-color);
+  }
 }
 
 .user-profile {
   @include flex-center;
-  gap: $spacing-sm;
+  gap: var(--spacing-sm);
   cursor: pointer;
   padding: 6px 12px;
-  border-radius: $radius-full;
-  transition: $transition-base;
+  border-radius: var(--radius-xl);
+  transition: var(--transition-base);
   position: relative;
   border: 1px solid transparent;
 
   &:hover {
-    background-color: $secondary-color;
+    background-color: var(--secondary-bg);
     
     .user-dropdown {
       opacity: 1;
@@ -60,15 +78,15 @@
   text-align: left;
 
   .user-name {
-    font-size: $font-size-sm;
+    font-size: var(--font-size-sm);
     font-weight: 600;
-    color: $text-primary;
+    color: var(--text-primary);
     line-height: 1.2;
   }
 
   .user-role {
-    font-size: $font-size-xs;
-    color: $text-muted;
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
   }
 }
 
@@ -77,47 +95,46 @@
   top: calc(100% + 8px);
   right: 0;
   width: 220px;
-  background-color: $surface-color;
-  border: 1px solid $border-color;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-lg;
-  padding: $spacing-xs;
+  @include glassmorphism(24px);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xs);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
-  transition: $transition-base;
+  transition: var(--transition-base);
   z-index: 110;
 
   .dropdown-item {
     display: flex;
     align-items: center;
-    gap: $spacing-sm;
+    gap: var(--spacing-sm);
     width: 100%;
     padding: 10px 12px;
     border: none;
     background: none;
-    border-radius: $radius-md;
-    color: $text-secondary;
-    font-size: $font-size-sm;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
     font-weight: 500;
     cursor: pointer;
-    transition: $transition-fast;
+    transition: var(--transition-fast);
     text-align: left;
 
     &:hover {
-      background-color: $secondary-color;
-      color: $primary-color;
+      background-color: var(--secondary-bg);
+      color: var(--text-primary);
     }
 
     &.logout:hover {
-      background-color: $error-bg;
-      color: $error-color;
+      background-color: var(--error-bg);
+      color: var(--error-color);
     }
   }
 
   hr {
-    margin: $spacing-xs 0;
+    margin: var(--spacing-xs) 0;
     border: 0;
-    border-top: 1px solid $border-color;
+    border-top: 1px solid var(--border-color);
+    opacity: 0.1;
   }
 }

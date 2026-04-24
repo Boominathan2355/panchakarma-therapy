@@ -1,18 +1,27 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
 
 .form-field {
   @include flex-column;
-  gap: $spacing-xs;
-  margin-bottom: $spacing-md;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-lg;
 
   .field-label {
     font-size: $font-size-sm;
     font-weight: 600;
     color: $text-secondary;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    opacity: 0.8;
   }
 
   .field-error {
     font-size: $font-size-xs;
     color: $error-text;
-    margin-top: 2px;
+    font-weight: 500;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 }

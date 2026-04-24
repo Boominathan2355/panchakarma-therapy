@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Bell, Check, Trash2 } from 'lucide-react';
 import Badge from '../atoms/Badge';
 import { useNotificationStore } from '../../store/notificationStore';
-import './NotificationBell.css';
+import './NotificationBell.scss';
 
 const NotificationBell: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);

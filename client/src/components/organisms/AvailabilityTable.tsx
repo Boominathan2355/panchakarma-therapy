@@ -3,7 +3,7 @@ import Skeleton from '../atoms/Skeleton';
 import Badge from '../atoms/Badge';
 import Table, { Column } from '../molecules/Table';
 import Card from '../atoms/Card';
-import './AvailabilityTable.css';
+import './AvailabilityTable.scss';
 
 export interface ResourceItem {
     id: string;
@@ -64,41 +64,39 @@ const AvailabilityTable: React.FC<AvailabilityTableProps> = ({ therapists = [], 
     ];
 
     return (
-        <div className="availability-layout">
-            <Card className="availability-header-card">
-                <div className="panel-header">
-                    <h3 className="section-title">Resource Availability</h3>
-                    <div className="tabs">
-                        <button
-                            className={`tab-btn ${activeTab === 'therapists' ? 'active' : ''}`}
-                            onClick={() => {
-                                setActiveTab('therapists');
-                                setCurrentPage(1);
-                            }}
-                        >
-                            Therapists
-                        </button>
-                        <button
-                            className={`tab-btn ${activeTab === 'rooms' ? 'active' : ''}`}
-                            onClick={() => {
-                                setActiveTab('rooms');
-                                setCurrentPage(1);
-                            }}
-                        >
-                            Rooms
-                        </button>
-                    </div>
+        <Card className="availability-section-card" glass>
+            <div className="panel-header">
+                <h3 className="section-title">Resource Availability</h3>
+                <div className="tabs">
+                    <button
+                        className={`tab-btn ${activeTab === 'therapists' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveTab('therapists');
+                            setCurrentPage(1);
+                        }}
+                    >
+                        Therapists
+                    </button>
+                    <button
+                        className={`tab-btn ${activeTab === 'rooms' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveTab('rooms');
+                            setCurrentPage(1);
+                        }}
+                    >
+                        Rooms
+                    </button>
                 </div>
-            </Card>
+            </div>
 
             <Table
                 columns={tableColumns}
                 data={paginatedData}
                 keyField="id"
                 isLoading={loading}
-                className="availability-table-card"
+                className="availability-table-flat"
             />
-        </div>
+        </Card>
     );
 };
 

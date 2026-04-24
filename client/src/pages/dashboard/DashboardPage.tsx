@@ -130,90 +130,88 @@ const DashboardPage: React.FC = () => {
 
     return (
         <div className="dashboard-container">
-            <div className="dashboard-wrapper">
+            <div className="container-fluid py-4">
                 {/* KPI Section */}
-                <div className="stats-grid mb-8">
-                    <StatsCard
-                        title={isDoctor ? 'My Sessions' : 'Total Sessions'}
-                        value={kpis?.totalSessions}
-                        description={isDoctor ? 'Assigned to you' : 'Completed today'}
-                        icon={Calendar}
-                        trend={12}
-                        loading={loading}
-                    />
-                    <StatsCard
-                        title={isDoctor ? 'My Patients' : 'Active Patients'}
-                        value={kpis?.activePatients}
-                        description={isDoctor ? 'Under your care' : 'Currently admitted'}
-                        icon={Users}
-                        trend={5}
-                        loading={loading}
-                    />
+                <div className="row g-4 mb-4">
+                    <div className="col-12 col-md-6 col-xl-3">
+                        <StatsCard
+                            title={isDoctor ? 'My Sessions' : 'Total Sessions'}
+                            value={kpis?.totalSessions}
+                            description={isDoctor ? 'Assigned to you' : 'Completed today'}
+                            icon={Calendar}
+                            trend={12}
+                            loading={loading}
+                        />
+                    </div>
+                    <div className="col-12 col-md-6 col-xl-3">
+                        <StatsCard
+                            title={isDoctor ? 'My Patients' : 'Active Patients'}
+                            value={kpis?.activePatients}
+                            description={isDoctor ? 'Under your care' : 'Currently admitted'}
+                            icon={Users}
+                            trend={5}
+                            loading={loading}
+                        />
+                    </div>
                     {isDoctor ? (
                         <>
-                            <StatsCard
-                                title="Emergency"
-                                value={riskCounts.Emergency}
-                                description="Critical patients"
-                                icon={AlertTriangle}
-                                loading={loading}
-                            />
-                            <StatsCard
-                                title="High Risk"
-                                value={riskCounts.High}
-                                description="Needs close monitoring"
-                                icon={ShieldAlert}
-                                loading={loading}
-                            />
-                            <StatsCard
-                                title="Medium Risk"
-                                value={riskCounts.Medium}
-                                description="Moderate attention"
-                                icon={AlertCircle}
-                                loading={loading}
-                            />
-                            <StatsCard
-                                title="Low Risk"
-                                value={riskCounts.Low}
-                                description="Stable patients"
-                                icon={ShieldCheck}
-                                loading={loading}
-                            />
+                            <div className="col-12 col-md-6 col-xl-3">
+                                <StatsCard
+                                    title="Emergency"
+                                    value={riskCounts.Emergency}
+                                    description="Critical patients"
+                                    icon={AlertTriangle}
+                                    loading={loading}
+                                />
+                            </div>
+                            <div className="col-12 col-md-6 col-xl-3">
+                                <StatsCard
+                                    title="High Risk"
+                                    value={riskCounts.High}
+                                    description="Needs close monitoring"
+                                    icon={ShieldAlert}
+                                    loading={loading}
+                                />
+                            </div>
                         </>
                     ) : (
                         <>
-                            <StatsCard
-                                title="Today's Revenue"
-                                value={kpis?.todaysRevenue ? `₹${kpis.todaysRevenue.toLocaleString()}` : '₹0'}
-                                description="Estimated earnings"
-                                icon={DollarSign}
-                                trend={8}
-                                loading={loading}
-                            />
-                            <StatsCard
-                                title="Occupancy Rate"
-                                value={kpis?.occupancyRate ? `${kpis.occupancyRate}%` : '0%'}
-                                description="Room utilization"
-                                icon={Activity}
-                                trend={-2}
-                                loading={loading}
-                            />
+                            <div className="col-12 col-md-6 col-xl-3">
+                                <StatsCard
+                                    title="Today's Revenue"
+                                    value={kpis?.todaysRevenue ? `₹${kpis.todaysRevenue.toLocaleString()}` : '₹0'}
+                                    description="Estimated earnings"
+                                    icon={DollarSign}
+                                    trend={8}
+                                    loading={loading}
+                                />
+                            </div>
+                            <div className="col-12 col-md-6 col-xl-3">
+                                <StatsCard
+                                    title="Occupancy Rate"
+                                    value={kpis?.occupancyRate ? `${kpis.occupancyRate}%` : '0%'}
+                                    description="Room utilization"
+                                    icon={Activity}
+                                    trend={-2}
+                                    loading={loading}
+                                />
+                            </div>
                         </>
                     )}
                 </div>
 
                 {/* Main Content Grid */}
-                <div className="dashboard-content-stack">
+                <div className="row g-4">
                     {!isDoctor && (
-                        <div className="dashboard-charts-grid">
-                            <div className="dashboard-card-wrapper">
+                        <>
+                            <div className="col-12 col-lg-6">
                                 <TherapyTrendChart
                                     dates={trends?.dates || []}
                                     values={trends?.values || []}
                                     loading={loading}
                                 />
                             </div>
-                            <div className="dashboard-card-wrapper">
+                            <div className="col-12 col-lg-6">
                                 <PatientRiskChart
                                     dates={riskTrends?.dates || []}
                                     high={riskTrends?.high || []}
@@ -223,10 +221,10 @@ const DashboardPage: React.FC = () => {
                                     loading={loading}
                                 />
                             </div>
-                        </div>
+                        </>
                     )}
 
-                    <div className="card-container">
+                    <div className="col-12">
                         {isDoctor ? (
                             <UpcomingSchedule sessions={doctorSchedule as any[]} loading={loading} />
                         ) : (

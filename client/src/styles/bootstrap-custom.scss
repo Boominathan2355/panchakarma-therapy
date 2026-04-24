@@ -1,0 +1,72 @@
+// Custom Bootstrap Entry Point
+// ----------------------------
+
+// 1. Sass Module Rules (Must be at the top)
+@forward "variables";
+@forward "mixins";
+@use 'sass:color';
+@use "variables" as *;
+@use "mixins" as *;
+
+// 2. Import Bootstrap functions, variables, and mixins
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+// 4. Import the rest of Bootstrap
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/button-group";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/accordion";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/pagination";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/progress";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/toasts";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/tooltip";
+@import "bootstrap/scss/popover";
+@import "bootstrap/scss/carousel";
+@import "bootstrap/scss/spinners";
+@import "bootstrap/scss/offcanvas";
+@import "bootstrap/scss/placeholders";
+
+// 5. Utilities (API)
+@import "bootstrap/scss/utilities/api";
+
+// 6. Custom Global Overrides for Glassmorphism feel
+.card {
+    backdrop-filter: blur(12px);
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary {
+    background-image: linear-gradient(135deg, $accent-color 0%, color.adjust($accent-color, $lightness: -15%) 100%);
+    border: none;
+    box-shadow: 0 4px 12px rgba($accent-color, 0.3);
+    
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba($accent-color, 0.4);
+    }
+}

@@ -2,14 +2,15 @@
 .main-layout {
   display: flex;
   min-height: 100vh;
-  background-color: $background-color;
+  background-color: var(--background-color);
+  color: var(--text-primary);
 
   .main-container {
     flex: 1;
     display: flex;
     flex-direction: column;
     margin-left: 280px;
-    transition: margin-left $transition-slow;
+    transition: margin-left var(--transition-slow);
     min-width: 0; // Prevent flex item from overflowing
   }
 
@@ -21,7 +22,7 @@
 
   .main-content {
     flex: 1;
-    padding: $spacing-xl;
+    padding: var(--spacing-xl);
     max-width: 1600px;
     width: 100%;
     margin: 0 auto;

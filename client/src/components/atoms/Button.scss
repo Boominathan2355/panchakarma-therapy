@@ -1,3 +1,5 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
 
 .btn {
   @include button-premium;
@@ -6,16 +8,17 @@
 
   // Variants
   &-primary {
-    background-color: $primary-color;
-    color: $primary-foreground;
-    border-color: $primary-color;
+    background: linear-gradient(135deg, $accent-color, $primary-light);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba($accent-color, 0.3);
 
     &:hover:not(:disabled) {
-      background-color: $primary-hover;
-      border-color: $primary-hover;
-      box-shadow: 0 0 0 4px rgba($primary-color, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba($accent-color, 0.4);
     }
   }
+// ... rest of the file
 
   &-secondary {
     background-color: $secondary-color;

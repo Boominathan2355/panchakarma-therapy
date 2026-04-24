@@ -1,5 +1,22 @@
 // src/types/therapy.ts
 
+export interface TherapyDocument {
+  id: string;
+  name: string;
+  size: string;
+  uploadDate: string;
+}
+
+export interface TherapyDefinition {
+  id: string;
+  name: TherapyType;
+  description: string;
+  workflow: any[]; // Avoid circular dependency if TherapyWorkflowStep is in service
+  contraindications: string[];
+  safetyNotes: string;
+  documents: TherapyDocument[];
+}
+
 export type TherapyType = 'Vamana' | 'Virechana' | 'Basti' | 'Nasya' | 'Raktamokshana';
 
 export interface TherapySession {

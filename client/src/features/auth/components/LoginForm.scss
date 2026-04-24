@@ -1,45 +1,53 @@
 @use 'sass:color';
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
 
 .login-form-card {
-  @include glassmorphism(16px, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: $spacing-2xl;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  
+  &.glass {
+    @include glassmorphism(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
 }
 
 .login-header {
   text-align: center;
-  margin-bottom: $spacing-xl;
+  margin-bottom: $spacing-2xl;
 
   .logo-icon-wrapper {
     @include flex-center;
-    width: 72px;
-    height: 72px;
-    background: linear-gradient(135deg, $accent-color, color.adjust($accent-color, $lightness: -15%));
-    border-radius: $radius-2xl;
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, $accent-color, $primary-light);
+    border-radius: $radius-xl;
     margin: 0 auto $spacing-lg;
-    box-shadow: 0 8px 16px rgba($accent-color, 0.3);
+    box-shadow: 0 10px 20px -5px rgba($accent-color, 0.5);
     color: white;
-    transform: rotate(-5deg);
-    transition: $transition-base;
+    transform: rotate(-3deg);
+    transition: $transition-spring;
 
     &:hover {
-      transform: rotate(0deg) scale(1.05);
+      transform: rotate(0deg) scale(1.1);
+      box-shadow: 0 15px 25px -5px rgba($accent-color, 0.6);
     }
   }
 
   h2 {
     font-size: $font-size-3xl;
     font-weight: 800;
-    color: $primary-color;
-    letter-spacing: -0.02em;
-    margin-bottom: $spacing-xs;
+    color: #ffffff;
+    letter-spacing: -0.03em;
+    margin-bottom: $spacing-sm;
   }
 
   p {
     color: $text-secondary;
-    font-size: $font-size-sm;
+    font-size: $font-size-base;
     font-weight: 500;
+    max-width: 280px;
+    margin: 0 auto;
+    line-height: 1.5;
   }
 }
 
@@ -65,15 +73,20 @@
 .form-error-banner {
   @include flex-center;
   gap: $spacing-sm;
-  padding: $spacing-sm $spacing-md;
-  background-color: $error-bg;
+  padding: $spacing-md;
+  background: rgba($error-color, 0.1);
   color: $error-text;
-  border-radius: $radius-md;
-  font-size: $font-size-xs;
+  border-radius: $radius-lg;
+  font-size: $font-size-sm;
   font-weight: 600;
-  margin-top: $spacing-md;
-  border: 1px solid rgba($error-color, 0.1);
+  margin-top: $spacing-lg;
+  border: 1px solid rgba($error-color, 0.2);
+  backdrop-filter: blur(8px);
   animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  
+  svg {
+    flex-shrink: 0;
+  }
 }
 
 .login-footer {
@@ -85,9 +98,12 @@
   a {
     color: $accent-color;
     font-weight: 700;
+    text-decoration: none;
+    transition: $transition-fast;
     
     &:hover {
-      color: color.adjust($accent-color, $lightness: -10%);
+      color: $primary-light;
+      text-decoration: underline;
     }
   }
 }

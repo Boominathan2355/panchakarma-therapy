@@ -1,5 +1,5 @@
 import api from './api';
-import type { TherapyType } from '../types';
+import type { TherapyType, TherapyDefinition } from '../types';
 
 export interface TherapyWorkflowStep {
     id: string;
@@ -11,22 +11,6 @@ export interface TherapyWorkflowStep {
     precautions?: string[];
 }
 
-export interface TherapyDocument {
-    id: string;
-    name: string;
-    size: string;
-    uploadDate: string;
-}
-
-export interface TherapyDefinition {
-    id: string;
-    name: TherapyType;
-    description: string;
-    workflow: TherapyWorkflowStep[];
-    contraindications: string[];
-    safetyNotes: string;
-    documents: TherapyDocument[];
-}
 
 const getTherapies = async (): Promise<TherapyDefinition[]> => {
     try {
